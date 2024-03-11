@@ -14,7 +14,7 @@ class Sleep extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final status = ref.watch(userProvider).status;
-    final controller = useSleep(ref);
+    final controller = useSleep(ref.read(userProvider.notifier));
 
     final button = status == Statuses.sleeping
         ? WakeUpButton(

@@ -3,15 +3,14 @@ import "package:flutter_hooks/flutter_hooks.dart";
 import "package:hooks_riverpod/hooks_riverpod.dart";
 import "package:routine_builder/general/provider/user_provider.dart";
 import "package:routine_builder/general/enum/statuses.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
 
-SleepController useSleep(WidgetRef ref) {
+SleepController useSleep(UserNotifier notifier) {
   final handleSleep = useCallback(() {
-    final notifier = ref.read(userProvider.notifier);
     notifier.updateStatus(Statuses.sleeping);
   }, []);
 
   final handleWakeUp = useCallback(() {
-    final notifier = ref.read(userProvider.notifier);
     notifier.updateStatus(Statuses.none);
   }, []);
 
