@@ -4,10 +4,10 @@ import 'package:routine_builder/general/enum/statuses.dart';
 //TODO: statusだけをstateにするべきか、User全体をstateにするべきか...
 class User {
   final String name;
-  ValueNotifier<Statuses> status;
+  final Statuses status;
 
   User({
     required this.name,
-    required Statuses status,
-  }) : status = ValueNotifier<Statuses>(status);
+    required this.status,
+  });
 }

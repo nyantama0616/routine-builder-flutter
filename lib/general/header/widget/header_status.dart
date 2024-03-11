@@ -8,9 +8,9 @@ class HeaderStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider).user;
-    final icon = user.status.value == Statuses.sleeping ? Icons.bedtime : null;
-    final text = user.status.value == Statuses.none ? "" : user.status.value.rawValue;
+    final user = ref.watch(userProvider);
+    final icon = user.status == Statuses.sleeping ? Icons.bedtime : null;
+    final text = user.status == Statuses.none ? "" : user.status.rawValue;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

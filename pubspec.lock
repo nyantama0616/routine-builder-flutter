@@ -247,13 +247,21 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_hooks:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_hooks
       sha256: cde36b12f7188c85286fba9b38cc5a902e7279f36dd676967106c041dc9dde70
       url: "https://pub.dev"
     source: hosted
     version: "0.20.5"
+  flutter_hooks_test:
+    dependency: "direct dev"
+    description:
+      name: flutter_hooks_test
+      sha256: "5b135ffd249f2f920329f6e6ccc3edb5f345750b50c4d2ff0773a981bd0a7556"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.5"
   flutter_lints:
     dependency: "direct dev"
     description:

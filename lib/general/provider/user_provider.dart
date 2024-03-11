@@ -1,30 +1,15 @@
-import "package:riverpod_annotation/riverpod_annotation.dart";
-import "package:routine_builder/general/class/user.dart";
-import "package:routine_builder/general/enum/statuses.dart";
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routine_builder/general/class/user.dart';
+import 'package:routine_builder/general/enum/statuses.dart';
 
-part 'user_provider.g.dart';
+final userProvider = StateNotifierProvider<UserNotifier, User>((ref) {
+  return UserNotifier(User(name: 'Panda', status: Statuses.sleeping));
+});
 
-@riverpod
-UserProviderReturn user(UserRef ref) {
+class UserNotifier extends StateNotifier<User> {
+  UserNotifier(super.user);
+
   void updateStatus(Statuses newStatus) {
-    ref.read(userProvider).user.status.value = newStatus;
+    state = User(name: state.name, status: newStatus);
   }
-
-  return UserProviderReturn(
-    user: User(
-      name: "Panda",
-      status: Statuses.sleeping,
-    ),
-    updateStatus: updateStatus,
-  );
-}
-
-class UserProviderReturn {
-  final User user;
-  final void Function(Statuses) updateStatus;
-
-  UserProviderReturn({
-    required this.user,
-    required this.updateStatus,
-  });
 }
