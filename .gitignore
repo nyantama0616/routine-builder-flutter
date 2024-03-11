@@ -42,5 +42,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+#ログファイル
 *LogStoreManifest.plist
 *.xcactivitylog
+
+#code builderによって生成されるファイル
+*.mocks.dart
+*.g.dart
