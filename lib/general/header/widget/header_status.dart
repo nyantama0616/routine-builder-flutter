@@ -10,6 +10,7 @@ class HeaderStatus extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider).user;
     final icon = user.status.value == Statuses.sleeping ? Icons.bedtime : null;
+    final text = user.status.value == Statuses.none ? "" : user.status.value.rawValue;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -22,7 +23,7 @@ class HeaderStatus extends ConsumerWidget {
           onPressed: () {},
         ),
         Text(
-          user.status.value.rawValue,
+          text,
           style: const TextStyle(color: Colors.white),
         ),
       ],
