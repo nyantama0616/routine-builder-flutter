@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:routine_builder/general/header/header.dart';
+import 'package:routine_builder/feature/sleep/widget/sleep.dart';
+import 'package:routine_builder/general/header/widget/header.dart';
+import 'package:routine_builder/feature/sleep/widget/sleep.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -16,14 +18,7 @@ class App extends StatelessWidget {
       home: const SafeArea(
         child: Scaffold(
           appBar: Header(),
-          body: Center(
-            child: Text(
-              'Hello, World!',
-              style: TextStyle(
-                fontSize: 24,
-              ),
-            ),
-          ),
+          body: Sleep(),
         ),
       ),
     );
