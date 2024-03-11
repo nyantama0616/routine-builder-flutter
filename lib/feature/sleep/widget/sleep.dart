@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routine_builder/feature/sleep/class/sleep_controller.dart';
 import 'package:routine_builder/feature/sleep/widget/sleep_button.dart';
 import 'package:routine_builder/feature/sleep/widget/wake_up_button.dart';
 import 'package:routine_builder/general/enum/statuses.dart';
@@ -7,21 +8,23 @@ import 'package:routine_builder/general/provider/user_provider.dart';
 import 'package:routine_builder/feature/sleep/hook/use_sleep.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
 class Sleep extends HookConsumerWidget {
-  const Sleep({super.key});
+  SleepController? controller;
+  Sleep({super.key, this.controller}) ;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final status = ref.watch(userProvider).status;
-    final controller = useSleep(ref.read(userProvider.notifier));
+    controller ??= useSleep(ref.read(userProvider.notifier));
 
     final button = status == Statuses.sleeping
         ? WakeUpButton(
-            onPressed: controller.handleWakeUp,
+          key: const Key("wake_up_button"),
+            onPressed: controller!.handleWakeUp,
           )
         : SleepButton(
-            onPressed: controller.handleSleep,
+          key: const Key("sleep_button"),
+            onPressed: (controller!.handleSleep),
           );
 
     return Center(
