@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 
+//TODO: テスト書く
 class QueryClient {
   Future<http.Response> get(String path, {Map<String, String>? headers}) {
     return http.get(Uri.parse(path), headers: headers);
