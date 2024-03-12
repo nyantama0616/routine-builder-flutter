@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:routine_builder/general/query/client/query_client.dart';
 import "package:routine_builder/general/query/client/dev_query_client.dart";
 
 import 'package:mockito/mockito.dart';

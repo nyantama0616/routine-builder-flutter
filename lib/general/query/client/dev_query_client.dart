@@ -1,5 +1,5 @@
 import 'dart:convert';
-import "package:routine_builder/general/query/data/ping/Ping_response_body.dart";
+import "package:routine_builder/general/query/data/ping/ping_response_body.dart";
 import "query_client.dart";
 import "../requests.dart";
 class DevQueryClient {
