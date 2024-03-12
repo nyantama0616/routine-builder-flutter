@@ -6,12 +6,21 @@ class QueryClient {
     return http.get(Uri.parse(path), headers: headers);
   }
 
-  Future<http.Response> post(String path, {dynamic body, Map<String, String>? headers}) {
+  Future<http.Response> post(String path,
+      {dynamic body, Map<String, String>? headers}) {
+    headers ??= {};
+    _setDefaultValuesToHeaders(headers);
     return http.post(Uri.parse(path), body: body, headers: headers);
   }
 
-  Future<http.Response> patch(String path, {dynamic body, Map<String, String>? headers}) {
-    return http.patch(Uri.parse(path),
-        body: body, headers: headers);
+  Future<http.Response> patch(String path,
+      {dynamic body, Map<String, String>? headers}) {
+    headers ??= {};
+    _setDefaultValuesToHeaders(headers);
+    return http.patch(Uri.parse(path), body: body, headers: headers);
+  }
+
+  void _setDefaultValuesToHeaders(Map<String, String> headers) {
+    headers["Content-Type"] ??= "application/json";
   }
 }
