@@ -15,11 +15,11 @@ class App extends StatelessWidget {
         primaryColor: Colors.black,
         useMaterial3: true,
       ),
-      home: const SafeArea(
+      home: SafeArea(
         child: Scaffold(
-          appBar: Header(),
-          // body: Sleep(),
-          body: Ping(),
+          appBar: const Header(),
+          body: Sleep(),
+          // body: Ping(),
         ),
       ),
     );
