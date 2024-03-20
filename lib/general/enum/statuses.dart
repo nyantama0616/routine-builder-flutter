@@ -1,6 +1,7 @@
 enum Statuses {
   none("none"),
-  sleeping("sleeping");
+  sleeping("sleeping"),
+  napping("napping");
   
   final String rawValue;
   const Statuses(this.rawValue);

@@ -36,5 +36,11 @@ void main() {
     await tester.pump();
     status = container.read(userProvider).status;
     expect(status, Statuses.none);
+
+    // Nap
+    controller.handleNap();
+    await tester.pump();
+    status = container.read(userProvider).status;
+    expect(status, Statuses.napping);
   });
 }

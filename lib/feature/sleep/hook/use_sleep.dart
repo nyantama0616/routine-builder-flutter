@@ -30,8 +30,18 @@ SleepController useSleep(UserNotifier notifier,
     }
   }, []);
 
+  final handleNap = useCallback(() async {
+    try {
+      await client.startSleep(isNap: true);
+      notifier.updateStatus(Statuses.napping);
+    } catch (e) {
+      print(e);
+    }
+  }, []);
+
   return SleepController(
     handleSleep: handleSleep,
     handleWakeUp: handleWakeUp,
+    handleNap: handleNap,
   );
 }
