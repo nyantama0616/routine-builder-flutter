@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:routine_builder/feature/dev/ping/widget/ping.dart';
 import 'package:routine_builder/feature/sleep/widget/sleep.dart';
 import 'package:routine_builder/general/header/widget/header.dart';
+import 'package:routine_builder/feature/caterpillar/widget/caterpillar.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -18,8 +19,9 @@ class App extends StatelessWidget {
       home: SafeArea(
         child: Scaffold(
           appBar: const Header(),
-          body: Sleep(),
+          // body: Sleep(),
           // body: Ping(),
+          body: Caterpillar(),
         ),
       ),
     );
