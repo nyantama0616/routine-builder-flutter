@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class TimerWidget extends StatelessWidget {
+class Counter extends StatelessWidget {
   final int seconds;
 
-  TimerWidget(this.seconds);
+  Counter(this.seconds);
 
   @override
   Widget build(BuildContext context) {

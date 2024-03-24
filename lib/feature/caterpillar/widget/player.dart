@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:routine_builder/feature/caterpillar/class/mode.dart';
-import 'package:routine_builder/feature/caterpillar/widget/timer_widget.dart';
+import 'package:routine_builder/feature/caterpillar/widget/counter.dart';
 import 'package:routine_builder/feature/caterpillar/widget/submit_button.dart';
 
 class Player extends StatelessWidget {
@@ -26,7 +26,7 @@ class Player extends StatelessWidget {
           children: [
             Text(mode.pattern, style: TextStyle(fontSize: 36)),
             SizedBox(height: 10),
-            TimerWidget(90),
+            Counter(90),
             SizedBox(height: 10),
             StartButton,
             StopButton,
