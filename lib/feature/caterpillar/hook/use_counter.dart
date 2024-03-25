@@ -26,6 +26,8 @@ CounterController useCounter(
       throw Exception("Timer is already finished");
     }
 
+    passedSeconds.value = passedSecondsWhenStopped;
+    
     timer.value = Timer.periodic(Duration(seconds: 1), (Timer t) {
       final now = DateTime.now();
       final difference = now.difference(startedAt);
