@@ -4,6 +4,10 @@ import 'package:routine_builder/feature/caterpillar/class/caterpillar_controller
 import 'package:routine_builder/feature/caterpillar/widget/counter.dart';
 import 'package:routine_builder/feature/caterpillar/widget/submit_button.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
+import 'package:routine_builder/feature/caterpillar/widget/back_button.dart' as MyBack;
+
+//TODO: 上の余白気になる(BackButtonのせい)
+//BackButton表示・非表示の切り替えの際に「ガタッ」となるのも気になる
 
 class Player extends HookWidget {
   final CaterpillarController controller;
@@ -18,7 +22,8 @@ class Player extends HookWidget {
         icon: Icons.stop_circle_outlined,
         color: const Color.fromARGB(255, 239, 131, 123),
         onPressed: controller.stop);
-    final button = controller.status == BasicStatuses.none ? StartButton : StopButton;
+    final backButton = controller.status == BasicStatuses.doing ? null : MyBack.BackButton(onPressed: controller.toModeSelector);
+    final submitButton = controller.status == BasicStatuses.none ? StartButton : StopButton;
     return Center(
       child: Container(
         height: 400,
@@ -27,11 +32,15 @@ class Player extends HookWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: backButton,
+            ),
             Text(controller.currentMode!.pattern, style: TextStyle(fontSize: 36)),
             SizedBox(height: 10),
             Counter(30*60 - controller.passedSeconds),
             SizedBox(height: 10),
-            button,
+            submitButton,
           ],
         ),
       )

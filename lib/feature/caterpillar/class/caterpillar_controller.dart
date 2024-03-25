@@ -11,17 +11,17 @@ class CaterpillarController {
   Function(Caterpillar mode) selectMode;
   Function() start;
   Function() stop;
+  Function() toModeSelector;
 
   CaterpillarController(
     this._currentMode,
     this._status,
-    this._counter,
-    {
-      required this.selectMode,
-      required this.start,
-      required this.stop,
-    }
-  );
+    this._counter, {
+    required this.selectMode,
+    required this.start,
+    required this.stop,
+    required this.toModeSelector,
+  });
 
   Caterpillar? get currentMode => _currentMode.value;
   BasicStatuses get status => _status.value;

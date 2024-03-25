@@ -11,6 +11,7 @@ class Caterpillar extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = useCaterpillar();
+    final mainScreen = controller.currentMode == null ? ModeSelector(controller: controller,) : Player(controller: controller);
 
     return Center(
       child: Column(
@@ -18,7 +19,8 @@ class Caterpillar extends HookWidget {
         children: [
           Goal(),
           // ModeSelector(),
-          Player(controller: controller),
+          // Player(controller: controller),
+          mainScreen,
         ],
     ));
   }

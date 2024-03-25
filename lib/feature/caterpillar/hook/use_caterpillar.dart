@@ -57,6 +57,15 @@ CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryCl
     }
   }
 
+  void toModeSelector() {
+    currentMode.value = null;
+  }
+
+  useEffect(() {
+    init();
+    return null;
+  }, []);
+
   return useMemoized(() {
     return CaterpillarController(
       currentMode,
@@ -65,6 +74,7 @@ CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryCl
       selectMode: selectMode,
       start: start,
       stop: stop,
+      toModeSelector: toModeSelector,
     );
   }, [currentMode.value, counter.passedSeconds]);
 }
