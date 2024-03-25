@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:routine_builder/feature/caterpillar/class/mode.dart';
 import 'package:routine_builder/feature/caterpillar/widget/progress_bar.dart';
+import 'package:routine_builder/general/class/caterpillar.dart';
 
-const GOAL = 120; //各パターン120分を目指そう
+const GOAL_MINUTES = 120; //各パターン120分を目指そう
 
 class ModeSelector extends StatelessWidget {
   ModeSelector({super.key});
 
   final modes = _getPermutations("1234").map((pattern) {
-    final mode = Mode(pattern: pattern, minutes: 55);
-    final progress = mode.minutes / GOAL;
+    final mode = Caterpillar(pattern: pattern, passedSeconds: 55 * 60);
+    final passedMinutes = mode.passedSeconds ~/ 60;
+    final progress = passedMinutes / GOAL_MINUTES;
     return Material(
         color: Color.fromARGB(255, 193, 212, 247),
         child: InkWell(
@@ -18,7 +19,7 @@ class ModeSelector extends StatelessWidget {
             title: Text(pattern),
             subtitle: ProgressBar(progress: progress),
             leading: Icon(Icons.music_note),
-            trailing: Text("${mode.minutes}/$GOAL(分)",
+            trailing: Text("${passedMinutes}/$GOAL_MINUTES(分)",
                 style: TextStyle(fontSize: 12)),
           ),
         ));

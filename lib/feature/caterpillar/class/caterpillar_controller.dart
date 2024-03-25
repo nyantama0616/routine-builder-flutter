@@ -1,14 +1,14 @@
 import "package:flutter/material.dart";
-import "package:routine_builder/feature/caterpillar/class/mode.dart";
 import "package:routine_builder/feature/caterpillar/class/counter_controller.dart";
 import "package:routine_builder/general/enum/basic_statuses.dart";
+import 'package:routine_builder/general/class/caterpillar.dart';
 
 class CaterpillarController {
-  final ValueNotifier<Mode?> _currentMode;
+  final ValueNotifier<Caterpillar?> _currentMode;
   final ValueNotifier<BasicStatuses> _status;
   final CounterController _counter;
 
-  Function(Mode mode) selectMode;
+  Function(Caterpillar mode) selectMode;
   Function() start;
   Function() stop;
 
@@ -23,7 +23,7 @@ class CaterpillarController {
     }
   );
 
-  Mode? get currentMode => _currentMode.value;
+  Caterpillar? get currentMode => _currentMode.value;
   BasicStatuses get status => _status.value;
   int get passedSeconds => _counter.passedSeconds;
 }

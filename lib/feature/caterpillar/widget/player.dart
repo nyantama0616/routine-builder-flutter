@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/caterpillar/class/caterpillar_controller.dart';
-import 'package:routine_builder/feature/caterpillar/class/mode.dart';
 import 'package:routine_builder/feature/caterpillar/widget/counter.dart';
 import 'package:routine_builder/feature/caterpillar/widget/submit_button.dart';
-import 'package:routine_builder/feature/caterpillar/hook/use_counter.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 
 class Player extends HookWidget {
