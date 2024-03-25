@@ -6,7 +6,7 @@ CounterController useCounter() {
   final passedSeconds = useState<int>(0);
   final timer = useRef<Timer?>(null);
 
-  void start(DateTime startedAt) {
+  void start(DateTime startedAt, int passedSecondsWhenStopped) {
     if (timer.value != null) {
       throw Exception("Timer is already running");
     }
@@ -14,13 +14,14 @@ CounterController useCounter() {
     timer.value = Timer.periodic(Duration(seconds: 1), (Timer t) {
       final now = DateTime.now();
       final difference = now.difference(startedAt);
-      passedSeconds.value = difference.inSeconds;
+      passedSeconds.value = difference.inSeconds + passedSecondsWhenStopped;
     });
   }
 
-  void stop() {
+  void stop(int passedSecondsWhenStopped) {
     timer.value?.cancel();
     timer.value = null;
+    passedSeconds.value = passedSecondsWhenStopped;
   }
 
   void reset() {

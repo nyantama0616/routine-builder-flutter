@@ -24,7 +24,7 @@ CaterpillarController useCaterpillar(
 
     try {
       final res = await client.start(pattern: currentMode.value!.pattern);
-      counter.start(res.timer.startedAt);
+      counter.start(res.timer.startedAt, res.timer.passedSecondsWhenStopped);
       status.value = BasicStatuses.doing;
     } catch (e) {
       print(e);
@@ -32,16 +32,15 @@ CaterpillarController useCaterpillar(
     }
   }
 
-  void stop() {
+  void stop() async {
     try {
-      client.stop();
+      final res = await client.stop();
+      counter.stop(res.timer.passedSecondsWhenStopped);
+      status.value = BasicStatuses.none;
     } catch (e) {
       print(e);
       return;
     }
-
-    counter.stop();
-    status.value = BasicStatuses.none;
   }
 
   return useMemoized(() {

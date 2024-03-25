@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 
 class CounterController {
   late final ValueNotifier<int> _passedSeconds;
-  Function(DateTime startedAt) start;
-  Function() stop;
+  Function(DateTime startedAt, int passedSecondsWhenStopped) start;
+  Function(int passedSecondsWhenStopped) stop;
   Function() reset;
 
   CounterController(
