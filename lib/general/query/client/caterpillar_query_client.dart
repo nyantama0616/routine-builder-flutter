@@ -1,6 +1,7 @@
 import "package:routine_builder/general/query/client/query_client.dart";
 import "package:routine_builder/general/query/data/caterpillar/start/start_response_body.dart";
 import "package:routine_builder/general/query/data/caterpillar/stop/stop_response_body.dart";
+import "package:routine_builder/general/query/data/caterpillar/finish/finish_response_body.dart";
 import 'dart:convert';
 import 'package:routine_builder/general/query/requests.dart';
 import "package:routine_builder/general/query/data/queryErrorResponseBody.dart";
@@ -17,8 +18,9 @@ class CaterpillarQueryClient {
     final res = await queryClient.post(Requests.startCaterpillar,
         body: jsonEncode({'pattern': pattern}));
 
-    if (res.statusCode == 200)
+    if (res.statusCode == 200) {
       return StartResponseBody.fromJson(jsonDecode(res.body));
+    }
 
     _handleError(res);
   }
@@ -26,8 +28,19 @@ class CaterpillarQueryClient {
   Future<StopResponseBody> stop() async {
     final res = await queryClient.post(Requests.stopCaterpillar);
 
-    if (res.statusCode == 200)
+    if (res.statusCode == 200) {
       return StopResponseBody.fromJson(jsonDecode(res.body));
+    }
+
+    _handleError(res);
+  }
+
+  Future<FinishResponseBody> finish() async {
+    final res = await queryClient.post(Requests.finishCaterpillar);
+
+    if (res.statusCode == 200) {
+      return FinishResponseBody.fromJson(jsonDecode(res.body));
+    }
 
     _handleError(res);
   }

@@ -5,13 +5,23 @@ import 'package:routine_builder/feature/caterpillar/hook/use_counter.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import "package:routine_builder/general/query/client/caterpillar_query_client.dart";
 
-CaterpillarController useCaterpillar(
-    {CaterpillarQueryClient? caterpillarQueryClient}) {
+CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryClient}) {
   // final currentMode = useState<Mode?>(null);
   final currentMode = useState<Mode?>(Mode(pattern: "4321", minutes: 30));
   final status = useState<BasicStatuses>(BasicStatuses.none);
-  final counter = useCounter();
   final client = caterpillarQueryClient ?? CaterpillarQueryClient();
+
+  void finish() async {
+    try {
+      await client.finish();
+      status.value = BasicStatuses.none;
+    } catch (e) {
+      print(e);
+      return;
+    }
+  }
+  
+  final counter = useCounter(goalSeconds: 3, onFinished: finish);
 
   void selectMode(Mode mode) {
     currentMode.value = mode;
