@@ -3,27 +3,43 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/caterpillar/class/mode.dart';
 import 'package:routine_builder/feature/caterpillar/hook/use_counter.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
+import "package:routine_builder/general/query/client/caterpillar_query_client.dart";
 
-CaterpillarController useCaterpillar() {
+CaterpillarController useCaterpillar(
+    {CaterpillarQueryClient? caterpillarQueryClient}) {
   // final currentMode = useState<Mode?>(null);
   final currentMode = useState<Mode?>(Mode(pattern: "4321", minutes: 30));
   final status = useState<BasicStatuses>(BasicStatuses.none);
   final counter = useCounter();
+  final client = caterpillarQueryClient ?? CaterpillarQueryClient();
 
   void selectMode(Mode mode) {
     currentMode.value = mode;
   }
 
-  void start() {
+  void start() async {
     if (currentMode.value == null) {
-        throw Exception("Mode is not selected");
+      throw Exception("Mode is not selected");
     }
 
-    counter.start(DateTime.now());
-    status.value = BasicStatuses.doing;
+    try {
+      final res = await client.start(pattern: currentMode.value!.pattern);
+      counter.start(res.timer.startedAt);
+      status.value = BasicStatuses.doing;
+    } catch (e) {
+      print(e);
+      return;
+    }
   }
 
   void stop() {
+    try {
+      client.stop();
+    } catch (e) {
+      print(e);
+      return;
+    }
+
     counter.stop();
     status.value = BasicStatuses.none;
   }
