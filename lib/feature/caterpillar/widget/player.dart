@@ -5,6 +5,7 @@ import 'package:routine_builder/feature/caterpillar/widget/counter.dart';
 import 'package:routine_builder/feature/caterpillar/widget/submit_button.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import 'package:routine_builder/feature/caterpillar/widget/back_button.dart' as MyBack;
+import 'package:routine_builder/feature/caterpillar/settings.dart';
 
 //TODO: 上の余白気になる(BackButtonのせい)
 //BackButton表示・非表示の切り替えの際に「ガタッ」となるのも気になる
@@ -38,7 +39,7 @@ class Player extends HookWidget {
             ),
             Text(controller.currentMode!.pattern, style: TextStyle(fontSize: 36)),
             SizedBox(height: 10),
-            Counter(30*60 - controller.passedSeconds),
+            Counter(TRAIN_SECONDS - controller.passedSeconds),
             SizedBox(height: 10),
             submitButton,
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routine_builder/feature/caterpillar/settings.dart';
 
 class Counter extends StatelessWidget {
   final int seconds;
@@ -12,7 +13,7 @@ class Counter extends StatelessWidget {
 
     return Stack(children: [
       _ProgressCircle(1, color: Colors.grey),
-      _ProgressCircle(seconds / (30 * 60), color: Colors.blue),
+      _ProgressCircle(seconds / (TRAIN_SECONDS), color: Colors.blue),
       Container(
         height: 180,
         width: 180,

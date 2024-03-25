@@ -4,6 +4,7 @@ import 'package:routine_builder/feature/caterpillar/hook/use_counter.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import "package:routine_builder/general/query/client/caterpillar_query_client.dart";
 import 'package:routine_builder/general/class/caterpillar.dart';
+import 'package:routine_builder/feature/caterpillar/settings.dart';
 
 CaterpillarController useCaterpillar(
     {CaterpillarQueryClient? caterpillarQueryClient}) {
@@ -27,7 +28,7 @@ CaterpillarController useCaterpillar(
     }
   }
 
-  final counter = useCounter(goalSeconds: 10, onFinished: finish);
+  final counter = useCounter(goalSeconds: TRAIN_SECONDS, onFinished: finish);
 
   void init() async {
     print("init");
