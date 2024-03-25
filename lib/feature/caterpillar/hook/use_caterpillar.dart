@@ -8,10 +8,9 @@ import 'package:routine_builder/general/class/caterpillar.dart';
 CaterpillarController useCaterpillar(
     {CaterpillarQueryClient? caterpillarQueryClient}) {
   final currentMode = useState<Caterpillar?>(null);
-  // final currentMode =
-  //     useState<Caterpillar?>(Caterpillar(pattern: "4321", passedSeconds: 30));
   final status = useState<BasicStatuses>(BasicStatuses.none);
   final client = caterpillarQueryClient ?? CaterpillarQueryClient();
+  final patterns = useState<Map<String, int>>({});
 
   void selectMode(Caterpillar mode) {
     currentMode.value = mode;
@@ -35,6 +34,8 @@ CaterpillarController useCaterpillar(
 
     try {
       final res = await client.init();
+      patterns.value = res.patterns;
+      
       if (res.inProgress != null) {
         selectMode(res.inProgress!.caterpillar);
 
@@ -42,7 +43,6 @@ CaterpillarController useCaterpillar(
           counter.start(res.inProgress!.timer.startedAt, res.inProgress!.timer.passedSecondsWhenStopped);
           status.value = BasicStatuses.doing;
         } else {
-          // counter.start(res.inProgress!.timer.startedAt, res.inProgress!.timer.passedSecondsWhenStopped);
           counter.stop(res.inProgress!.timer.passedSecondsWhenStopped);
           status.value = BasicStatuses.none;
         }
@@ -96,6 +96,7 @@ CaterpillarController useCaterpillar(
       currentMode,
       status,
       counter,
+      patterns,
       selectMode: selectMode,
       start: start,
       stop: stop,

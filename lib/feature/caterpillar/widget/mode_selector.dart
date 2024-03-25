@@ -11,8 +11,10 @@ class ModeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final modes = _getPermutations("1234").map((pattern) {
-      final mode = Caterpillar(pattern: pattern, passedSeconds: 55 * 60);
+    final modes = controller.patterns.entries.map((entry) {
+      final pattern = entry.key;
+      final passedSeconds = entry.value;
+      final mode = Caterpillar(pattern: pattern, passedSeconds: passedSeconds);
       final passedMinutes = mode.passedSeconds ~/ 60;
       final progress = passedMinutes / GOAL_MINUTES;
       return Material(
