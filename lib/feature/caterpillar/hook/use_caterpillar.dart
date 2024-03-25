@@ -31,12 +31,10 @@ CaterpillarController useCaterpillar(
   final counter = useCounter(goalSeconds: TRAIN_SECONDS, onFinished: finish);
 
   void init() async {
-    print("init");
-
     try {
       final res = await client.init();
       patterns.value = res.patterns;
-      
+
       if (res.inProgress != null) {
         selectMode(res.inProgress!.caterpillar);
 
@@ -89,7 +87,14 @@ CaterpillarController useCaterpillar(
 
   useEffect(() {
     init();
-    return null;
+    return () {
+      if (status.value == BasicStatuses.doing) {
+        print("stop on dispose");
+        //TODO: エラーの対処する
+        //一応動いてはいるから、とりあえずは放置
+        client.stop();
+      }
+    };
   }, []);
 
   return useMemoized(() {
