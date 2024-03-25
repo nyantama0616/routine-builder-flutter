@@ -5,9 +5,11 @@ import 'package:routine_builder/general/enum/basic_statuses.dart';
 import "package:routine_builder/general/query/client/caterpillar_query_client.dart";
 import 'package:routine_builder/general/class/caterpillar.dart';
 
-CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryClient}) {
-  // final currentMode = useState<Mode?>(null);
-  final currentMode = useState<Caterpillar?>(Caterpillar(pattern: "4321", passedSeconds: 30));
+CaterpillarController useCaterpillar(
+    {CaterpillarQueryClient? caterpillarQueryClient}) {
+  final currentMode = useState<Caterpillar?>(null);
+  // final currentMode =
+  //     useState<Caterpillar?>(Caterpillar(pattern: "4321", passedSeconds: 30));
   final status = useState<BasicStatuses>(BasicStatuses.none);
   final client = caterpillarQueryClient ?? CaterpillarQueryClient();
 
@@ -25,8 +27,31 @@ CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryCl
       return;
     }
   }
-  
-  final counter = useCounter(goalSeconds: 3, onFinished: finish);
+
+  final counter = useCounter(goalSeconds: 10, onFinished: finish);
+
+  void init() async {
+    print("init");
+
+    try {
+      final res = await client.init();
+      if (res.inProgress != null) {
+        selectMode(res.inProgress!.caterpillar);
+
+        if (res.inProgress!.timer.isRunning) {
+          counter.start(res.inProgress!.timer.startedAt, res.inProgress!.timer.passedSecondsWhenStopped);
+          status.value = BasicStatuses.doing;
+        } else {
+          // counter.start(res.inProgress!.timer.startedAt, res.inProgress!.timer.passedSecondsWhenStopped);
+          counter.stop(res.inProgress!.timer.passedSecondsWhenStopped);
+          status.value = BasicStatuses.none;
+        }
+      }
+    } catch (e) {
+      print(e);
+      return;
+    }
+  }
 
   void start() async {
     if (currentMode.value == null) {

@@ -8,6 +8,7 @@ class Requests {
   static const finishSleep = "$_baseURL/sleeps/finish";
 
   //caterpillar
+  static const initCaterpillar = "$_baseURL/caterpillars";
   static const startCaterpillar = "$_baseURL/caterpillars/start";
   static const stopCaterpillar = "$_baseURL/caterpillars/stop";
   static const finishCaterpillar = "$_baseURL/caterpillars/finish";
