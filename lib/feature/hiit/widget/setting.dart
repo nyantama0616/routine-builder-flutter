@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:routine_builder/feature/hiit/hook/use_setting_form.dart';
 import "package:routine_builder/feature/hiit/widget/buttons.dart";
 
-class Setting extends StatelessWidget {
+class Setting extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final settingController = useSettingForm(workTime: 10, breakTime: 10, setCount: 1);
+
     return Center(
       child: Container(
           width: 200,
@@ -22,10 +26,26 @@ class Setting extends StatelessWidget {
                   shrinkWrap: true,
                   children: [
                     _SettingItem(
-                        title: "ワークタイム", value: 10, options: [10, 20, 30], unit: "秒"),
+                        title: "ワークタイム",
+                        value: settingController.workTime,
+                        options: settingController.workTimeOptions,
+                        unit: "秒",
+                        onChanged: (value) {settingController.setWorkTime(value!);}
+                      ),
                     _SettingItem(
-                        title: "ブレークタイム", value: 10, options: [10, 20, 30], unit: "秒"),
-                    _SettingItem(title: "ラウンド数", value: 1, options: [1, 2, 3], unit: "回"),
+                        title: "ブレークタイム",
+                        value: settingController.breakTime,
+                        options: settingController.breakTimeOptions,
+                        unit: "秒",
+                        onChanged: (value) {settingController.setBreakTime(value!);}
+                      ),
+                    _SettingItem(
+                        title: "ラウンド数",
+                        value: settingController.roundCount,
+                        options: settingController.roundCountOptions,
+                        unit: "回",
+                        onChanged: (value) {settingController.setRoundCount(value!);}
+                      ),
                   ],
                 ),
               ),
@@ -41,7 +61,16 @@ class _SettingItem extends StatelessWidget {
   final int value;
   final List<int> options;
   final String unit;
-  _SettingItem({required this.title, required this.value, required this.options, this.unit = ""});
+  final Function(int?)? onChanged;
+  _SettingItem(
+    {
+      required this.title,
+      required this.value,
+      required this.options,
+      this.unit = "",
+      this.onChanged,
+    }
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +80,7 @@ class _SettingItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _DropdownButton(value: value, options: options),
+            _DropdownButton(value: value, options: options, onChanged: onChanged),
             Text(unit),
           ],
         ),
@@ -63,7 +92,8 @@ class _SettingItem extends StatelessWidget {
 class _DropdownButton extends StatelessWidget {
   final int value;
   final List<int> options;
-  _DropdownButton({required this.value, required this.options});
+  final Function(int?)? onChanged;
+  _DropdownButton({required this.value, required this.options, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +102,10 @@ class _DropdownButton extends StatelessWidget {
             DropdownMenuItem(child: Text(option.toString()), value: option))
         .toList();
     return DropdownButton(
+      menuMaxHeight: 200,
       value: value,
       items: items,
-      onChanged: (value) => print(value),
+      onChanged: onChanged,
     );
   }
 }
