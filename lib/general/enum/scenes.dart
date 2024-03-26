@@ -3,6 +3,7 @@ enum Scenes {
   sleep("sleep"),
   ping("ping"),
   caterpillar("caterpillar"),
+  hiit("hiit"),
   water("water");
 
   final String rawValue;

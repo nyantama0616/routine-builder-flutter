@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import "package:routine_builder/general/enum/scenes.dart";
 
 final appProvider = StateNotifierProvider<AppNotifier, AppState>((ref) {
-  return AppNotifier(AppState(scene: Scenes.water));
+  return AppNotifier(AppState(scene: Scenes.hiit));
 });
 
 class AppNotifier extends StateNotifier<AppState> {

@@ -24,6 +24,10 @@ class Home extends HookConsumerWidget {
           WaterButton(() {
             appController.setScene(Scenes.water);
           }),
+          SizedBox(width: 20, height: 20,),
+          HiitButton(() {
+            appController.setScene(Scenes.hiit);
+          }),
         ]
       )
     );

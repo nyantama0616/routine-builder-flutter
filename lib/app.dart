@@ -7,6 +7,7 @@ import 'package:routine_builder/general/enum/scenes.dart';
 import 'package:routine_builder/general/header/widget/header.dart';
 import 'package:routine_builder/feature/caterpillar/widget/caterpillar.dart';
 import 'package:routine_builder/feature/water/widget/water.dart';
+import 'package:routine_builder/feature/hiit/widget/hiit.dart';
 import 'package:routine_builder/general/provider/app_provider.dart';
 
 
@@ -29,6 +30,9 @@ class App extends HookConsumerWidget {
         break;
       case Scenes.caterpillar:
         mainScreen = Caterpillar();
+        break;
+      case Scenes.hiit:
+        mainScreen = Hiit();
         break;
       case Scenes.water:
         mainScreen = Water();
