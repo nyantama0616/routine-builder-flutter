@@ -1,21 +1,21 @@
 class HiitSetting {
   final int workTime;
   final int breakTime;
-  final int setCount;
+  final int roundCount;
 
   HiitSetting(
     {
       required this.workTime,
       required this.breakTime,
-      required this.setCount
+      required this.roundCount
     }
   );
 
-  HiitSetting copyWith({int? workTime, int? breakTime, int? setCount}) {
+  HiitSetting copyWith({int? workTime, int? breakTime, int? roundCount}) {
     return HiitSetting(
       workTime: workTime ?? this.workTime,
       breakTime: breakTime ?? this.breakTime,
-      setCount: setCount ?? this.setCount,
+      roundCount: roundCount ?? this.roundCount,
     );
   }
 
@@ -23,7 +23,7 @@ class HiitSetting {
     return HiitSetting(
       workTime: json['workTime'],
       breakTime: json['breakTime'],
-      setCount: json['setCount'],
+      roundCount: json['roundCount'],
     );
   }
 
@@ -31,7 +31,7 @@ class HiitSetting {
     return {
       'workTime': workTime,
       'breakTime': breakTime,
-      'setCount': setCount,
+      'roundCount': roundCount,
     };
   }
 }

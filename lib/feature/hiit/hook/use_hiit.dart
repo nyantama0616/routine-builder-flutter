@@ -10,7 +10,7 @@ HiitController useHiit() {
     setting: HiitSetting(
       workTime: 5,
       breakTime: 5,
-      setCount: 1,
+      roundCount: 1,
     ),
   ));
 

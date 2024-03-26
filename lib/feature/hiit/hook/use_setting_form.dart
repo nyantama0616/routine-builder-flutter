@@ -3,9 +3,9 @@ import "package:routine_builder/feature/hiit/class/setting_form_controller.dart"
 import "package:routine_builder/general/class/hiit_setting.dart";
 
 SettingFormController useSettingForm(
-    {required workTime, required breakTime, required setCount}) {
+    {required workTime, required breakTime, required roundCount}) {
   final _state = useState<HiitSetting>(HiitSetting(
-      workTime: workTime, breakTime: breakTime, setCount: setCount));
+      workTime: workTime, breakTime: breakTime, roundCount: roundCount));
 
   void setWorkTime(int workTime) {
     _state.value = _state.value.copyWith(workTime: workTime);
@@ -15,8 +15,8 @@ SettingFormController useSettingForm(
     _state.value = _state.value.copyWith(breakTime: breakTime);
   }
 
-  void setSetCount(int setCount) {
-    _state.value = _state.value.copyWith(setCount: setCount);
+  void setSetCount(int roundCount) {
+    _state.value = _state.value.copyWith(roundCount: roundCount);
   }
 
   final workTimeOptions =
@@ -28,7 +28,7 @@ SettingFormController useSettingForm(
       () => SettingFormController(
             workTime: _state.value.workTime,
             breakTime: _state.value.breakTime,
-            roundCount: _state.value.setCount,
+            roundCount: _state.value.roundCount,
             setWorkTime: setWorkTime,
             setBreakTime: setBreakTime,
             setRoundCount: setSetCount,

@@ -11,13 +11,13 @@ class Setting extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settingController = useSettingForm(workTime: 10, breakTime: 10, setCount: 1);
+    final settingController = useSettingForm(workTime: 10, breakTime: 10, roundCount: 1);
 
     void handleSave() {
       hiitController.saveSetting(HiitSetting(
         workTime: settingController.workTime,
         breakTime: settingController.breakTime,
-        setCount: settingController.roundCount,
+        roundCount: settingController.roundCount,
       ));
     }
 
