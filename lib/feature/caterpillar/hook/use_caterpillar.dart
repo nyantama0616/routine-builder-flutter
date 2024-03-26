@@ -91,7 +91,8 @@ CaterpillarController useCaterpillar(
       if (status.value == BasicStatuses.doing) {
         print("stop on dispose");
         //TODO: エラーの対処する
-        //一応動いてはいるから、とりあえずは放置
+        // 一応動いてはいるから、とりあえずは放置
+        // また、アプリをブチっと切った場合は、タイマー止まらないと思う
         client.stop();
       }
     };

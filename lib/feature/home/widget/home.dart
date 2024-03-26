@@ -17,8 +17,12 @@ class Home extends HookConsumerWidget {
             appController.setScene(Scenes.sleep);
           }),
           SizedBox(width: 20, height: 20,),
-          Caterpillar(() {
+          CaterpillarButton(() {
             appController.setScene(Scenes.caterpillar);
+          }),
+          SizedBox(width: 20, height: 20,),
+          WaterButton(() {
+            appController.setScene(Scenes.water);
           }),
         ]
       )

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 final SleepButton = (Function()? onPressed) => _ButtonBase("睡眠", onPressed: onPressed, icon: Icons.bedtime);
-final Caterpillar = (Function()? onPressed) => _ButtonBase("いもむし", onPressed: onPressed, icon: Icons.bug_report);
+final CaterpillarButton = (Function()? onPressed) => _ButtonBase("いもむし", onPressed: onPressed, icon: Icons.bug_report);
+final WaterButton = (Function()? onPressed) => _ButtonBase("水", onPressed: onPressed, icon: Icons.local_drink);
 
 class _ButtonBase extends StatelessWidget {
   final String text;

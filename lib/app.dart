@@ -6,7 +6,9 @@ import 'package:routine_builder/feature/sleep/widget/sleep.dart';
 import 'package:routine_builder/general/enum/scenes.dart';
 import 'package:routine_builder/general/header/widget/header.dart';
 import 'package:routine_builder/feature/caterpillar/widget/caterpillar.dart';
+import 'package:routine_builder/feature/water/widget/water.dart';
 import 'package:routine_builder/general/provider/app_provider.dart';
+
 
 class App extends HookConsumerWidget {
   const App({super.key});
@@ -28,8 +30,11 @@ class App extends HookConsumerWidget {
       case Scenes.caterpillar:
         mainScreen = Caterpillar();
         break;
+      case Scenes.water:
+        mainScreen = Water();
+        break;
       default:
-        mainScreen = Caterpillar();
+        mainScreen = Home();
     }
 
     return MaterialApp(
