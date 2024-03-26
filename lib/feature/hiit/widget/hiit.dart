@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import "package:routine_builder/feature/hiit/widget/goal.dart";
 import "package:routine_builder/feature/hiit/widget/train.dart";
 import "package:routine_builder/feature/hiit/widget/buttons.dart";
+import "package:routine_builder/feature/hiit/widget/setting.dart";
 
+//TODO: Settingをモーダルにする
 class Hiit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,8 @@ class Hiit extends StatelessWidget {
           ),
           Goal(),
           SizedBox(width: 20, height: 20,),
-          Train(),
+          // Train(),
+          Setting(),
         ],
       ),
     );
