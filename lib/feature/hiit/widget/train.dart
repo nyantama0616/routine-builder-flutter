@@ -2,19 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/hiit/class/hiit_controller.dart';
+import 'package:routine_builder/feature/hiit/enum/train_statuses.dart';
+import 'package:routine_builder/feature/hiit/hook/use_train.dart';
 import 'package:routine_builder/feature/hiit/widget/buttons.dart';
+import 'package:routine_builder/general/class/hiit_setting.dart';
 
+/*
+  TODO: パフォーマンスを計測する
+  30fpsくらいでゲージを動かしているが、重くないのか？
+*/
 class Train extends HookWidget {
   final HiitController hiitController;
   Train({required this.hiitController});
 
   @override
   Widget build(BuildContext context) {
-    final subWidget = StartButton(() {});
+    final trainController = useTrain(setting: hiitController.setting, onFinished: (roundCount) {print("finished: $roundCount");});
+    
+    final subWidget = trainController.status == TrainStatuses.notStarted || trainController.status == TrainStatuses.finished
+        ? StartButton(trainController.start)
+        : _Info(setting: hiitController.setting, currentRound: trainController.currentRound);
+    
+    final gageProgress = 
+        trainController.status == TrainStatuses.workTime
+            ? trainController.currentWorkTimeMillis / (hiitController.setting.workTime * 1000) :
+        trainController.status == TrainStatuses.breakTime
+            ? 1 - trainController.currentBreakTimeMillis / (hiitController.setting.breakTime * 1000) :
+              0.0;
+
+    final gageColor = trainController.status == TrainStatuses.workTime
+        ? Colors.green
+        : trainController.status == TrainStatuses.breakTime
+        ? Colors.blue
+        : Colors.grey;
+
     return Column(
       children: [
-        _Gage(0.3, color: Colors.green),
-        SizedBox(height: 20,),
+        _Gage(gageProgress, color: gageColor),
+        SizedBox(
+          height: 20,
+        ),
         subWidget,
       ],
     );
@@ -24,7 +51,7 @@ class Train extends HookWidget {
 class _Gage extends StatelessWidget {
   final double progress;
   final Color color;
-  
+
   _Gage(this.progress, {required this.color});
 
   @override
@@ -44,7 +71,7 @@ class _Gage extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: 200,
-                height: 300 * 0.4,
+                height: 300 * progress,
                 color: color,
               ),
             ),
@@ -56,8 +83,12 @@ class _Gage extends StatelessWidget {
 }
 
 class _Info extends StatelessWidget {
+  final HiitSetting setting;
+  final int currentRound;
+  _Info({required this.setting, required this.currentRound});
+
   @override
   Widget build(BuildContext context) {
-    return Text("3/10", style: TextStyle(fontSize: 36));
+    return Text("$currentRound/${setting.roundCount}", style: TextStyle(fontSize: 36));
   }
 }
