@@ -12,4 +12,8 @@ class Requests {
   static const startCaterpillar = "$_baseURL/caterpillars/start";
   static const stopCaterpillar = "$_baseURL/caterpillars/stop";
   static const finishCaterpillar = "$_baseURL/caterpillars/finish";
+
+  //water
+  static const initWater = "$_baseURL/waters";
+  static const drinkWater = "$_baseURL/waters/drink";
 }
