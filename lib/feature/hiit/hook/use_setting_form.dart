@@ -1,9 +1,10 @@
 import "package:flutter_hooks/flutter_hooks.dart";
 import "package:routine_builder/feature/hiit/class/setting_form_controller.dart";
+import "package:routine_builder/general/class/hiit_setting.dart";
 
 SettingFormController useSettingForm(
     {required workTime, required breakTime, required setCount}) {
-  final _state = useState<_SettingFormState>(_SettingFormState(
+  final _state = useState<HiitSetting>(HiitSetting(
       workTime: workTime, breakTime: breakTime, setCount: setCount));
 
   void setWorkTime(int workTime) {
@@ -36,23 +37,4 @@ SettingFormController useSettingForm(
             roundCountOptions: setCountOptions,
           ),
       [_state.value]);
-}
-
-class _SettingFormState {
-  final int workTime;
-  final int breakTime;
-  final int setCount;
-
-  _SettingFormState(
-      {required this.workTime,
-      required this.breakTime,
-      required this.setCount});
-
-  _SettingFormState copyWith({int? workTime, int? breakTime, int? setCount}) {
-    return _SettingFormState(
-      workTime: workTime ?? this.workTime,
-      breakTime: breakTime ?? this.breakTime,
-      setCount: setCount ?? this.setCount,
-    );
-  }
 }

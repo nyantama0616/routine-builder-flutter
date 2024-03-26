@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:routine_builder/feature/hiit/class/hiit_controller.dart';
 import 'package:routine_builder/feature/hiit/widget/buttons.dart';
 
-class Train extends StatelessWidget {
+class Train extends HookWidget {
+  final HiitController hiitController;
+  Train({required this.hiitController});
+
   @override
   Widget build(BuildContext context) {
-    // final subWidget = _Info();
-    final subWidget = StartButton(() => print("start"));
+    final subWidget = StartButton(() {});
     return Column(
       children: [
         _Gage(0.3, color: Colors.green),
