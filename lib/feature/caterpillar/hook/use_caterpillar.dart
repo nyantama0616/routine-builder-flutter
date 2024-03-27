@@ -68,8 +68,6 @@ CaterpillarController useCaterpillar(
       throw Exception("Mode is not selected");
     }
 
-    // _saveTrainSuccess.value = false;
-
     soundPlayer.playOneShot(sounds.caterpillarCountDownToStart); //スタート3秒前を音声で教える
     _timer = Timer(Duration(seconds: 3), () {
       client.start(pattern: currentMode.value!.pattern).then((res) {
@@ -116,14 +114,15 @@ CaterpillarController useCaterpillar(
 
   return useMemoized(() {
     return CaterpillarController(
-      currentMode,
-      status,
-      counter,
-      patterns,
+      currentMode: currentMode.value,
+      status: status.value,
+      counter: counter,
+      patterns: patterns.value,
+      passedSeconds: counter.passedSeconds,
       selectMode: selectMode,
       start: start,
       stop: stop,
       toModeSelector: toModeSelector,
     );
-  }, [currentMode.value, counter.passedSeconds]);
+  }, [currentMode.value, status.value, patterns.value, counter.passedSeconds]);
 }
