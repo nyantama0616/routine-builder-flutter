@@ -26,28 +26,46 @@ class Train extends HookWidget {
       );
       hiitController.saveTrainData(data);
     }
-    final trainController = useTrain(setting: hiitController.setting, onFinished: onFinished);
-    
-    final subWidget = trainController.status == TrainStatuses.notStarted || trainController.status == TrainStatuses.finished
+
+    final trainController =
+        useTrain(setting: hiitController.setting, onFinished: onFinished);
+
+    final subWidget = trainController.status == TrainStatuses.notStarted ||
+            trainController.status == TrainStatuses.finished
         ? StartButton(trainController.start)
-        : _Info(setting: hiitController.setting, currentRound: trainController.currentRound);
-    
-    final gageProgress = 
-        trainController.status == TrainStatuses.workTime
-            ? trainController.currentWorkTimeMillis / (hiitController.setting.workTime * 1000) :
-        trainController.status == TrainStatuses.breakTime
-            ? 1 - trainController.currentBreakTimeMillis / (hiitController.setting.breakTime * 1000) :
-              0.0;
+        : _Info(
+            setting: hiitController.setting,
+            currentRound: trainController.currentRound);
+
+    final gageProgress = trainController.status == TrainStatuses.workTime
+        ? trainController.currentWorkTimeMillis /
+            (hiitController.setting.workTime * 1000)
+        : trainController.status == TrainStatuses.breakTime
+            ? 1 -
+                trainController.currentBreakTimeMillis /
+                    (hiitController.setting.breakTime * 1000)
+            : 0.0;
 
     final gageColor = trainController.status == TrainStatuses.workTime
         ? Colors.green
         : trainController.status == TrainStatuses.breakTime
-        ? Colors.blue
-        : Colors.grey;
+            ? Colors.blue
+            : Colors.grey;
+
+    final mainScreen = trainController.status == TrainStatuses.finished
+        ? _Result(
+            trainData: HiitTrainData(
+              workTime: hiitController.setting.workTime,
+              breakTime: hiitController.setting.breakTime,
+              roundCount: trainController.currentRound,
+            ),
+            saveTrainSuccess: hiitController.saveTrainSuccess,
+          )
+        : _Gage(gageProgress, color: gageColor);
 
     return Column(
       children: [
-        _Gage(gageProgress, color: gageColor),
+        mainScreen,
         SizedBox(
           height: 20,
         ),
@@ -98,6 +116,37 @@ class _Info extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("$currentRound/${setting.roundCount}", style: TextStyle(fontSize: 36));
+    return Text("$currentRound/${setting.roundCount}",
+        style: TextStyle(fontSize: 36));
+  }
+}
+
+class _Result extends StatelessWidget {
+  final HiitTrainData trainData;
+  final bool saveTrainSuccess;
+  _Result({required this.trainData, required this.saveTrainSuccess});
+
+  @override
+  Widget build(BuildContext context) {
+    //TODO: トレーニング終了時に一瞬だけFailedになるのを修正する(通信環境次第)
+    final message = saveTrainSuccess
+        ? Text("Save Success!", style: TextStyle(color: Colors.green, fontSize: 24))
+        : Text("Save Failed...", style: TextStyle(color: Colors.red, fontSize: 24));
+    
+    final textStyle = TextStyle(fontSize: 24);
+    return Center(
+        child: Container(
+          width: 200,
+          height: 300,
+          child: Column(
+          children: [
+            Text("ワークタイム: ${trainData.workTime}", style: textStyle),
+            Text("ブレークタイム: ${trainData.breakTime}", style: textStyle),
+            Text("ラウンド数: ${trainData.roundCount}", style: textStyle),
+            message,
+          ],
+        )
+      )
+    );
   }
 }

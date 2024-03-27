@@ -7,6 +7,7 @@ import 'package:routine_builder/general/query/client/hiit_query_client.dart';
 HiitController useHiit() {
   final _state = useState<_State>(_State(
     showSetting: false,
+    saveTrainSuccess: false,
     isTraining: false,
     setting: HiitSetting.init(),
   ));
@@ -14,12 +15,12 @@ HiitController useHiit() {
   final _client = HiitQueryClient();
 
   void toggleShowSetting() {
-    _state.value =
-        _state.value.copyWith(showSetting: !_state.value.showSetting);
+    if (_state.value.isTraining) return; //TODO: UI側で非表示にするべき
+    _state.value = _state.value.copyWith(showSetting: !_state.value.showSetting);
   }
 
   void start() {
-    _state.value = _state.value.copyWith(isTraining: true);
+    _state.value = _state.value.copyWith(isTraining: true, saveTrainSuccess: false);
   }
 
   void saveSetting(HiitSetting setting) {
@@ -31,9 +32,8 @@ HiitController useHiit() {
   }
 
   void saveTrainData(HiitTrainData setting) {
-    print("saveTrainData");
     _client.create(setting).then((res) {
-      print(res);
+      _state.value = _state.value.copyWith(saveTrainSuccess: true);
     }).catchError((e) {
       print(e);
     });
@@ -42,7 +42,6 @@ HiitController useHiit() {
   void init() {
     _client.init().then((res) {
       _state.value = _state.value.copyWith(setting: res.hiitSetting);
-      print(res.hiitSetting.workTime);
     }).catchError((e) {
       print(e);
     });
@@ -56,6 +55,7 @@ HiitController useHiit() {
   return useMemoized(
       () => HiitController(
             showSetting: _state.value.showSetting,
+            saveTrainSuccess: _state.value.saveTrainSuccess,
             setting: _state.value.setting,
             toggleShowSetting: toggleShowSetting,
             saveSetting: saveSetting,
@@ -66,18 +66,21 @@ HiitController useHiit() {
 
 class _State {
   final bool showSetting;
+  final bool saveTrainSuccess;
   final bool isTraining;
   final HiitSetting setting;
 
   _State({
     required this.showSetting,
+    required this.saveTrainSuccess,
     required this.isTraining,
     required this.setting,
   });
 
-  _State copyWith({bool? showSetting, bool? isTraining, HiitSetting? setting}) {
+  _State copyWith({bool? showSetting, bool? saveTrainSuccess, bool? isTraining, HiitSetting? setting}) {
     return _State(
       showSetting: showSetting ?? this.showSetting,
+      saveTrainSuccess: saveTrainSuccess ?? this.saveTrainSuccess,
       isTraining: isTraining ?? this.isTraining,
       setting: setting ?? this.setting,
     );
