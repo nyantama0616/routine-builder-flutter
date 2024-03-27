@@ -11,6 +11,8 @@ class HiitSetting {
     }
   );
 
+  HiitSetting.init() : workTime = 5, breakTime = 5, roundCount = 1;
+
   HiitSetting copyWith({int? workTime, int? breakTime, int? roundCount}) {
     return HiitSetting(
       workTime: workTime ?? this.workTime,

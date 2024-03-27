@@ -6,6 +6,7 @@ import 'package:routine_builder/feature/hiit/enum/train_statuses.dart';
 import 'package:routine_builder/feature/hiit/hook/use_train.dart';
 import 'package:routine_builder/feature/hiit/widget/buttons.dart';
 import 'package:routine_builder/general/class/hiit_setting.dart';
+import 'package:routine_builder/general/class/hiit_train_data.dart';
 
 /*
   TODO: パフォーマンスを計測する
@@ -17,7 +18,15 @@ class Train extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final trainController = useTrain(setting: hiitController.setting, onFinished: (roundCount) {print("finished: $roundCount");});
+    void onFinished(int roundCount) {
+      HiitTrainData data = HiitTrainData(
+        workTime: hiitController.setting.workTime,
+        breakTime: hiitController.setting.breakTime,
+        roundCount: roundCount,
+      );
+      hiitController.saveTrainData(data);
+    }
+    final trainController = useTrain(setting: hiitController.setting, onFinished: onFinished);
     
     final subWidget = trainController.status == TrainStatuses.notStarted || trainController.status == TrainStatuses.finished
         ? StartButton(trainController.start)

@@ -2,17 +2,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/hiit/class/hiit_controller.dart';
 import 'package:routine_builder/general/class/hiit_setting.dart';
 import 'package:routine_builder/general/class/hiit_train_data.dart';
+import 'package:routine_builder/general/query/client/hiit_query_client.dart';
 
 HiitController useHiit() {
   final _state = useState<_State>(_State(
     showSetting: false,
     isTraining: false,
-    setting: HiitSetting(
-      workTime: 5,
-      breakTime: 5,
-      roundCount: 3,
-    ),
+    setting: HiitSetting.init(),
   ));
+
+  final _client = HiitQueryClient();
 
   void toggleShowSetting() {
     _state.value =
@@ -24,12 +23,35 @@ HiitController useHiit() {
   }
 
   void saveSetting(HiitSetting setting) {
-    _state.value = _state.value.copyWith(setting: setting);
+    _client.updateSetting(setting).then((res) {
+      _state.value = _state.value.copyWith(setting: res.hiitSetting);
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   void saveTrainData(HiitTrainData setting) {
-    print("saveTrainData: $setting");
+    print("saveTrainData");
+    _client.create(setting).then((res) {
+      print(res);
+    }).catchError((e) {
+      print(e);
+    });
   }
+
+  void init() {
+    _client.init().then((res) {
+      _state.value = _state.value.copyWith(setting: res.hiitSetting);
+      print(res.hiitSetting.workTime);
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  useEffect(() {
+    init();
+    return null;
+  }, []);
 
   return useMemoized(
       () => HiitController(

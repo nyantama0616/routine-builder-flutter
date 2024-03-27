@@ -16,4 +16,9 @@ class Requests {
   //water
   static const initWater = "$_baseURL/waters";
   static const drinkWater = "$_baseURL/waters/drink";
+
+  //hiit
+  static const initHiit = "$_baseURL/hiits";
+  static const createHiit = "$_baseURL/hiits";
+  static const updateHiitSetting = "$_baseURL/hiits/setting";
 }

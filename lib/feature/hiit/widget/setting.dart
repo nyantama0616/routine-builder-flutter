@@ -11,7 +11,7 @@ class Setting extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settingController = useSettingForm(workTime: 10, breakTime: 10, roundCount: 1);
+    final settingController = useSettingForm(hiitController.setting);
 
     void handleSave() {
       hiitController.saveSetting(HiitSetting(

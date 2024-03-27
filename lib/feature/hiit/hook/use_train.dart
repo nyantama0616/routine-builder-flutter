@@ -21,6 +21,7 @@ TrainController useTrain({required HiitSetting setting, Function(int)? onFinishe
   void start() {
     _state.value = _state.value.copyWith(
       status: TrainStatuses.workTime,
+      currentRound: 0,
     );
   }
 
@@ -74,7 +75,6 @@ TrainController useTrain({required HiitSetting setting, Function(int)? onFinishe
     }
 
     return () {
-      print("timer cancel");
       _timer?.cancel(); //めっちゃ大事！
     };
   }, [_state.value.status]);
@@ -82,7 +82,6 @@ TrainController useTrain({required HiitSetting setting, Function(int)? onFinishe
   useEffect(() {
     if (_state.value.currentRound >= setting.roundCount) {
       _state.value = _state.value.copyWith(status: TrainStatuses.finished);
-      print("finished!!");
     }
   }, [_state.value.currentRound]);
 
