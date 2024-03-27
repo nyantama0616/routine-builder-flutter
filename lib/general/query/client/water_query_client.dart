@@ -1,18 +1,11 @@
-import "package:routine_builder/general/query/client/query_client.dart";
+import "package:routine_builder/general/query/client/query_client_base.dart";
 import 'package:routine_builder/general/query/requests.dart';
-import 'package:http/http.dart' as http;
-import "package:routine_builder/general/query/data/queryErrorResponseBody.dart";
-import "package:routine_builder/general/query/server_responded_but_exception.dart";
 import 'dart:convert';
 import "package:routine_builder/general/query/data/water/drink_water/drink_water_request_body.dart";
 import "package:routine_builder/general/query/data/water/drink_water/drink_water_response_body.dart";
 import "package:routine_builder/general/query/data/water/init/init_response_body.dart";
 
-class WaterQueryClient {
-  final QueryClient queryClient;
-
-  WaterQueryClient({QueryClient? queryClient}) : queryClient = queryClient ?? QueryClient();
-
+class WaterQueryClient extends QueryClientBase {
   Future<InitResponseBody> init() async {
     final res = await queryClient.get(Requests.initWater);
 
@@ -20,7 +13,7 @@ class WaterQueryClient {
       return InitResponseBody.fromJson(jsonDecode(res.body));
     }
 
-    _handleError(res);
+    handleError(res);
   }
 
   //TODO: 将来的にdrinkに名称変更すると思う
@@ -32,16 +25,6 @@ class WaterQueryClient {
       return DrinkWaterResponseBody.fromJson(jsonDecode(res.body));
     }
 
-    _handleError(res);
-  }
-
-  Never _handleError(http.Response res) {
-    if (res.statusCode == 400) {
-      final parsedBody = QueryErrorResponseBody.fromJson(jsonDecode(res.body));
-      throw ServerRespondedButException(
-          statusCode: res.statusCode, errorMessages: parsedBody.errors);
-    } else {
-      throw Exception("Unknown error. statusCode: ${res.statusCode}");
-    }
+    handleError(res);
   }
 }
