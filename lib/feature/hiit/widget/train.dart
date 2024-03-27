@@ -136,7 +136,7 @@ class _Result extends StatelessWidget {
     final textStyle = TextStyle(fontSize: 24);
     return Center(
         child: Container(
-          width: 200,
+          width: 250,
           height: 300,
           child: Column(
           children: [

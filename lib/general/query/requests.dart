@@ -1,7 +1,7 @@
 class Requests {
   static const _baseURL = 'http://localhost:3000';
   
-  static const ping = "$_baseURL/ping";
+  static const ping = "$_baseURL/dev/ping";
 
   //sleep
   static const startSleep = "$_baseURL/sleeps/start";

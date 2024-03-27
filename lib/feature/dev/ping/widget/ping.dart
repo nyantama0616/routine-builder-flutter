@@ -22,11 +22,11 @@ class Ping extends HookWidget {
               color: Colors.blue,
             ),
           ),
-          if (controller.status.value == QueryStatuses.doing)
+          if (controller.status == QueryStatuses.doing)
             const CircularProgressIndicator()
           else
             Text(
-              controller.message.value,
+              controller.message,
               style: const TextStyle(
                 fontSize: 40,
                 color: Colors.blue,

@@ -5,6 +5,8 @@ final SleepButton = (Function()? onPressed) => _ButtonBase("睡眠", onPressed: 
 final CaterpillarButton = (Function()? onPressed) => _ButtonBase("いもむし", onPressed: onPressed, icon: Icons.bug_report);
 final WaterButton = (Function()? onPressed) => _ButtonBase("水", onPressed: onPressed, icon: Icons.local_drink);
 final HiitButton = (Function()? onPressed) => _ButtonBase("HIIT", onPressed: onPressed, icon: Icons.directions_run);
+final PingButton = (Function()? onPressed) => _ButtonBase("Ping", onPressed: onPressed, icon: Icons.network_check);
+
 class _ButtonBase extends StatelessWidget {
   final String text;
   final Function()? onPressed;

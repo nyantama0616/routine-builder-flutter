@@ -28,6 +28,10 @@ class Home extends HookConsumerWidget {
           HiitButton(() {
             appController.setScene(Scenes.hiit);
           }),
+          SizedBox(width: 20, height: 20,),
+          PingButton(() {
+            appController.setScene(Scenes.ping);
+          }),
         ]
       )
     );

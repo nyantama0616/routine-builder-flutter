@@ -8,25 +8,29 @@ import "package:flutter_hooks/flutter_hooks.dart";
 PingController usePing({DevQueryClient? devQueryClient}) {
   DevQueryClient client = devQueryClient ?? DevQueryClient();
 
-  final message = useState<String>("");
-  final status = useState<QueryStatuses>(QueryStatuses.none);
+  final _message = useState<String>("");
+  final _status = useState<QueryStatuses>(QueryStatuses.none);
 
   void submit() {
-    status.value = QueryStatuses.doing;
+    _status.value = QueryStatuses.doing;
 
     client.ping().then((value) {
-      message.value = value;
-      status.value = QueryStatuses.success;
+      _message.value = value;
+      _status.value = QueryStatuses.success;
     }).catchError((error) {
-      message.value = error.toString();
-      status.value = QueryStatuses.failure;
+      _message.value = error.toString();
+      _status.value = QueryStatuses.failure;
     });
   }
 
-  void reset() => message.value = "";
+  void reset() => _message.value = "";
 
   return useMemoized(() {
     return PingController(
-        message: message, status: status, submit: submit, reset: reset);
-  }, [message.value]);
+      message: _message.value,
+      status: _status.value,
+      submit: submit,
+      reset: reset,
+    );
+  }, [_message.value, _status.value]);
 }

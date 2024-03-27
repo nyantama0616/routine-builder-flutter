@@ -1,16 +1,18 @@
 import 'dart:convert';
+import "package:routine_builder/general/query/client/query_client_base.dart";
 import "package:routine_builder/general/query/data/ping/ping_response_body.dart";
 import "query_client.dart";
 import "../requests.dart";
-class DevQueryClient {
-  final QueryClient queryClient;
-
-  DevQueryClient({QueryClient? queryClient}) : queryClient = queryClient ?? QueryClient();
-
+class DevQueryClient extends QueryClientBase {
   Future<String> ping() async {
-    final response = await queryClient.get(Requests.ping);
-    final body = jsonDecode(response.body);
+    final res = await queryClient.get(Requests.ping);
+    final body = jsonDecode(res.body);
     final parsedBody = PingResponseBody.fromJson(body);
-    return parsedBody.message;
+
+    if (res.statusCode == 200) {
+      return parsedBody.message;
+    }
+
+    handleError(res);
   }
 }
