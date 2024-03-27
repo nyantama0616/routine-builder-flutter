@@ -24,7 +24,10 @@ class Player extends HookWidget {
         color: const Color.fromARGB(255, 239, 131, 123),
         onPressed: controller.stop);
     final backButton = controller.status == BasicStatuses.doing ? null : MyBack.BackButton(onPressed: controller.toModeSelector);
-    final submitButton = controller.status == BasicStatuses.none ? StartButton : StopButton;
+    final submitButton = controller.status == BasicStatuses.none || controller.status == BasicStatuses.success ? StartButton : StopButton;
+    final message = controller.status == BasicStatuses.success ? Text("保存成功", style: TextStyle(color: Colors.green)) :
+                    controller.status == BasicStatuses.failed ? Text("保存失敗", style: TextStyle(color: Colors.red)) :
+                    Text("");
     return Center(
       child: Container(
         height: 400,
@@ -37,6 +40,7 @@ class Player extends HookWidget {
               alignment: Alignment.topLeft,
               child: backButton,
             ),
+            message,
             Text(controller.currentMode!.pattern, style: TextStyle(fontSize: 36)),
             SizedBox(height: 10),
             Counter(TRAIN_SECONDS - controller.passedSeconds),
