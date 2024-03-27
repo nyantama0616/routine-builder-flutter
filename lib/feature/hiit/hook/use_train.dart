@@ -12,10 +12,7 @@ const FRAME_DURATION_Millis = 40;
 
 TrainController useTrain(
     {required HiitSetting setting, Function(int)? onFinished}) {
-  final _state = useState<_State>(_State(
-    status: TrainStatuses.notStarted,
-    currentRound: 0,
-  ));
+  final _state = useState<_State>(_State());
 
   final currentWorkTimeMillis = useState<int>(0);
   final currentBreakTimeMillis = useState<int>(0);
@@ -25,20 +22,21 @@ TrainController useTrain(
   final _soundPlayer = SoundPlayer();
 
   void start() {
-    _soundPlayer.playOneShot(sounds.hiitCountDown); //スタートを音声で教える
+    _soundPlayer.playOneShot(sounds.hiitToWorkTime); //スタートを音声で教える
     _timer = Timer(Duration(seconds: 3), () {
       _state.value = _state.value.copyWith(
         status: TrainStatuses.workTime,
         currentRound: 0,
       );
       _soundPlayer.playOneShot(_pick(sounds.hiitStartVoices),
-          delay: 500); //スタートを音声で教える
+          delay: 1000); //スタートを音声で教える
     });
   }
 
   void _startWorkTime() {
     currentWorkTimeMillis.value = 0;
-    _state.value = _state.value.copyWith(status: TrainStatuses.workTime);
+    _state.value = _state.value.copyWith(
+        status: TrainStatuses.workTime, playedToBreakTimeSound: false);
 
     _timer =
         Timer.periodic(Duration(milliseconds: FRAME_DURATION_Millis), (timer) {
@@ -49,7 +47,15 @@ TrainController useTrain(
           status: TrainStatuses.breakTime,
         );
         _soundPlayer.playOneShot(
-            sounds.hiitNumberVoices[_state.value.currentRound]); //何回目かを音声で教える
+            sounds.hiitNumberVoices[_state.value.currentRound], delay: 500); //何回目かを音声で教える
+        return;
+      }
+
+      //ワークタイム終了3秒前を音声で教える
+      if (currentWorkTimeMillis.value >= setting.workTime * 1000 - 3000 &&
+          !_state.value.playedToBreakTimeSound) {
+        _soundPlayer.playOneShot(sounds.hiitToBreakTime);
+        _state.value = _state.value.copyWith(playedToBreakTimeSound: true);
       }
     });
   }
@@ -58,6 +64,7 @@ TrainController useTrain(
     currentBreakTimeMillis.value = 0;
     _state.value = _state.value.copyWith(
       status: TrainStatuses.breakTime,
+      playedToWorkTimeSound: false,
     );
 
     _timer =
@@ -67,6 +74,14 @@ TrainController useTrain(
         _state.value = _state.value.copyWith(
           status: TrainStatuses.workTime,
         );
+        return;
+      }
+
+      //ブレークタイム終了3秒前を音声で教える
+      if (currentBreakTimeMillis.value >= setting.breakTime * 1000 - 3000 &&
+          !_state.value.playedToWorkTimeSound) {
+        _soundPlayer.playOneShot(sounds.hiitToWorkTime);
+        _state.value = _state.value.copyWith(playedToWorkTimeSound: true);
       }
     });
   }
@@ -118,21 +133,29 @@ TrainController useTrain(
 class _State {
   final TrainStatuses status;
   final int currentRound;
+  final bool playedToWorkTimeSound;
+  final bool playedToBreakTimeSound;
 
   _State({
-    required this.status,
-    required this.currentRound,
+    this.status = TrainStatuses.notStarted,
+    this.currentRound = 0,
+    this.playedToWorkTimeSound = false,
+    this.playedToBreakTimeSound = false,
   });
 
   _State copyWith({
     TrainStatuses? status,
-    int? currentWorkTimeMillis,
-    int? currentBreakTimeMillis,
     int? currentRound,
+    bool? playedToWorkTimeSound,
+    bool? playedToBreakTimeSound,
   }) {
     return _State(
       status: status ?? this.status,
       currentRound: currentRound ?? this.currentRound,
+      playedToWorkTimeSound:
+          playedToWorkTimeSound ?? this.playedToWorkTimeSound,
+      playedToBreakTimeSound:
+          playedToBreakTimeSound ?? this.playedToBreakTimeSound,
     );
   }
 }

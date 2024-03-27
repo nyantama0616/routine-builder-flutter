@@ -7,4 +7,5 @@ final hiitNumberVoices = List<String>.generate(10, (i) => "$_base/hiit/number/$i
 final hiitFinisheVoices = List<String>.generate(5, (i) => "$_base/hiit/finish/$i.mp3");
 final hiitSaveSuccess = "$_base/hiit/finish/save_success.mp3";
 final hiitSaveFailed = "$_base/hiit/finish/save_failed.mp3";
-final hiitCountDown = "$_base/hiit/start/count_down.mp3";
+final hiitToWorkTime = "$_base/hiit/start/to_work_time.mp3";
+final hiitToBreakTime = "$_base/hiit/start/to_break_time.mp3";
