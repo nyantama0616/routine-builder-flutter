@@ -3,6 +3,8 @@ import 'package:routine_builder/feature/hiit/class/hiit_controller.dart';
 import 'package:routine_builder/general/class/hiit_setting.dart';
 import 'package:routine_builder/general/class/hiit_train_data.dart';
 import 'package:routine_builder/general/query/client/hiit_query_client.dart';
+import 'package:routine_builder/general/sound/sound_player.dart';
+import 'package:routine_builder/general/sound/sounds.dart' as sounds;
 
 HiitController useHiit() {
   final _state = useState<_State>(_State(
@@ -13,6 +15,8 @@ HiitController useHiit() {
   ));
 
   final _client = HiitQueryClient();
+
+  final _soundPlayer = SoundPlayer();
 
   void toggleShowSetting() {
     if (_state.value.isTraining) return; //TODO: UI側で非表示にするべき
@@ -34,8 +38,11 @@ HiitController useHiit() {
   void saveTrainData(HiitTrainData setting) {
     _client.create(setting).then((res) {
       _state.value = _state.value.copyWith(saveTrainSuccess: true);
+      _soundPlayer.playOneShot(sounds.hiitSaveSuccess);
     }).catchError((e) {
       print(e);
+      _state.value = _state.value.copyWith(saveTrainSuccess: false);
+      _soundPlayer.playOneShot(sounds.hiitSaveFailed);
     });
   }
 
