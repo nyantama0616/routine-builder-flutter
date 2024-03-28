@@ -58,7 +58,6 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
   build_runner: ^2.4.8
-  http: ^1.2.1
 
   #riverpod
   riverpod_generator: ^2.4.0
