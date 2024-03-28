@@ -10,7 +10,7 @@ import "package:routine_builder/general/query/query_statuses.dart";
 class Home extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pingController = usePing();
+    final pingController = usePing(); //TODO: homeQueryClientあるからいらん。消す。
 
     final message = pingController.status == QueryStatuses.doing
         ? Text("Loading...")

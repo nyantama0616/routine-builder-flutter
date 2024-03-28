@@ -3,6 +3,9 @@ class Requests {
   
   static const ping = "$_baseURL/dev/ping";
 
+  //home
+  static const initHome = "$_baseURL/home";
+
   //sleep
   static const startSleep = "$_baseURL/sleeps/start";
   static const finishSleep = "$_baseURL/sleeps/finish";

@@ -1,14 +1,22 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routine_builder/general/class/life.dart';
 import "package:routine_builder/general/enum/scenes.dart";
-import 'package:routine_builder/general/enum/statuses.dart';
+import 'package:routine_builder/general/query/client/home_query_client.dart';
 
 final appProvider = StateNotifierProvider<AppNotifier, AppState>((ref) {
-  return AppNotifier(AppState(scene: Scenes.home, todayLife: Life.init()));
+  return AppNotifier.init();
 });
 
 class AppNotifier extends StateNotifier<AppState> {
-  AppNotifier(super.state);
+  
+  AppNotifier.init() : super(AppState(scene: Scenes.home, todayLife: Life.init())) {
+    final client = HomeQueryClient(); //TODO: ここでhomeQueryClient使うのはおかしいけどね。
+    client.init().then((res) {
+      setTodayLife(res.todayLife);
+    }).catchError((e) {
+      print(e);
+    });
+  }
 
   void setScene(Scenes newScene) {
     state = state.copyWith(scene: newScene);
