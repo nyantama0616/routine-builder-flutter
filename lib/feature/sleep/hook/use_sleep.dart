@@ -1,3 +1,5 @@
+import "dart:async";
+
 import "package:routine_builder/feature/sleep/class/sleep_controller.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
 import "package:routine_builder/general/provider/app_provider.dart";
@@ -10,11 +12,28 @@ SleepController useSleep(AppNotifier notifier,
     {SleepQueryClient? sleepQueryClient}) {
   final client = sleepQueryClient ?? SleepQueryClient();
   final soundPlayer = SoundPlayer();
+  
+  Timer? _timer;
+  final _callable = useState(true);
 
   void _handleSleep({bool isNap = false}) async {
+    if (!_callable.value) return;
+
     client.startSleep(isNap: isNap).then((res) {
       notifier.setTodayLife(res.todayLife);
       soundPlayer.playOneShot(sounds.sleepGoToBedSound);
+      
+      /* 3秒間は連続で呼べないようにする
+        TODO:
+        けど実際は連続で呼べちゃう。
+        stateの変更時にdisposeされるからだと思うけど、
+        なんでdisposeされるのかはわからない。
+      */
+
+      _callable.value = false;
+      _timer = Timer(Duration(seconds: 3), () {
+        _callable.value = true;
+      });
     }).catchError((e) {
       print(e);
     });
@@ -30,18 +49,34 @@ SleepController useSleep(AppNotifier notifier,
   }
 
   void handleWakeUp() async {
+    if (!_callable.value) return;
+    
     client.finishSleep().then((res) {
       notifier.setTodayLife(res.todayLife);
       soundPlayer.playOneShot(sounds.sleepWakeUpSounds.pick());
       soundPlayer.playOneShot(sounds.sleepWakeUpVoices.pick(), delay: 1500);
+
+      // 3秒間は連続で呼べないようにする
+      _callable.value = false;
+      _timer = Timer(Duration(seconds: 3), () {
+        _callable.value = true;
+      });
     }).catchError((e) {
       print(e);
     });
   }
 
-  return SleepController(
-    handleSleep: handleSleep,
-    handleWakeUp: handleWakeUp,
-    handleNap: handleNap,
-  );
+  useEffect(() {
+    return () {
+      _timer?.cancel();
+    };
+  }, []);
+
+  return useMemoized(() {
+    return SleepController(
+      handleSleep: handleSleep,
+      handleWakeUp: handleWakeUp,
+      handleNap: handleNap,
+    );
+  }, []);
 }
