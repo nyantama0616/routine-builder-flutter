@@ -15,3 +15,8 @@ final hiitToBreakTime = "$_base/hiit/start/to_break_time.mp3";
 final caterpillarCountDownToStart = hiitToWorkTime;
 final caterpillarSaveSuccess = hiitSaveSuccess;
 final caterpillarSaveFailed = hiitSaveFailed;
+
+// Sleep
+final sleepWakeUpVoices = List<String>.generate(2, (i) => "$_base/sleep/wake_up/greet$i.mp3");
+final sleepWakeUpSounds = List<String>.generate(4, (i) => "$_base/sleep/wake_up/$i.mp3");
+final sleepGoToBedSound = "$_base/sleep/go_to_bed/go_to_bed.mp3";

@@ -83,6 +83,8 @@ flutter:
     - assets/sounds/hiit/number/
     - assets/sounds/hiit/start/
     - assets/sounds/hiit/finish/
+    - assets/sounds/sleep/wake_up/
+    - assets/sounds/sleep/go_to_bed/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
