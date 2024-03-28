@@ -9,6 +9,7 @@ class Ping extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = usePing();
+    final authorized = controller.authorized ? "Authorized" : "Unauthorized";
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,6 +35,7 @@ class Ping extends HookWidget {
                 fontFamily: "IndieFlower",
               ),
             ),
+            Text(authorized, style: const TextStyle(fontSize: 20)),
           ElevatedButton(
             onPressed: controller.submit,
             child: const Text("Ping"),

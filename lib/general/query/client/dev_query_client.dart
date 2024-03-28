@@ -4,13 +4,11 @@ import "package:routine_builder/general/query/data/ping/ping_response_body.dart"
 import "query_client.dart";
 import "../requests.dart";
 class DevQueryClient extends QueryClientBase {
-  Future<String> ping() async {
+  Future<PingResponseBody> ping() async {
     final res = await queryClient.get(Requests.ping);
-    final body = jsonDecode(res.body);
-    final parsedBody = PingResponseBody.fromJson(body);
 
     if (res.statusCode == 200) {
-      return parsedBody.message;
+      return PingResponseBody.fromJson(jsonDecode(res.body));
     }
 
     handleError(res);

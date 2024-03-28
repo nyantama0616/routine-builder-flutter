@@ -1,8 +1,11 @@
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 //TODO: テスト書く
 class QueryClient {
   Future<http.Response> get(String path, {Map<String, String>? headers}) {
+    headers ??= {};
+    _setDefaultValuesToHeaders(headers);
     return http.get(Uri.parse(path), headers: headers);
   }
 
@@ -22,5 +25,6 @@ class QueryClient {
 
   void _setDefaultValuesToHeaders(Map<String, String> headers) {
     headers["Content-Type"] ??= "application/json";
+    headers["data-access-key"] ??= dotenv.env["ACCESS_KEY"]!;
   }
 }

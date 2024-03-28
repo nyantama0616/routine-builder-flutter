@@ -14,14 +14,14 @@ class Home extends HookConsumerWidget {
 
     final message = pingController.status == QueryStatuses.doing
         ? Text("Loading...")
-        : pingController.status == QueryStatuses.success
+        : pingController.status == QueryStatuses.failure || !pingController.authorized
+        ? Text(
+            "ネットワークエラー！！",
+            style: TextStyle(color: Colors.red),
+          )
+        : pingController.status == QueryStatuses.success && pingController.authorized
             ? Text("ようこそ！")
-            : pingController.status == QueryStatuses.failure
-                ? Text(
-                    "ネットワークエラー！！",
-                    style: TextStyle(color: Colors.red),
-                  )
-                : Text("nothing");
+        : Text("nothing");
 
     useEffect(() {
       pingController.submit();

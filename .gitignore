@@ -49,3 +49,5 @@ app.*.map.json
 #code builderによって生成されるファイル
 *.mocks.dart
 *.g.dart
+
+.env*

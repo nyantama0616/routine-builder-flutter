@@ -9,16 +9,19 @@ PingController usePing({DevQueryClient? devQueryClient}) {
   DevQueryClient client = devQueryClient ?? DevQueryClient();
 
   final _message = useState<String>("");
+  final _authorized = useState<bool>(false);
   final _status = useState<QueryStatuses>(QueryStatuses.none);
 
   void submit() {
     _status.value = QueryStatuses.doing;
 
-    client.ping().then((value) {
-      _message.value = value;
+    client.ping().then((res) {
+      _message.value = res.message;
+      _authorized.value = res.authorized;
       _status.value = QueryStatuses.success;
     }).catchError((error) {
       _message.value = error.toString();
+      _authorized.value = false;
       _status.value = QueryStatuses.failure;
     });
   }
@@ -28,6 +31,7 @@ PingController usePing({DevQueryClient? devQueryClient}) {
   return useMemoized(() {
     return PingController(
       message: _message.value,
+      authorized: _authorized.value,
       status: _status.value,
       submit: submit,
       reset: reset,
