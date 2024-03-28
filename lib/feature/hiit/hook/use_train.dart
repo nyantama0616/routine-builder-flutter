@@ -7,6 +7,7 @@ import 'package:routine_builder/feature/hiit/enum/train_statuses.dart';
 import 'package:routine_builder/general/class/hiit_setting.dart';
 import 'package:routine_builder/general/sound/sound_player.dart';
 import 'package:routine_builder/general/sound/sounds.dart' as sounds;
+import "package:routine_builder/general/extention/list.dart";
 
 const FRAME_DURATION_Millis = 40;
 
@@ -28,8 +29,7 @@ TrainController useTrain(
         status: TrainStatuses.workTime,
         currentRound: 0,
       );
-      _soundPlayer.playOneShot(_pick(sounds.hiitStartVoices),
-          delay: 1000); //スタートを音声で教える
+      _soundPlayer.playOneShot(sounds.hiitStartVoices.pick(), delay: 1000); //スタートを音声で教える
     });
   }
 
@@ -96,8 +96,7 @@ TrainController useTrain(
         break;
       case TrainStatuses.finished:
         onFinished?.call(_state.value.currentRound);
-        _soundPlayer.playOneShot(_pick(sounds.hiitFinisheVoices),
-            delay: 1000); //終了を音声で教える
+        _soundPlayer.playOneShot(sounds.hiitFinisheVoices.pick(), delay: 1000); //終了を音声で教える
         break;
       default:
         break;
@@ -158,10 +157,4 @@ class _State {
           playedToBreakTimeSound ?? this.playedToBreakTimeSound,
     );
   }
-}
-
-String _pick(List<String> list) {
-  Random random = Random();
-
-  return list[random.nextInt(list.length)];
 }
