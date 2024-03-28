@@ -1,27 +1,27 @@
-class Requests {
-  static const _baseURL = 'http://localhost:3000';
-  
-  static const ping = "$_baseURL/dev/ping";
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-  //home
-  static const initHome = "$_baseURL/home";
+final String _baseURL = dotenv.env['API_URL']!;
 
-  //sleep
-  static const startSleep = "$_baseURL/sleeps/start";
-  static const finishSleep = "$_baseURL/sleeps/finish";
+final ping = "$_baseURL/dev/ping";
 
-  //caterpillar
-  static const initCaterpillar = "$_baseURL/caterpillars";
-  static const startCaterpillar = "$_baseURL/caterpillars/start";
-  static const stopCaterpillar = "$_baseURL/caterpillars/stop";
-  static const finishCaterpillar = "$_baseURL/caterpillars/finish";
+//home
+final initHome = "$_baseURL/home";
 
-  //water
-  static const initWater = "$_baseURL/waters";
-  static const drinkWater = "$_baseURL/waters/drink";
+//sleep
+final startSleep = "$_baseURL/sleeps/start";
+final finishSleep = "$_baseURL/sleeps/finish";
 
-  //hiit
-  static const initHiit = "$_baseURL/hiits";
-  static const createHiit = "$_baseURL/hiits";
-  static const updateHiitSetting = "$_baseURL/hiits/setting";
-}
+//caterpillar
+final initCaterpillar = "$_baseURL/caterpillars";
+final startCaterpillar = "$_baseURL/caterpillars/start";
+final stopCaterpillar = "$_baseURL/caterpillars/stop";
+final finishCaterpillar = "$_baseURL/caterpillars/finish";
+
+//water
+final initWater = "$_baseURL/waters";
+final drinkWater = "$_baseURL/waters/drink";
+
+//hiit
+final initHiit = "$_baseURL/hiits";
+final createHiit = "$_baseURL/hiits";
+final updateHiitSetting = "$_baseURL/hiits/setting";
