@@ -1,7 +1,7 @@
-class SleepStartRequestBody {
+class StartRequestBody {
   final bool isNap;
   
-  const SleepStartRequestBody({required this.isNap});
+  const StartRequestBody({required this.isNap});
   
   Map<String, dynamic> toJson() {
     return {

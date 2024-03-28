@@ -4,7 +4,7 @@ import 'package:routine_builder/feature/sleep/widget/nap_button.dart';
 import 'package:routine_builder/feature/sleep/widget/sleep_button.dart';
 import 'package:routine_builder/feature/sleep/widget/wake_up_button.dart';
 import 'package:routine_builder/general/enum/statuses.dart';
-import 'package:routine_builder/general/provider/user_provider.dart';
+import 'package:routine_builder/general/provider/app_provider.dart';
 import 'package:routine_builder/feature/sleep/hook/use_sleep.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -14,10 +14,10 @@ class Sleep extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final status = ref.watch(userProvider).status;
-    controller ??= useSleep(ref.read(userProvider.notifier));
+    final status = ref.watch(appProvider).todayLife.status;
+    controller ??= useSleep(ref.read(appProvider.notifier));
 
-    final button = status == Statuses.sleeping || status == Statuses.napping
+    final button = status == Statuses.sleep || status == Statuses.nap
         ? WakeUpButton(
             key: const Key("wake_up_button"),
             onPressed: controller!.handleWakeUp,

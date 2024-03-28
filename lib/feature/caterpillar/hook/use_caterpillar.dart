@@ -4,14 +4,14 @@ import 'package:routine_builder/feature/caterpillar/class/caterpillar_controller
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/caterpillar/hook/use_counter.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
+import 'package:routine_builder/general/provider/app_provider.dart';
 import "package:routine_builder/general/query/client/caterpillar_query_client.dart";
 import 'package:routine_builder/general/class/caterpillar.dart';
 import 'package:routine_builder/feature/caterpillar/settings.dart';
 import 'package:routine_builder/general/sound/sound_player.dart';
 import 'package:routine_builder/general/sound/sounds.dart' as sounds;
 
-CaterpillarController useCaterpillar(
-    {CaterpillarQueryClient? caterpillarQueryClient}) {
+CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryClient, required AppNotifier appNotifier}) {
   final currentMode = useState<Caterpillar?>(null);
   final status = useState<BasicStatuses>(BasicStatuses.none);
   final client = caterpillarQueryClient ?? CaterpillarQueryClient();
@@ -29,6 +29,7 @@ CaterpillarController useCaterpillar(
       .then((res) {
         status.value = BasicStatuses.success;
         selectMode(res.caterpillar);
+        appNotifier.setTodayLife(res.todayLife);
         soundPlayer.playOneShot(sounds.caterpillarSaveSuccess); //保存成功を音声で教える
       })
       .catchError((e) {
@@ -75,6 +76,7 @@ CaterpillarController useCaterpillar(
         counter.start(res.timer.startedAt, res.timer.passedSecondsWhenStopped);
         status.value = BasicStatuses.doing;
         selectMode(res.caterpillar);
+        appNotifier.setTodayLife(res.todayLife);
       }).catchError((e) {
         print(e);
         return;
@@ -88,6 +90,7 @@ CaterpillarController useCaterpillar(
       counter.stop(res.timer.passedSecondsWhenStopped);
       status.value = BasicStatuses.none;
       selectMode(res.caterpillar);
+      appNotifier.setTodayLife(res.todayLife);
     } catch (e) {
       print(e);
       return;

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:routine_builder/general/provider/user_provider.dart';
+import 'package:routine_builder/general/provider/app_provider.dart';
 import 'package:routine_builder/general/enum/statuses.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +8,9 @@ class HeaderStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
-    final icon = user.status == Statuses.sleeping ? Icons.bedtime : null;
-    final text = user.status == Statuses.none ? "" : user.status.rawValue;
+    final status = ref.watch(appProvider).todayLife.status;
+    final icon = iconFromStatus(status);
+    final text = status == Statuses.none ? "" : status.rawValue;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -28,5 +28,18 @@ class HeaderStatus extends ConsumerWidget {
         ),
       ],
     );
+  }
+}
+
+IconData? iconFromStatus(Statuses status) {
+  switch (status) {
+    case Statuses.sleep:
+      return Icons.bedtime;
+    case Statuses.nap:
+      return Icons.bedroom_baby;
+    case Statuses.caterpillar:
+      return Icons.bug_report;
+    default:
+      return null;
   }
 }
