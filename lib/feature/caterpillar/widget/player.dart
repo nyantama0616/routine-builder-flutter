@@ -4,7 +4,7 @@ import 'package:routine_builder/feature/caterpillar/class/caterpillar_controller
 import 'package:routine_builder/general/widget/counter.dart';
 import 'package:routine_builder/general/widget/counter_submit_button.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
-import 'package:routine_builder/feature/caterpillar/widget/back_button.dart' as MyBack;
+import 'package:routine_builder/general/widget/back_button.dart' as MyBack;
 import 'package:routine_builder/feature/caterpillar/settings.dart';
 
 //TODO: 上の余白気になる(BackButtonのせい)

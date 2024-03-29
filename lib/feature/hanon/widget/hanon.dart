@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:routine_builder/feature/hanon/hook/use_hanon.dart';
 import 'package:routine_builder/feature/hanon/widget/goal.dart';
 import 'package:routine_builder/feature/hanon/widget/mode_selector.dart';
 import 'package:routine_builder/feature/hanon/widget/player.dart';
-import 'package:routine_builder/general/class/hanon.dart' as hanon;
+import 'package:routine_builder/general/widget/back_button.dart' as back;
 
-class Hanon extends StatelessWidget {
+class Hanon extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final title = "練習曲";
-
+    final controller = useHanon();
+    final mainScreen = controller.hanon == null ? ModeSelector(hanonController: controller,) : Player(hanonController: controller);
+    
     return Center(
-        child: Column(
+      child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Goal(),
-        Text(title, style: TextStyle(fontSize: 20)),
-        // ModeSelector(),
-        Player(hanon: hanon.Hanon.init()),
+        //TODO: ちゃんと位置調整する
+        Row(
+          children: [
+            SizedBox(width: 56),
+            back.BackButton(onPressed: controller.handleBack)
+          ],
+        ),
+        mainScreen,
       ],
     ));
   }
