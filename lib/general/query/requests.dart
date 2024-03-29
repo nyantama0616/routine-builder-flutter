@@ -17,6 +17,12 @@ final startCaterpillar = "$_baseURL/caterpillars/start";
 final stopCaterpillar = "$_baseURL/caterpillars/stop";
 final finishCaterpillar = "$_baseURL/caterpillars/finish";
 
+//hanon
+final initHanon = "$_baseURL/hanons";
+final startHanon = "$_baseURL/hanons/start";
+final stopHanon = "$_baseURL/hanons/stop";
+final finishHanon = "$_baseURL/hanons/finish";
+
 //water
 final initWater = "$_baseURL/waters";
 final drinkWater = "$_baseURL/waters/drink";
