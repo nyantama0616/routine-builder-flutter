@@ -39,6 +39,8 @@ IconData? iconFromStatus(Statuses status) {
       return Icons.bedroom_baby;
     case Statuses.caterpillar:
       return Icons.bug_report;
+    case Statuses.hanon:
+      return Icons.piano;
     default:
       return null;
   }

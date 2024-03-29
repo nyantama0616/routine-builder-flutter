@@ -5,10 +5,11 @@ import 'package:routine_builder/general/class/hanon.dart';
 import 'package:routine_builder/general/class/hanon_patterns.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import 'package:routine_builder/general/hook/use_counter.dart';
+import 'package:routine_builder/general/provider/app_provider.dart';
 import 'package:routine_builder/general/query/client/hanon_query_client.dart';
 import 'package:routine_builder/general/util/train_sound_player.dart';
 
-HanonController useHanon() {
+HanonController useHanon({required AppNotifier appNotifier}) {
   final _hanonNum = useState<int?>(null);
   final _hanon = useState<Hanon?>(null);
   final _status = useState<BasicStatuses>(BasicStatuses.none);
@@ -29,6 +30,7 @@ HanonController useHanon() {
       _status.value = BasicStatuses.success;
       selectHanonNum(res.hanon.num);
       selectHanon(res.hanon);
+      appNotifier.setTodayLife(res.todayLife);
       tsPlayer.playSaveSuccess();
     }).catchError((e) {
       _status.value = BasicStatuses.failed;
@@ -54,6 +56,7 @@ HanonController useHanon() {
         selectHanon(res.hanon);
         counter.reset();
         counter.start(res.timer.startedAt, res.timer.passedSecondsWhenStopped);
+        appNotifier.setTodayLife(res.todayLife);
       }).catchError((e) {
         print("$e from start");
         return;
@@ -67,6 +70,7 @@ HanonController useHanon() {
       selectHanonNum(res.hanon.num);
       selectHanon(res.hanon);
       counter.stop(res.timer.passedSecondsWhenStopped);
+      appNotifier.setTodayLife(res.todayLife);
     }).catchError((e) {
       print("$e from stop");
       return;
@@ -96,8 +100,7 @@ HanonController useHanon() {
         selectHanonNum(res.inProgress!.hanon.num);
         selectHanon(res.inProgress!.hanon);
         counter.reset();
-        counter.start(res.inProgress!.timer.startedAt,
-            res.inProgress!.timer.passedSecondsWhenStopped);
+        counter.start(res.inProgress!.timer.startedAt, res.inProgress!.timer.passedSecondsWhenStopped);
         _status.value = BasicStatuses.doing;
       }
     }).catchError((e) {

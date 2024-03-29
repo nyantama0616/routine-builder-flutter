@@ -2,7 +2,8 @@ enum Statuses {
   none("none"),
   sleep("sleep"),
   nap("nap"),
-  caterpillar("caterpillar");
+  caterpillar("caterpillar"),
+  hanon("hanon");
 
   final String rawValue;
   const Statuses(this.rawValue);
@@ -19,6 +20,8 @@ Statuses statusFromRawValue(String rawValue) {
       return Statuses.nap;
     case "caterpillar":
       return Statuses.caterpillar;
+    case "hanon":
+      return Statuses.hanon;
     default:
       throw Exception("Unknown raw value: $rawValue");
   }
