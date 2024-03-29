@@ -6,13 +6,15 @@ import 'package:routine_builder/general/class/hanon_patterns.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import 'package:routine_builder/general/hook/use_counter.dart';
 import 'package:routine_builder/general/query/client/hanon_query_client.dart';
+import 'package:routine_builder/general/util/train_sound_player.dart';
 
 HanonController useHanon() {
-  final _hanonNum = useState<int?>(3);
+  final _hanonNum = useState<int?>(null);
   final _hanon = useState<Hanon?>(null);
   final _status = useState<BasicStatuses>(BasicStatuses.none);
   final _patterns = useState<HanonPatterns>(_initPatterns());
   final client = HanonQueryClient();
+  final tsPlayer = TrainSoundPlayer();
 
   void selectHanonNum(int hanonNum) {
     _hanonNum.value = hanonNum;
@@ -27,8 +29,10 @@ HanonController useHanon() {
       _status.value = BasicStatuses.success;
       selectHanonNum(res.hanon.num);
       selectHanon(res.hanon);
+      tsPlayer.playSaveSuccess();
     }).catchError((e) {
       _status.value = BasicStatuses.failed;
+      tsPlayer.playSaveFailed();
       print("$e from finish");
       return;
     });
@@ -41,17 +45,19 @@ HanonController useHanon() {
       return;
     }
 
-    client
-        .start(num: _hanonNum.value!, pattern: _hanon.value!.pattern)
-        .then((res) {
-      _status.value = BasicStatuses.doing;
-      selectHanonNum(res.hanon.num);
-      selectHanon(res.hanon);
-      counter.reset();
-      counter.start(res.timer.startedAt, res.timer.passedSecondsWhenStopped);
-    }).catchError((e) {
-      print("$e from start");
-      return;
+    tsPlayer.playCountDownToStart(() {
+      client
+          .start(num: _hanonNum.value!, pattern: _hanon.value!.pattern)
+          .then((res) {
+        _status.value = BasicStatuses.doing;
+        selectHanonNum(res.hanon.num);
+        selectHanon(res.hanon);
+        counter.reset();
+        counter.start(res.timer.startedAt, res.timer.passedSecondsWhenStopped);
+      }).catchError((e) {
+        print("$e from start");
+        return;
+      });
     });
   }
 
