@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:routine_builder/feature/caterpillar/class/caterpillar_controller.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/general/hook/use_counter.dart';
@@ -8,36 +6,34 @@ import 'package:routine_builder/general/provider/app_provider.dart';
 import "package:routine_builder/general/query/client/caterpillar_query_client.dart";
 import 'package:routine_builder/general/class/caterpillar.dart';
 import 'package:routine_builder/feature/caterpillar/settings.dart';
-import 'package:routine_builder/general/sound/sound_player.dart';
-import 'package:routine_builder/general/sound/sounds.dart' as sounds;
+import 'package:routine_builder/general/util/train_sound_player.dart';
 
-CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryClient, required AppNotifier appNotifier}) {
+CaterpillarController useCaterpillar(
+    {CaterpillarQueryClient? caterpillarQueryClient,
+    required AppNotifier appNotifier}) {
   final currentMode = useState<Caterpillar?>(null);
   final status = useState<BasicStatuses>(BasicStatuses.none);
   final client = caterpillarQueryClient ?? CaterpillarQueryClient();
   final patterns = useState<Map<String, int>>({});
-  
-  final SoundPlayer soundPlayer = SoundPlayer();
-  Timer? _timer;
+
+  final tsPlayer = TrainSoundPlayer();
 
   void selectMode(Caterpillar mode) {
     currentMode.value = mode;
   }
 
   void finish() async {
-    client.finish()
-      .then((res) {
-        status.value = BasicStatuses.success;
-        selectMode(res.caterpillar);
-        appNotifier.setTodayLife(res.todayLife);
-        soundPlayer.playOneShot(sounds.caterpillarSaveSuccess); //保存成功を音声で教える
-      })
-      .catchError((e) {
-        status.value = BasicStatuses.failed;
-        print(e);
-        soundPlayer.playOneShot(sounds.caterpillarSaveFailed); //保存失敗を音声で教える
-        return;
-      });
+    client.finish().then((res) {
+      status.value = BasicStatuses.success;
+      selectMode(res.caterpillar);
+      appNotifier.setTodayLife(res.todayLife);
+      tsPlayer.playSaveSuccess(); //保存成功を音声で教える
+    }).catchError((e) {
+      status.value = BasicStatuses.failed;
+      print(e);
+      tsPlayer.playSaveFailed(); //保存失敗を音声で教える
+      return;
+    });
   }
 
   final counter = useCounter(goalSeconds: TRAIN_SECONDS, onFinished: finish);
@@ -51,7 +47,8 @@ CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryCl
         selectMode(res.inProgress!.caterpillar);
 
         if (res.inProgress!.timer.isRunning) {
-          counter.start(res.inProgress!.timer.startedAt, res.inProgress!.timer.passedSecondsWhenStopped);
+          counter.start(res.inProgress!.timer.startedAt,
+              res.inProgress!.timer.passedSecondsWhenStopped);
           status.value = BasicStatuses.doing;
         } else {
           counter.stop(res.inProgress!.timer.passedSecondsWhenStopped);
@@ -69,8 +66,7 @@ CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryCl
       throw Exception("Mode is not selected");
     }
 
-    soundPlayer.playOneShot(sounds.caterpillarCountDownToStart); //スタート3秒前を音声で教える
-    _timer = Timer(Duration(seconds: 3), () {
+    tsPlayer.playCountDownToStart(() {
       client.start(pattern: currentMode.value!.pattern).then((res) {
         counter.reset();
         counter.start(res.timer.startedAt, res.timer.passedSecondsWhenStopped);
@@ -111,7 +107,7 @@ CaterpillarController useCaterpillar({CaterpillarQueryClient? caterpillarQueryCl
         // また、アプリをブチっと切った場合は、タイマー止まらないと思う
         client.stop();
       }
-      _timer?.cancel();
+      tsPlayer.dispose();
     };
   }, []);
 

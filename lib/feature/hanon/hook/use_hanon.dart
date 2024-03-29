@@ -108,7 +108,9 @@ HanonController useHanon() {
 
   useEffect(() {
     _init();
-    return null;
+    return () {
+      tsPlayer.dispose();
+    };
   }, []);
 
   return useMemoized(() {
