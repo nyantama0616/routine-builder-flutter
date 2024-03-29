@@ -6,14 +6,12 @@ import 'package:routine_builder/general/class/hanon_patterns.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import 'package:routine_builder/general/hook/use_counter.dart';
 import 'package:routine_builder/general/query/client/hanon_query_client.dart';
-import 'package:routine_builder/feature/hanon/settings.dart';
 
 HanonController useHanon() {
   final _hanonNum = useState<int?>(3);
-  // final _hanon = useState<Hanon?>(null);
-  final _hanon = useState<Hanon?>(Hanon(num: 3, pattern: "1:CM", passedSeconds: 0));
+  final _hanon = useState<Hanon?>(null);
   final _status = useState<BasicStatuses>(BasicStatuses.none);
-  final _patterns = useState<HanonPatterns>(initPatterns());
+  final _patterns = useState<HanonPatterns>(_initPatterns());
   final client = HanonQueryClient();
 
   void selectHanonNum(int hanonNum) {
@@ -43,9 +41,9 @@ HanonController useHanon() {
       return;
     }
 
-    print("start");
-    client.start(num: _hanonNum.value!, pattern: _hanon.value!.pattern)
-      .then((res) {
+    client
+        .start(num: _hanonNum.value!, pattern: _hanon.value!.pattern)
+        .then((res) {
       _status.value = BasicStatuses.doing;
       selectHanonNum(res.hanon.num);
       selectHanon(res.hanon);
@@ -85,6 +83,28 @@ HanonController useHanon() {
     }
   }
 
+  void _init() {
+    client.init().then((res) {
+      _patterns.value = res.patterns;
+      if (res.inProgress != null) {
+        selectHanonNum(res.inProgress!.hanon.num);
+        selectHanon(res.inProgress!.hanon);
+        counter.reset();
+        counter.start(res.inProgress!.timer.startedAt,
+            res.inProgress!.timer.passedSecondsWhenStopped);
+        _status.value = BasicStatuses.doing;
+      }
+    }).catchError((e) {
+      print("$e from init");
+      return;
+    });
+  }
+
+  useEffect(() {
+    _init();
+    return null;
+  }, []);
+
   return useMemoized(() {
     return HanonController(
       hanonNum: _hanonNum.value,
@@ -102,7 +122,7 @@ HanonController useHanon() {
   }, [_hanonNum.value, _hanon.value, _status.value, counter, _patterns.value]);
 }
 
-HanonPatterns initPatterns() {
+HanonPatterns _initPatterns() {
   HanonPatterns patterns = HanonPatterns();
   for (int i = 1; i <= HANON_NUM; i++) {
     Map<String, int> x = {};
@@ -115,6 +135,5 @@ HanonPatterns initPatterns() {
     patterns[i] = x;
   }
 
-  patterns[3]!["1:CM"] = 30 * 60;
   return patterns;
 }
