@@ -4,6 +4,7 @@ enum Scenes {
   ping("ping"),
   caterpillar("caterpillar"),
   hiit("hiit"),
+  hanon("hanon"),
   water("water");
 
   final String rawValue;

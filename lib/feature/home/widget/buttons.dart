@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:routine_builder/feature/hiit/widget/hiit.dart';
 
-final SleepButton = (Function()? onPressed) => _ButtonBase("睡眠", onPressed: onPressed, icon: Icons.bedtime);
-final CaterpillarButton = (Function()? onPressed) => _ButtonBase("いもむし", onPressed: onPressed, icon: Icons.bug_report);
-final WaterButton = (Function()? onPressed) => _ButtonBase("水", onPressed: onPressed, icon: Icons.local_drink);
-final HiitButton = (Function()? onPressed) => _ButtonBase("HIIT", onPressed: onPressed, icon: Icons.directions_run);
-final PingButton = (Function()? onPressed) => _ButtonBase("Ping", onPressed: onPressed, icon: Icons.network_check);
+final SleepButton = (Function()? onPressed) => HomeButtonBase("睡眠", onPressed: onPressed, icon: Icons.bedtime);
+final CaterpillarButton = (Function()? onPressed) => HomeButtonBase("いもむし", onPressed: onPressed, icon: Icons.bug_report);
+final WaterButton = (Function()? onPressed) => HomeButtonBase("水", onPressed: onPressed, icon: Icons.local_drink);
+final HiitButton = (Function()? onPressed) => HomeButtonBase("HIIT", onPressed: onPressed, icon: Icons.directions_run);
+final PingButton = (Function()? onPressed) => HomeButtonBase("Ping", onPressed: onPressed, icon: Icons.network_check);
+final HanonButton = (Function()? onPressed) => HomeButtonBase("Hanon", onPressed: onPressed, icon: Icons.piano);
 
-class _ButtonBase extends StatelessWidget {
+class HomeButtonBase extends StatelessWidget {
   final String text;
   final Function()? onPressed;
   final IconData icon;
 
-  _ButtonBase(this.text, {super.key, required , this.onPressed, required this.icon});
+  HomeButtonBase(this.text, {super.key, required , this.onPressed, required this.icon});
 
   @override
   Widget build(BuildContext context) {
