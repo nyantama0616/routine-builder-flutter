@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/hiit/class/train_controller.dart';
 import 'package:routine_builder/feature/hiit/enum/train_statuses.dart';
@@ -8,6 +6,7 @@ import 'package:routine_builder/general/class/hiit_setting.dart';
 import 'package:routine_builder/general/sound/sound_player.dart';
 import 'package:routine_builder/general/sound/sounds.dart' as sounds;
 import "package:routine_builder/general/extention/list.dart";
+import 'package:routine_builder/general/util/train_sound_player.dart';
 
 const FRAME_DURATION_Millis = 40;
 
@@ -21,10 +20,10 @@ TrainController useTrain(
   Timer? _timer;
 
   final _soundPlayer = SoundPlayer();
+  final _tsPlayer = TrainSoundPlayer();
 
   void start() {
-    _soundPlayer.playOneShot(sounds.hiitToWorkTime); //スタートを音声で教える
-    _timer = Timer(Duration(seconds: 3), () {
+    _tsPlayer.playCountDownToStart(() {
       _state.value = _state.value.copyWith(
         status: TrainStatuses.workTime,
         currentRound: 0,
@@ -104,6 +103,7 @@ TrainController useTrain(
 
     return () {
       _timer?.cancel(); //めっちゃ大事！
+      _tsPlayer.dispose();
     };
   }, [_state.value.status]);
 

@@ -14,71 +14,91 @@ class Home extends HookConsumerWidget {
 
     final message = pingController.status == QueryStatuses.doing
         ? Text("Loading...")
-        : pingController.status == QueryStatuses.failure || !pingController.authorized
-        ? Text(
-            "ネットワークエラー！！",
-            style: TextStyle(color: Colors.red),
-          )
-        : pingController.status == QueryStatuses.success && pingController.authorized
-            ? Text("ようこそ！")
-        : Text("nothing");
+        : pingController.status == QueryStatuses.failure ||
+                !pingController.authorized
+            ? Text(
+                "ネットワークエラー！！",
+                style: TextStyle(color: Colors.red),
+              )
+            : pingController.status == QueryStatuses.success &&
+                    pingController.authorized
+                ? Text("ようこそ！")
+                : Text("nothing");
 
     useEffect(() {
       pingController.submit();
       return null;
     }, []);
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center, children: [
-          message,
-          SizedBox(
-            width: 20,
-            height: 20,
-          ),
-          _Buttons(),
-        ]
-      )
+    final appController = ref.watch(appProvider.notifier);
+
+    final sleepButton = SleepButton(() {
+      appController.setScene(Scenes.sleep);
+    });
+
+    final caterpillarButton = CaterpillarButton(() {
+      appController.setScene(Scenes.caterpillar);
+    });
+
+    final waterButton = WaterButton(() {
+      appController.setScene(Scenes.water);
+    });
+
+    final hiitButton = HiitButton(() {
+      appController.setScene(Scenes.hiit);
+    });
+
+    final pingButton = PingButton(() {
+      appController.setScene(Scenes.ping);
+    });
+
+    final hanonButton = HanonButton(() {
+      appController.setScene(Scenes.hanon);
+    });
+
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: pingButton,
+        ),
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            message,
+            SizedBox(
+              width: 20,
+              height: 20,
+            ),
+            _ButtonsRow([sleepButton, waterButton]),
+            SizedBox(
+              height: 20,
+            ),
+            _ButtonsRow([hiitButton, caterpillarButton, hanonButton])
+          ])
+        )
+      ],
     );
   }
 }
 
-class _Buttons extends HookConsumerWidget {
+class _ButtonsRow extends HookConsumerWidget {
+  final List<HomeButtonBase> buttons;
+  _ButtonsRow(this.buttons);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appController = ref.watch(appProvider.notifier);
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      SleepButton(() {
-        appController.setScene(Scenes.sleep);
-      }),
-      SizedBox(
+    var children = <Widget>[];
+    buttons.forEach((button) {
+      children.add(button);
+      children.add(SizedBox(
         width: 20,
-        height: 20,
-      ),
-      CaterpillarButton(() {
-        appController.setScene(Scenes.caterpillar);
-      }),
-      SizedBox(
-        width: 20,
-        height: 20,
-      ),
-      WaterButton(() {
-        appController.setScene(Scenes.water);
-      }),
-      SizedBox(
-        width: 20,
-        height: 20,
-      ),
-      HiitButton(() {
-        appController.setScene(Scenes.hiit);
-      }),
-      SizedBox(
-        width: 20,
-        height: 20,
-      ),
-      PingButton(() {
-        appController.setScene(Scenes.ping);
-      }),
-    ]);
+      ));
+    });
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: children,
+    );
   }
 }

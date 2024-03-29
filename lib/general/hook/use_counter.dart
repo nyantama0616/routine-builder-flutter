@@ -1,5 +1,5 @@
 import 'dart:async';
-import "package:routine_builder/feature/caterpillar/class/counter_controller.dart";
+import "package:routine_builder/general/controller/counter_controller.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
 import 'package:flutter/foundation.dart';
 import 'dart:math';
