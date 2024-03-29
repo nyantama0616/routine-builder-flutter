@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/caterpillar/class/caterpillar_controller.dart';
-import 'package:routine_builder/feature/caterpillar/widget/counter.dart';
-import 'package:routine_builder/feature/caterpillar/widget/submit_button.dart';
+import 'package:routine_builder/general/widget/counter.dart';
+import 'package:routine_builder/general/widget/counter_submit_button.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import 'package:routine_builder/feature/caterpillar/widget/back_button.dart' as MyBack;
 import 'package:routine_builder/feature/caterpillar/settings.dart';
@@ -17,14 +17,11 @@ class Player extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StartButton = SubmitButton("開始",
-        icon: Icons.play_circle_outline, color: Colors.blue, onPressed: controller.start);
-    final StopButton = SubmitButton("停止",
-        icon: Icons.stop_circle_outlined,
-        color: const Color.fromARGB(255, 239, 131, 123),
-        onPressed: controller.stop);
+    final startButton = StartButton(controller.start);
+    final stopButton = StopButton(controller.stop);
+
     final backButton = controller.status == BasicStatuses.doing ? null : MyBack.BackButton(onPressed: controller.toModeSelector);
-    final submitButton = controller.status == BasicStatuses.none || controller.status == BasicStatuses.success ? StartButton : StopButton;
+    final submitButton = controller.status == BasicStatuses.none || controller.status == BasicStatuses.success ? startButton : stopButton;
     final message = controller.status == BasicStatuses.success ? Text("保存成功", style: TextStyle(color: Colors.green)) :
                     controller.status == BasicStatuses.failed ? Text("保存失敗", style: TextStyle(color: Colors.red)) :
                     Text("");
