@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:routine_builder/feature/tooth/class/tooth_controller.dart';
 import 'package:routine_builder/feature/tooth/settings.dart';
@@ -22,12 +23,21 @@ class Player extends StatelessWidget {
     final button1 = toothController.status == BasicStatuses.doing
         ? stopButton
         : Container();
-
+    
+    final successMessage = Text("歯みがき終了!", style: TextStyle(color: Colors.green));
+    final failedMessage = Text("保存失敗...", style: TextStyle(color: Colors.red));
+    final message = toothController.status == BasicStatuses.success
+        ? successMessage
+        : toothController.status == BasicStatuses.failed
+            ? failedMessage
+            : Container();
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          message,
+          SizedBox(height: 10),
           Counter(GOAL_SECONDS - toothController.passedSeconds),
           SizedBox(height: 10),
           button0,
