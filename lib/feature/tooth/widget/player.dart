@@ -38,7 +38,7 @@ class Player extends StatelessWidget {
         children: [
           message,
           SizedBox(height: 10),
-          Counter(GOAL_SECONDS - toothController.passedSeconds),
+          Counter(GOAL_SECONDS - toothController.passedSeconds, goalSeconds: GOAL_SECONDS),
           SizedBox(height: 10),
           button0,
           SizedBox(height: 10),

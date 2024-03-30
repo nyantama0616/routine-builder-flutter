@@ -40,7 +40,7 @@ class Player extends HookWidget {
             message,
             Text(controller.currentMode!.pattern, style: TextStyle(fontSize: 36)),
             SizedBox(height: 10),
-            Counter(TRAIN_SECONDS - controller.passedSeconds),
+            Counter(TRAIN_SECONDS - controller.passedSeconds, goalSeconds: TRAIN_SECONDS),
             SizedBox(height: 10),
             submitButton,
           ],

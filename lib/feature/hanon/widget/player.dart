@@ -31,7 +31,7 @@ class Player extends StatelessWidget {
               Text("第${hanon!.num}番", style: TextStyle(fontSize: 36)),
               Text(hanon.pattern, style: TextStyle(fontSize: 20)),
               SizedBox(height: 10),
-              Counter(TRAIN_SECONDS - hanonController.passedSeconds),
+              Counter(TRAIN_SECONDS - hanonController.passedSeconds, goalSeconds: TRAIN_SECONDS),
               SizedBox(height: 10),
               submitButton,
             ],
