@@ -8,8 +8,11 @@ class Counter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final minutePart = ((seconds % 3600) ~/ 60).toString().padLeft(2, '0');
-    final secondPart = (seconds % 60).toString().padLeft(2, '0');
+    final minutePart =
+        ((seconds.abs() % 3600) ~/ 60).toString().padLeft(2, '0');
+    final secondPart = (seconds.abs() % 60).toString().padLeft(2, '0');
+    final sign = seconds < 0 ? "-" : "";
+    final displayString = "$sign$minutePart:$secondPart";
 
     return Stack(children: [
       _ProgressCircle(1, color: Colors.grey),
@@ -19,7 +22,7 @@ class Counter extends StatelessWidget {
         width: 180,
         child: Center(
           child: Text(
-            "$minutePart:$secondPart",
+            displayString,
             style: TextStyle(fontSize: 36),
           ),
         ),
