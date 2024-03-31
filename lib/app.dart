@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:routine_builder/general/provider/app_provider.dart';
 import 'package:routine_builder/feature/dev/ping/widget/ping.dart';
 import 'package:routine_builder/feature/home/widget/home.dart';
 import 'package:routine_builder/feature/sleep/widget/sleep.dart';
@@ -10,7 +11,7 @@ import 'package:routine_builder/feature/water/widget/water.dart';
 import 'package:routine_builder/feature/hiit/widget/hiit.dart';
 import 'package:routine_builder/feature/hanon/widget/hanon.dart';
 import 'package:routine_builder/feature/tooth/widget/tooth.dart';
-import 'package:routine_builder/general/provider/app_provider.dart';
+import 'package:routine_builder/feature/food-cost/widget/food-cost.dart';
 
 
 class App extends HookConsumerWidget {
@@ -44,6 +45,9 @@ class App extends HookConsumerWidget {
         break;
       case Scenes.tooth:
         mainScreen = Tooth();
+        break;
+      case Scenes.foodCost:
+        mainScreen = FoodCost();
         break;
       default:
         mainScreen = Home();

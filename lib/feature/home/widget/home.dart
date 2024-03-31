@@ -60,6 +60,10 @@ class Home extends HookConsumerWidget {
       appController.setScene(Scenes.tooth);
     });
 
+    final foodCostButton = FoodCostButton(() {
+      appController.setScene(Scenes.foodCost);
+    });
+
     return Column(
       children: [
         Align(
@@ -79,7 +83,11 @@ class Home extends HookConsumerWidget {
             SizedBox(
               height: 20,
             ),
-            _ButtonsRow([hiitButton, caterpillarButton, hanonButton])
+            _ButtonsRow([hiitButton, caterpillarButton, hanonButton]),
+            SizedBox(
+              height: 20,
+            ),
+            _ButtonsRow([foodCostButton]),
           ])
         )
       ],

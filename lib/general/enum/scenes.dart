@@ -7,6 +7,7 @@ enum Scenes {
   hanon("hanon"),
   water("water"),
   tooth("tooth"),
+  foodCost("foodCost"),
   ;
 
   final String rawValue;
