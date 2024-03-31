@@ -9,6 +9,7 @@ import 'package:routine_builder/feature/caterpillar/widget/caterpillar.dart';
 import 'package:routine_builder/feature/water/widget/water.dart';
 import 'package:routine_builder/feature/hiit/widget/hiit.dart';
 import 'package:routine_builder/feature/hanon/widget/hanon.dart';
+import 'package:routine_builder/feature/tooth/widget/tooth.dart';
 import 'package:routine_builder/general/provider/app_provider.dart';
 
 
@@ -40,6 +41,9 @@ class App extends HookConsumerWidget {
         break;
       case Scenes.hanon:
         mainScreen = Hanon();
+        break;
+      case Scenes.tooth:
+        mainScreen = Tooth();
         break;
       default:
         mainScreen = Home();

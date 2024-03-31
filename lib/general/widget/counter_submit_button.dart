@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 final StartButton = (VoidCallback? onPressed) => CounterSubmitButton("スタート", icon: Icons.play_arrow, color: Colors.green, onPressed: onPressed);
 final StopButton = (VoidCallback? onPressed) => CounterSubmitButton("ストップ", icon: Icons.stop, color: Colors.red, onPressed: onPressed);
+final FinishButton = (VoidCallback? onPressed) => CounterSubmitButton("フィニッシュ", icon: Icons.check, color: Colors.blue, onPressed: onPressed);
 
 class CounterSubmitButton extends StatelessWidget {
   final String label;

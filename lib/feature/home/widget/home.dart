@@ -56,6 +56,10 @@ class Home extends HookConsumerWidget {
       appController.setScene(Scenes.hanon);
     });
 
+    final toothButton = ToothButton(() {
+      appController.setScene(Scenes.tooth);
+    });
+
     return Column(
       children: [
         Align(
@@ -71,7 +75,7 @@ class Home extends HookConsumerWidget {
               width: 20,
               height: 20,
             ),
-            _ButtonsRow([sleepButton, waterButton]),
+            _ButtonsRow([sleepButton, waterButton, toothButton]),
             SizedBox(
               height: 20,
             ),

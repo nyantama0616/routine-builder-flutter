@@ -5,7 +5,9 @@ enum Scenes {
   caterpillar("caterpillar"),
   hiit("hiit"),
   hanon("hanon"),
-  water("water");
+  water("water"),
+  tooth("tooth"),
+  ;
 
   final String rawValue;
   const Scenes(this.rawValue);
