@@ -13,7 +13,9 @@ class FoodListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayName = food.abbName ?? food.name;
+    final displayName = food.abbName != null && food.abbName!.isNotEmpty
+        ? food.abbName!
+        : food.name;
     final price = "${food.price}円";
 
     return Material(
