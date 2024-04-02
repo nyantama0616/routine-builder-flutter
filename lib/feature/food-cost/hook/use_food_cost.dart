@@ -26,6 +26,7 @@ FoodCostController useFoodCost() {
 
   void handleTapAddFoodButton() {
     _scene.value = Scenes.foodCreate;
+    formController.init(Food.init(0));
   }
 
   void handleTapFoodItem(Food food) {
@@ -54,7 +55,19 @@ FoodCostController useFoodCost() {
   // foodEdit
 
   void handleTapSaveEditButton() {
-    _scene.value = Scenes.foodDetail;
+    final foodAndValid = formController.getFoodAndValidate();
+    if (!foodAndValid.isValid) {
+      return;
+    }
+
+    client.updateFood(foodAndValid.food).then((res) {
+      final index =
+          _foods.value.indexWhere((element) => element.id == res.food.id);
+      _foods.value[index] = res.food;
+      handleTapFoodItem(res.food);
+    }).catchError((error) {
+      print("$error from useFoodCost#handleTapSaveEditButton");
+    });
   }
 
   final foodEditController = FoodEditController(

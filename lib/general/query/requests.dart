@@ -41,3 +41,4 @@ final finishTooth = "$_baseURL/tooths/finish";
 //foodCost
 final initFood = "$_baseURL/foods";
 final createFood = "$_baseURL/foods";
+final updateFood = (int id) => "$_baseURL/foods/$id";
