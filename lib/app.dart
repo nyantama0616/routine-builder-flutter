@@ -11,7 +11,7 @@ import 'package:routine_builder/feature/water/widget/water.dart';
 import 'package:routine_builder/feature/hiit/widget/hiit.dart';
 import 'package:routine_builder/feature/hanon/widget/hanon.dart';
 import 'package:routine_builder/feature/tooth/widget/tooth.dart';
-import 'package:routine_builder/feature/food_cost/widget/food_cost.dart';
+import 'package:routine_builder/feature/food_cost/widget/food/food.dart';
 
 
 class App extends HookConsumerWidget {
@@ -47,7 +47,7 @@ class App extends HookConsumerWidget {
         mainScreen = Tooth();
         break;
       case Scenes.foodCost:
-        mainScreen = FoodCost();
+        mainScreen = Food();
         break;
       default:
         mainScreen = Home();

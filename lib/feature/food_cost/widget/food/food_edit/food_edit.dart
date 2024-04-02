@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:routine_builder/feature/food_cost/class/food/food_edit_controller.dart';
-import 'package:routine_builder/feature/food_cost/widget/food_detail/food_detail_editable.dart';
+import 'package:routine_builder/feature/food_cost/widget/food/food_detail/food_detail_editable.dart';
 import 'package:routine_builder/general/class/food.dart';
 import 'package:routine_builder/general/widget/submit_button.dart';
 
