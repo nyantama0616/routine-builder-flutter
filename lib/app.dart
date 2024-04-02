@@ -11,7 +11,7 @@ import 'package:routine_builder/feature/water/widget/water.dart';
 import 'package:routine_builder/feature/hiit/widget/hiit.dart';
 import 'package:routine_builder/feature/hanon/widget/hanon.dart';
 import 'package:routine_builder/feature/tooth/widget/tooth.dart';
-import 'package:routine_builder/feature/food-cost/widget/food-cost.dart';
+import 'package:routine_builder/feature/food_cost/widget/food_cost.dart';
 
 
 class App extends HookConsumerWidget {

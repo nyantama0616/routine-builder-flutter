@@ -1,10 +1,10 @@
-import 'package:routine_builder/feature/food-cost/class/food_create_controller.dart';
-import 'package:routine_builder/feature/food-cost/class/food_detail_controller.dart';
-import 'package:routine_builder/feature/food-cost/class/food_edit_controller.dart';
-import 'package:routine_builder/feature/food-cost/class/foods_controller.dart';
-import 'package:routine_builder/feature/food-cost/enum/scenes.dart';
+import 'package:routine_builder/feature/food_cost/class/food/food_create_controller.dart';
+import 'package:routine_builder/feature/food_cost/class/food/food_detail_controller.dart';
+import 'package:routine_builder/feature/food_cost/class/food/food_edit_controller.dart';
+import 'package:routine_builder/feature/food_cost/class/food/foods_controller.dart';
+import 'package:routine_builder/feature/food_cost/enum/scenes.dart';
 
-class FoodCostController {
+class FoodController {
   final Scenes scene;
   final String title;
   Function() handleTapBackButton;
@@ -13,7 +13,7 @@ class FoodCostController {
   FoodEditController foodEditController;
   FoodCreateController foodCreateController;
 
-  FoodCostController({
+  FoodController({
     required this.scene,
     required this.title,
     required this.handleTapBackButton,

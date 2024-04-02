@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:routine_builder/feature/food-cost/widget/foods/food_list_item.dart';
+import 'package:routine_builder/feature/food_cost/widget/foods/food_list_item.dart';
 import 'package:routine_builder/general/class/food.dart';
 
 class FoodList extends StatelessWidget {

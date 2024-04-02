@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:routine_builder/feature/food-cost/class/food_cost_controller.dart';
-import 'package:routine_builder/feature/food-cost/enum/scenes.dart';
-import 'package:routine_builder/feature/food-cost/hook/use_food_cost.dart';
-import 'package:routine_builder/feature/food-cost/widget/food_create/food_create.dart';
-import 'package:routine_builder/feature/food-cost/widget/food_detail/food_detail.dart';
-import 'package:routine_builder/feature/food-cost/widget/food_detail/food_detail_editable.dart';
-import 'package:routine_builder/feature/food-cost/widget/food_edit/food_edit.dart';
-import "package:routine_builder/feature/food-cost/widget/foods/foods.dart";
+import 'package:routine_builder/feature/food_cost/class/food/food_controller.dart';
+import 'package:routine_builder/feature/food_cost/enum/scenes.dart';
+import 'package:routine_builder/feature/food_cost/hook/use_food.dart';
+import 'package:routine_builder/feature/food_cost/widget/food_create/food_create.dart';
+import 'package:routine_builder/feature/food_cost/widget/food_detail/food_detail.dart';
+import 'package:routine_builder/feature/food_cost/widget/food_detail/food_detail_editable.dart';
+import 'package:routine_builder/feature/food_cost/widget/food_edit/food_edit.dart';
+import "package:routine_builder/feature/food_cost/widget/foods/foods.dart";
 import 'package:routine_builder/general/class/food.dart';
 import 'package:routine_builder/general/widget/back_button.dart' as back;
 
 class FoodCost extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final controller = useFoodCost();
+    final controller = useFood();
     final Widget mainScreen;
 
     switch (controller.scene) {
