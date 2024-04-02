@@ -29,6 +29,8 @@ class FoodDetailEditable extends StatelessWidget {
         height: height,
         child: ListView(
           children: [
+            DetailItemEditable("id", food.id.toString(), keyLabel: food.id.toString()),
+            Divider(),
             _createDetailItem("名前", "name"),
             Divider(),
             _createDetailItem("略称", "abbName"),
