@@ -19,7 +19,7 @@ FoodCostController useFoodCost() {
 
   void handleTapBackButton() {
     // TODO: 実装
-    _scene.value = Scenes.foods;
+    _scene.value = _targetSceneFromScene(_scene.value);
   }
 
   // foods
@@ -94,5 +94,20 @@ String _titleFromScene(Scenes scene) {
       return '食品追加';
     default:
       return '食品一覧';
+  }
+}
+
+Scenes _targetSceneFromScene(Scenes scene) {
+  switch (scene) {
+    case Scenes.foods:
+      return Scenes.home;
+    case Scenes.foodDetail:
+      return Scenes.foods;
+    case Scenes.foodCreate:
+      return Scenes.foods;
+    case Scenes.foodEdit:
+      return Scenes.foodDetail;
+    default:
+      return Scenes.home;
   }
 }

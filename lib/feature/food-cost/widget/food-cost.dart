@@ -9,6 +9,7 @@ import 'package:routine_builder/feature/food-cost/widget/food_detail/food_detail
 import 'package:routine_builder/feature/food-cost/widget/food_edit/food_edit.dart';
 import "package:routine_builder/feature/food-cost/widget/foods/foods.dart";
 import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/widget/back_button.dart' as back;
 
 class FoodCost extends HookWidget {
   @override
@@ -36,6 +37,12 @@ class FoodCost extends HookWidget {
     return Center(
       child: Column(
         children: [
+          Row(
+          children: [
+            SizedBox(width: 56),
+            back.BackButton(onPressed: controller.handleTapBackButton)
+          ],
+        ),
           Text(controller.title, style: TextStyle(fontSize: 20)),
           mainScreen,
         ],
