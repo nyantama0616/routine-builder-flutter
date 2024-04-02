@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:routine_builder/feature/food-cost/class/foods_controller.dart';
 import 'package:routine_builder/feature/food-cost/widget/foods/food_list.dart';
 import 'package:routine_builder/general/class/food.dart';
 import 'package:routine_builder/general/widget/submit_button.dart';
 
 class Foods extends StatelessWidget {
-  final List<Food> foods = [
-    Food(name: "りんご", price: 100),
-    Food(name: "バナナ", price: 50),
-    Food(name: "みかん", price: 30),
-    Food(name: "ぶどう", price: 200),
-    Food(name: "いちご", price: 150),
-  ];
+  FoodsController controller;
+
+  Foods({ required this.controller });
 
   @override
   Widget build(BuildContext context) {
+    final List<Food> foods = controller.foods;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("食品一覧", style: TextStyle(fontSize: 20)),
-          FoodList(foods),
-          SubmitButton("食品追加", icon: Icons.add, type: SubmitButtonType.save, onPressed: () {})
+          FoodList(foods, onTapFoodItem: controller.handleTapFoodItem),
+          SubmitButton("食品追加", icon: Icons.add, type: SubmitButtonType.save, onPressed: controller.handleTapAddFoodButton)
         ],
       ),
     );

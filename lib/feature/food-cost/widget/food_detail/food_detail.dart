@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:routine_builder/feature/food-cost/class/food_detail_controller.dart';
+import 'package:routine_builder/feature/food-cost/widget/food_detail/food_detail_editable.dart';
 import 'package:routine_builder/general/class/food.dart';
-import 'package:routine_builder/general/widget/detail_item_Editable.dart';
+import 'package:routine_builder/general/widget/submit_button.dart';
 
-class FoodDetailEditable extends StatelessWidget {
-  final Food food;
-  final bool isEditable;
+class FoodDetail extends StatelessWidget {
+  final FoodDetailController controller;
   final double width;
   final double height;
 
-  FoodDetailEditable(this.food, {this.width = 250, this.height = 300, this.isEditable = false});
+  FoodDetail({required this.controller, this.width = 250, this.height = 400});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: width,
         height: height,
-        child: ListView(
-          children: [
-            DetailItemEditable("名称", food.name, isEditable: isEditable),
-            Divider(),
-            DetailItemEditable("略称", food.abbName ?? "", isEditable: isEditable),
-            Divider(),
-            DetailItemEditable("値段", food.price.toString(), isEditable: isEditable),
-          ],
-        ));
+        child: Column(children: [
+          FoodDetailEditable(controller.food, isEditable: false),
+          SubmitButton(
+            "編集",
+            icon: Icons.edit,
+            onPressed: controller.handleTapEditButton,
+            type: SubmitButtonType.save,
+          )
+        ]));
   }
 }
