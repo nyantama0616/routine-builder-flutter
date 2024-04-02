@@ -12,10 +12,10 @@ class FoodDetailEditable extends StatelessWidget {
 
   FoodDetailEditable(this.food, {this.width = 250, this.height = 300, this.isEditable = false, this.formController});
 
-  DetailItemEditable _createDetailItem(String label, String keyLabel) {
+  DetailItemEditable _createDetailItem(String label, String keyLabel, {String? value}) {
     return DetailItemEditable(
       label,
-      formController?.map[keyLabel] ?? "",
+      formController?.map[keyLabel] ?? value ?? "",
       keyLabel: keyLabel,
       isEditable: isEditable,
       onChanged: formController?.onChanged,
@@ -31,11 +31,11 @@ class FoodDetailEditable extends StatelessWidget {
           children: [
             DetailItemEditable("id", food.id.toString(), keyLabel: food.id.toString()),
             Divider(),
-            _createDetailItem("名前", "name"),
+            _createDetailItem("名前", "name", value: food.name),
             Divider(),
-            _createDetailItem("略称", "abbName"),
+            _createDetailItem("略称", "abbName", value: food.abbName),
             Divider(),
-            _createDetailItem("価格", "price"),
+            _createDetailItem("価格", "price", value: food.price.toString()),
           ],
         ));
   }

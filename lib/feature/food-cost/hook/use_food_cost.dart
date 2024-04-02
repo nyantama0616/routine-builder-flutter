@@ -31,6 +31,7 @@ FoodCostController useFoodCost() {
 
   void handleTapFoodItem(Food food) {
     _scene.value = Scenes.foodDetail;
+    _selectedFood.value = food;
   }
 
   final foodsController = FoodsController(

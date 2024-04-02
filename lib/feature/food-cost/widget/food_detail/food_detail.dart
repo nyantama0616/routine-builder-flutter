@@ -22,7 +22,7 @@ class FoodDetail extends StatelessWidget {
             "編集",
             icon: Icons.edit,
             onPressed: controller.handleTapEditButton,
-            type: SubmitButtonType.save,
+            type: SubmitButtonType.edit,
           )
         ]));
   }
