@@ -39,4 +39,5 @@ final stopTooth = "$_baseURL/tooths/stop";
 final finishTooth = "$_baseURL/tooths/finish";
 
 //foodCost
+final initFood = "$_baseURL/foods";
 final createFood = "$_baseURL/foods";

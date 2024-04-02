@@ -85,6 +85,19 @@ FoodCostController useFoodCost() {
     formController: formController,
   );
 
+  void _init() {
+    client.initFood().then((res) {
+      _foods.value = res.foods;
+    }).catchError((error) {
+      print("$error from useFoodCost#_init");
+    });
+  }
+
+  useEffect(() {
+    _init();
+    return null;
+  }, []);
+
   return useMemoized(() {
     return FoodCostController(
       scene: _scene.value,
