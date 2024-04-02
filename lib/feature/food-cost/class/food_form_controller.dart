@@ -4,13 +4,13 @@ class FoodFormController {
   final Map<String, String> map;
   final Function(String, String) onChanged;
   final FoodAndValid Function() getFoodAndValidate;
-  final Function() reset;
+  final Function(Food food) init;
 
   FoodFormController({
     required this.map,
     required this.onChanged,
     required this.getFoodAndValidate,
-    required this.reset,
+    required this.init,
   });
 }
 

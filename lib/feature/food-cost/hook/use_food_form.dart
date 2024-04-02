@@ -4,16 +4,15 @@ import 'package:routine_builder/general/class/food.dart';
 
 FoodFormController useFoodForm(Food initFood) {
   final _initMap = {
-    "name": initFood.name,
-    "abbName": initFood.abbName ?? "",
-    "price": initFood.price.toString(),
+    "name": "",
+    "abbName": "",
+    "price": "",
   };
   
   final _map = useState<Map<String, String>>(_initMap);
 
   void handleOnChanged(String key, String value) {
     _map.value[key] = value;
-    print(_map.value);
   }
 
   FoodAndValid getFoodAndValidate() {
@@ -37,8 +36,12 @@ FoodFormController useFoodForm(Food initFood) {
     return FoodAndValid(food, isValid);
   }
 
-  void reset() {
-    _map.value = _initMap;
+  void init(Food food) {
+    _map.value = {
+      "name": food.name,
+      "abbName": food.abbName ?? "",
+      "price": food.price.toString(),
+    };
   }
 
   return useMemoized(() {
@@ -46,7 +49,7 @@ FoodFormController useFoodForm(Food initFood) {
       map: _map.value,
       onChanged: handleOnChanged,
       getFoodAndValidate: getFoodAndValidate,
-      reset: reset,
+      init: init,
     );
   }, [_map.value]);
 }

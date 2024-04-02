@@ -7,16 +7,15 @@ import 'package:routine_builder/feature/food-cost/class/foods_controller.dart';
 import 'package:routine_builder/feature/food-cost/enum/scenes.dart';
 import 'package:routine_builder/feature/food-cost/hook/use_food_form.dart';
 import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/query/client/food_cost_query_client.dart';
 
 FoodCostController useFoodCost() {
-  final _foods = useState<List<Food>>([
-    Food.init(0),
-    Food.init(1),
-    Food.init(2),
-  ]);
+  final _foods = useState<List<Food>>([]);
   final _scene = useState<Scenes>(Scenes.foods);
   final _title = _titleFromScene(_scene.value);
   final _selectedFood = useState<Food>(Food.init(0));
+  final formController = useFoodForm(_selectedFood.value);
+  final client = FoodCostQueryClient();
 
   void handleTapBackButton() {
     // TODO: 実装
@@ -32,6 +31,7 @@ FoodCostController useFoodCost() {
   void handleTapFoodItem(Food food) {
     _scene.value = Scenes.foodDetail;
     _selectedFood.value = food;
+    formController.init(food); //TODO: ほんとにこれ必要？
   }
 
   final foodsController = FoodsController(
@@ -41,7 +41,7 @@ FoodCostController useFoodCost() {
   );
 
   // foodDetail
-  
+
   void handleTapEditButton() {
     _scene.value = Scenes.foodEdit;
   }
@@ -57,8 +57,6 @@ FoodCostController useFoodCost() {
     _scene.value = Scenes.foodDetail;
   }
 
-  final formController = useFoodForm(_selectedFood.value);
-
   final foodEditController = FoodEditController(
     food: _selectedFood.value,
     handleTapSaveButton: handleTapSaveEditButton,
@@ -68,7 +66,18 @@ FoodCostController useFoodCost() {
   // foodCreate
 
   void handleTapSaveCreateButton() {
-    _scene.value = Scenes.foods;
+    // _scene.value = Scenes.foods;
+    final foodAndValid = formController.getFoodAndValidate();
+    if (!foodAndValid.isValid) {
+      return;
+    }
+
+    client.createFood(foodAndValid.food).then((res) {
+      _foods.value.add(res.food);
+      _scene.value = Scenes.foods;
+    }).catchError((error) {
+      print("$error from useFoodCost#handleTapSaveCreateButton");
+    });
   }
 
   final foodCreateController = FoodCreateController(
