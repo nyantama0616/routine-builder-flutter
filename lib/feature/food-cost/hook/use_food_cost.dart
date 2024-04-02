@@ -5,6 +5,7 @@ import 'package:routine_builder/feature/food-cost/class/food_detail_controller.d
 import 'package:routine_builder/feature/food-cost/class/food_edit_controller.dart';
 import 'package:routine_builder/feature/food-cost/class/foods_controller.dart';
 import 'package:routine_builder/feature/food-cost/enum/scenes.dart';
+import 'package:routine_builder/feature/food-cost/hook/use_food_form.dart';
 import 'package:routine_builder/general/class/food.dart';
 
 FoodCostController useFoodCost() {
@@ -30,7 +31,6 @@ FoodCostController useFoodCost() {
 
   void handleTapFoodItem(Food food) {
     _scene.value = Scenes.foodDetail;
-    print("tapped food: ${food.name}");
   }
 
   final foodsController = FoodsController(
@@ -56,9 +56,12 @@ FoodCostController useFoodCost() {
     _scene.value = Scenes.foodDetail;
   }
 
+  final formController = useFoodForm(_selectedFood.value);
+
   final foodEditController = FoodEditController(
     food: _selectedFood.value,
     handleTapSaveButton: handleTapSaveEditButton,
+    formController: formController,
   );
 
   // foodCreate
@@ -69,6 +72,7 @@ FoodCostController useFoodCost() {
 
   final foodCreateController = FoodCreateController(
     handleTapSaveButton: handleTapSaveCreateButton,
+    formController: formController,
   );
 
   return useMemoized(() {

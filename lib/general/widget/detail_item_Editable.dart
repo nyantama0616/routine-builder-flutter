@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 class DetailItemEditable extends StatelessWidget {
   final String label;
+  final String keyLabel;
   final String value;
   final bool isEditable;
   final Function(String, String)? onChanged;
 
   DetailItemEditable(this.label, this.value,
-      {this.isEditable = false, this.onChanged});
+      {required this.keyLabel, this.isEditable = false, this.onChanged});
 
   void _onChanged(String value) {
-    onChanged?.call(label, value);
+    onChanged?.call(keyLabel, value);
   }
 
   @override

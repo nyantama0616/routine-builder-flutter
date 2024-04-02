@@ -18,7 +18,7 @@ class FoodCreate extends StatelessWidget {
       height: height,
       child: Column(
         children: [
-          FoodDetailEditable(Food.init(0), isEditable: true),
+          FoodDetailEditable(Food.init(0), isEditable: true, formController: controller.formController),
           SubmitButton(
             "作成",
             icon: Icons.add,

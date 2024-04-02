@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routine_builder/feature/food-cost/class/food_form_controller.dart';
 import 'package:routine_builder/general/class/food.dart';
 import 'package:routine_builder/general/widget/detail_item_Editable.dart';
 
@@ -7,8 +8,19 @@ class FoodDetailEditable extends StatelessWidget {
   final bool isEditable;
   final double width;
   final double height;
+  final FoodFormController? formController;
 
-  FoodDetailEditable(this.food, {this.width = 250, this.height = 300, this.isEditable = false});
+  FoodDetailEditable(this.food, {this.width = 250, this.height = 300, this.isEditable = false, this.formController});
+
+  DetailItemEditable _createDetailItem(String label, String keyLabel) {
+    return DetailItemEditable(
+      label,
+      formController?.map[keyLabel] ?? "",
+      keyLabel: keyLabel,
+      isEditable: isEditable,
+      onChanged: formController?.onChanged,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +29,11 @@ class FoodDetailEditable extends StatelessWidget {
         height: height,
         child: ListView(
           children: [
-            DetailItemEditable("名称", food.name, isEditable: isEditable),
+            _createDetailItem("名前", "name"),
             Divider(),
-            DetailItemEditable("略称", food.abbName ?? "", isEditable: isEditable),
+            _createDetailItem("略称", "abbName"),
             Divider(),
-            DetailItemEditable("値段", food.price.toString(), isEditable: isEditable),
+            _createDetailItem("価格", "price"),
           ],
         ));
   }
