@@ -1,8 +1,8 @@
-import 'package:routine_builder/feature/food_cost/class/food/food_create_controller.dart';
-import 'package:routine_builder/feature/food_cost/class/food/food_detail_controller.dart';
-import 'package:routine_builder/feature/food_cost/class/food/food_edit_controller.dart';
-import 'package:routine_builder/feature/food_cost/class/food/foods_controller.dart';
-import 'package:routine_builder/feature/food_cost/enum/food/scenes.dart';
+import 'package:routine_builder/feature/food_cost/food/class/food_create_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/class/food_detail_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/class/food_edit_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/class/foods_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/enum/scenes.dart';
 
 class FoodController {
   final Scenes scene;

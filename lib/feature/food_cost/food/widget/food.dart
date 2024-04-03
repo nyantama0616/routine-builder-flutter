@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:routine_builder/feature/food_cost/class/food/food_controller.dart';
-import 'package:routine_builder/feature/food_cost/enum/food/scenes.dart';
-import 'package:routine_builder/feature/food_cost/hook/use_food.dart';
-import 'package:routine_builder/feature/food_cost/widget/food/food_create/food_create.dart';
-import 'package:routine_builder/feature/food_cost/widget/food/food_detail/food_detail.dart';
-import 'package:routine_builder/feature/food_cost/widget/food/food_detail/food_detail_editable.dart';
-import 'package:routine_builder/feature/food_cost/widget/food/food_edit/food_edit.dart';
-import "package:routine_builder/feature/food_cost/widget/food/foods/foods.dart";
+import 'package:routine_builder/feature/food_cost/food/class/food_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/enum/scenes.dart';
+import 'package:routine_builder/feature/food_cost/food/hook/use_food.dart';
+import 'package:routine_builder/feature/food_cost/food/widget/food_create/food_create.dart';
+import 'package:routine_builder/feature/food_cost/food/widget/food_detail/food_detail.dart';
+import 'package:routine_builder/feature/food_cost/food/widget/food_detail/food_detail_editable.dart';
+import 'package:routine_builder/feature/food_cost/food/widget/food_edit/food_edit.dart';
+import "package:routine_builder/feature/food_cost/food/widget/foods/foods.dart";
 import 'package:routine_builder/general/class/food.dart';
 import 'package:routine_builder/general/widget/back_button.dart' as back;
 
