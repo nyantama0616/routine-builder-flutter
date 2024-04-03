@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/food_cost/class/food/food_controller.dart';
-import 'package:routine_builder/feature/food_cost/enum/scenes.dart';
+import 'package:routine_builder/feature/food_cost/enum/food/scenes.dart';
 import 'package:routine_builder/feature/food_cost/hook/use_food.dart';
 import 'package:routine_builder/feature/food_cost/widget/food/food_create/food_create.dart';
 import 'package:routine_builder/feature/food_cost/widget/food/food_detail/food_detail.dart';
