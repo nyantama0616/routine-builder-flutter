@@ -5,8 +5,8 @@ import 'package:routine_builder/feature/hiit/controller/hiit_controller.dart';
 import 'package:routine_builder/feature/hiit/enum/train_statuses.dart';
 import 'package:routine_builder/feature/hiit/hook/use_train.dart';
 import 'package:routine_builder/feature/hiit/widget/buttons.dart';
-import 'package:routine_builder/general/class/hiit_setting.dart';
-import 'package:routine_builder/general/class/hiit_train_data.dart';
+import 'package:routine_builder/general/model/hiit_setting.dart';
+import 'package:routine_builder/general/model/hiit_train_data.dart';
 
 /*
   TODO: パフォーマンスを計測する

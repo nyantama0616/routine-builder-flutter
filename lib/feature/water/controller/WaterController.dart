@@ -1,4 +1,4 @@
-import "package:routine_builder/general/class/water_amount.dart";
+import "package:routine_builder/general/model/water_amount.dart";
 
 class WaterController {
   final WaterAmount waterAmount;

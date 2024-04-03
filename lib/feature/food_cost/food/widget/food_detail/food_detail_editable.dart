@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:routine_builder/feature/food_cost/food/controller/food_form_controller.dart';
-import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/model/food.dart';
 import 'package:routine_builder/general/widget/detail_item_Editable.dart';
 
 class FoodDetailEditable extends StatelessWidget {

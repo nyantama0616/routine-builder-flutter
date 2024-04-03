@@ -8,7 +8,7 @@ import 'package:routine_builder/feature/food_cost/food/widget/food_detail/food_d
 import 'package:routine_builder/feature/food_cost/food/widget/food_detail/food_detail_editable.dart';
 import 'package:routine_builder/feature/food_cost/food/widget/food_edit/food_edit.dart';
 import "package:routine_builder/feature/food_cost/food/widget/foods/foods.dart";
-import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/model/food.dart';
 import 'package:routine_builder/general/widget/back_button.dart' as back;
 
 class Food extends HookWidget {

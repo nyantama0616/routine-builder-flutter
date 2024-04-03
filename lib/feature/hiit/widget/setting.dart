@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/hiit/controller/hiit_controller.dart';
 import 'package:routine_builder/feature/hiit/hook/use_setting_form.dart';
 import "package:routine_builder/feature/hiit/widget/buttons.dart";
-import 'package:routine_builder/general/class/hiit_setting.dart';
+import 'package:routine_builder/general/model/hiit_setting.dart';
 
 class Setting extends HookWidget {
   final HiitController hiitController;

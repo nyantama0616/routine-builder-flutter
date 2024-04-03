@@ -1,8 +1,8 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/hanon/controller/hanon_controller.dart';
 import 'package:routine_builder/feature/hanon/settings.dart';
-import 'package:routine_builder/general/class/hanon.dart';
-import 'package:routine_builder/general/class/hanon_patterns.dart';
+import 'package:routine_builder/general/model/hanon.dart';
+import 'package:routine_builder/general/model/hanon_patterns.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import 'package:routine_builder/general/hook/use_counter.dart';
 import 'package:routine_builder/general/provider/app_provider.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:routine_builder/feature/hanon/controller/hanon_controller.dart';
-import 'package:routine_builder/general/class/hanon_patterns.dart';
+import 'package:routine_builder/general/model/hanon_patterns.dart';
 import 'package:routine_builder/general/widget/progress_bar.dart';
-import 'package:routine_builder/general/class/hanon.dart';
+import 'package:routine_builder/general/model/hanon.dart';
 import 'package:routine_builder/feature/hanon/settings.dart';
 
 class ModeSelector extends StatelessWidget {

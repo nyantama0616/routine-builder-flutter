@@ -1,5 +1,5 @@
 import 'package:routine_builder/feature/food_cost/food/controller/food_form_controller.dart';
-import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/model/food.dart';
 
 class FoodEditController {
   final Food food;

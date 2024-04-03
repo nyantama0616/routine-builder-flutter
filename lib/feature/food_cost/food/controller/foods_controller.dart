@@ -1,4 +1,4 @@
-import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/model/food.dart';
 
 class FoodsController {
   final List<Food> foods;

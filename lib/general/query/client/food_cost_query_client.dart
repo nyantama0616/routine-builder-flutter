@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/model/food.dart';
 import 'package:routine_builder/general/query/client/query_client_base.dart';
 import 'package:routine_builder/general/query/data/food_cost/create/create_request_body.dart';
 import 'package:routine_builder/general/query/data/food_cost/create/create_response_body.dart';

@@ -1,5 +1,5 @@
-import "package:routine_builder/general/class/caterpillar.dart";
-import "package:routine_builder/general/class/timer.dart";
+import "package:routine_builder/general/model/caterpillar.dart";
+import "package:routine_builder/general/model/timer.dart";
 
 class InitResponseBody {
   final Map<String, int> patterns;

@@ -1,6 +1,6 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/food_cost/food/controller/food_form_controller.dart';
-import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/model/food.dart';
 
 FoodFormController useFoodForm(Food initFood) {
   final _initMap = {

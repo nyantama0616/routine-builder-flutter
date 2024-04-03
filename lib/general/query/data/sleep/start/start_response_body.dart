@@ -1,4 +1,4 @@
-import 'package:routine_builder/general/class/life.dart';
+import 'package:routine_builder/general/model/life.dart';
 
 class StartResponseBody {
   final Life todayLife;

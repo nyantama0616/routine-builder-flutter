@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:routine_builder/general/widget/progress_bar.dart';
-import 'package:routine_builder/general/class/caterpillar.dart';
+import 'package:routine_builder/general/model/caterpillar.dart';
 import 'package:routine_builder/feature/caterpillar/controller/caterpillar_controller.dart';
 import 'package:routine_builder/feature/caterpillar/settings.dart';
 

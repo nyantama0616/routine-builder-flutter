@@ -1,6 +1,6 @@
 import "package:flutter_hooks/flutter_hooks.dart";
 import "package:routine_builder/feature/hiit/controller/setting_form_controller.dart";
-import "package:routine_builder/general/class/hiit_setting.dart";
+import "package:routine_builder/general/model/hiit_setting.dart";
 
 SettingFormController useSettingForm(HiitSetting setting) {
   final _state = useState<HiitSetting>(HiitSetting(

@@ -1,7 +1,7 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/hiit/controller/hiit_controller.dart';
-import 'package:routine_builder/general/class/hiit_setting.dart';
-import 'package:routine_builder/general/class/hiit_train_data.dart';
+import 'package:routine_builder/general/model/hiit_setting.dart';
+import 'package:routine_builder/general/model/hiit_train_data.dart';
 import 'package:routine_builder/general/query/client/hiit_query_client.dart';
 import 'package:routine_builder/general/util/train_sound_player.dart';
 

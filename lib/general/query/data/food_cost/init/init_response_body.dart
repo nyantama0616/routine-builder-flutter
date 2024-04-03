@@ -1,4 +1,4 @@
-import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/model/food.dart';
 
 class InitResponseBody {
   final List<Food> foods;

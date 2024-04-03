@@ -1,5 +1,5 @@
-import 'package:routine_builder/general/class/hiit_setting.dart';
-import 'package:routine_builder/general/class/hiit_train_data.dart';
+import 'package:routine_builder/general/model/hiit_setting.dart';
+import 'package:routine_builder/general/model/hiit_train_data.dart';
 
 class HiitController {
   final bool showSetting;

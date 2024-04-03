@@ -6,7 +6,7 @@ import 'package:routine_builder/feature/food_cost/food/controller/food_edit_cont
 import 'package:routine_builder/feature/food_cost/food/controller/foods_controller.dart';
 import 'package:routine_builder/feature/food_cost/food/enum/scenes.dart';
 import 'package:routine_builder/feature/food_cost/food/hook/use_food_form.dart';
-import 'package:routine_builder/general/class/food.dart';
+import 'package:routine_builder/general/model/food.dart';
 import 'package:routine_builder/general/query/client/food_cost_query_client.dart';
 
 FoodController useFood() {
