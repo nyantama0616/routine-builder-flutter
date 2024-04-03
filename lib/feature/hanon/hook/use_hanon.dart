@@ -1,5 +1,5 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:routine_builder/feature/hanon/class/hanon_controller.dart';
+import 'package:routine_builder/feature/hanon/controller/hanon_controller.dart';
 import 'package:routine_builder/feature/hanon/settings.dart';
 import 'package:routine_builder/general/class/hanon.dart';
 import 'package:routine_builder/general/class/hanon_patterns.dart';

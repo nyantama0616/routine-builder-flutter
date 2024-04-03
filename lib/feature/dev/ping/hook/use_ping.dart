@@ -1,7 +1,7 @@
 import "package:routine_builder/general/query/client/dev_query_client.dart";
 import "package:routine_builder/general/query/query_statuses.dart";
 
-import "./ping_controller.dart";
+import "../controller/ping_controller.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
 
 

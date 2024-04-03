@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:flutter_hooks/flutter_hooks.dart";
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import "package:routine_builder/feature/dev/ping/use_ping.dart";
+import "package:routine_builder/feature/dev/ping/hook/use_ping.dart";
 import "package:routine_builder/feature/home/widget/buttons.dart";
 import "package:routine_builder/general/enum/scenes.dart";
 import "package:routine_builder/general/provider/app_provider.dart";

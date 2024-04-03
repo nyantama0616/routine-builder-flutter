@@ -1,9 +1,9 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:routine_builder/feature/food_cost/food/class/food_controller.dart';
-import 'package:routine_builder/feature/food_cost/food/class/food_create_controller.dart';
-import 'package:routine_builder/feature/food_cost/food/class/food_detail_controller.dart';
-import 'package:routine_builder/feature/food_cost/food/class/food_edit_controller.dart';
-import 'package:routine_builder/feature/food_cost/food/class/foods_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/controller/food_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/controller/food_create_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/controller/food_detail_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/controller/food_edit_controller.dart';
+import 'package:routine_builder/feature/food_cost/food/controller/foods_controller.dart';
 import 'package:routine_builder/feature/food_cost/food/enum/scenes.dart';
 import 'package:routine_builder/feature/food_cost/food/hook/use_food_form.dart';
 import 'package:routine_builder/general/class/food.dart';

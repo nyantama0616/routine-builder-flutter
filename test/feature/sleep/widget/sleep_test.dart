@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:routine_builder/feature/sleep/widget/sleep.dart';
 import 'package:mockito/mockito.dart';
-import 'package:routine_builder/feature/sleep/class/sleep_controller.dart';
+import 'package:routine_builder/feature/sleep/controller/sleep_controller.dart';
 import 'package:routine_builder/general/enum/statuses.dart';
 import 'package:routine_builder/general/provider/user_provider.dart';
 import '../../../general/query/client/sleep_query_client_test.mocks.dart';

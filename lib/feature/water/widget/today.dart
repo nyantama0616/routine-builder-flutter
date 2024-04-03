@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:routine_builder/feature/water/class/WaterController.dart';
+import 'package:routine_builder/feature/water/controller/WaterController.dart';
 
 class Today extends StatelessWidget {
   final WaterController controller;

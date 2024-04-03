@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:routine_builder/feature/dev/ping/use_ping.dart';
+import 'package:routine_builder/feature/dev/ping/hook/use_ping.dart';
 import 'package:routine_builder/general/query/query_statuses.dart';
 
 class Ping extends HookWidget {

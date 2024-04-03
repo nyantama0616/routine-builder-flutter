@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:routine_builder/feature/hiit/class/hiit_controller.dart';
+import 'package:routine_builder/feature/hiit/controller/hiit_controller.dart';
 import 'package:routine_builder/feature/hiit/enum/train_statuses.dart';
 import 'package:routine_builder/feature/hiit/hook/use_train.dart';
 import 'package:routine_builder/feature/hiit/widget/buttons.dart';

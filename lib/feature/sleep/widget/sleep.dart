@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:routine_builder/feature/sleep/class/sleep_controller.dart';
+import 'package:routine_builder/feature/sleep/controller/sleep_controller.dart';
 import 'package:routine_builder/feature/sleep/widget/nap_button.dart';
 import 'package:routine_builder/feature/sleep/widget/sleep_button.dart';
 import 'package:routine_builder/feature/sleep/widget/wake_up_button.dart';

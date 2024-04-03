@@ -1,4 +1,4 @@
-import 'package:routine_builder/feature/caterpillar/class/caterpillar_controller.dart';
+import 'package:routine_builder/feature/caterpillar/controller/caterpillar_controller.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/general/hook/use_counter.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
