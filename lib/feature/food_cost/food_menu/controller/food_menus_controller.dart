@@ -1,8 +1,8 @@
 import 'package:routine_builder/general/model/food_menu.dart';
 
 class FoodMenusController {
-  final List<FoodMenu> foodMenus;
-  Function(FoodMenu) handleTapFoodMenuItem;
+  final List<FoodMenuHeader> foodMenus;
+  Function(FoodMenuHeader) handleTapFoodMenuItem;
   Function() handleTapAddFoodMenuButton;
 
   FoodMenusController({

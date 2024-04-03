@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:routine_builder/general/model/food_menu.dart';
 
 class FoodMenuListItem extends StatelessWidget {
-  final FoodMenu foodMenu;
-  final Function(FoodMenu)? onTap;
+  final FoodMenuHeader foodMenu;
+  final Function(FoodMenuHeader)? onTap;
 
   FoodMenuListItem(this.foodMenu, { this.onTap });
 

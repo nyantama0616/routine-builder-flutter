@@ -6,7 +6,7 @@ class FoodCost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FoodMenu(),
+      child: FoodMenuHeader(),
       // child: Food(),
     );
   }

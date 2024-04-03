@@ -14,13 +14,13 @@ FoodMenuController useFoodMenu() {
 
   //FoodMenus
 
-  final foodMenus = useState<List<FoodMenu>>([
-    FoodMenu.init(),
-    FoodMenu.init(),
-    FoodMenu.init(),
+  final foodMenus = useState<List<FoodMenuHeader>>([
+    FoodMenuHeader.init(),
+    FoodMenuHeader.init(),
+    FoodMenuHeader.init(),
   ]);
 
-  void handleTapFoodMenuItem(FoodMenu foodMenu) {
+  void handleTapFoodMenuItem(FoodMenuHeader foodMenu) {
     print("tapped food menu: ${foodMenu.name}");
   }
 

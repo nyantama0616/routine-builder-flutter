@@ -4,8 +4,8 @@ import 'package:routine_builder/general/model/food.dart';
 import 'package:routine_builder/general/model/food_menu.dart';
 
 class FoodMenuList extends StatelessWidget {
-  final List<FoodMenu> foodMenus;
-  final Function(FoodMenu)? onTapFoodMenuItem;
+  final List<FoodMenuHeader> foodMenus;
+  final Function(FoodMenuHeader)? onTapFoodMenuItem;
   final double width;
   final double height;
 

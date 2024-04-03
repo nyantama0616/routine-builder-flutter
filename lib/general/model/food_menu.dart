@@ -1,18 +1,18 @@
-class FoodMenu {
+class FoodMenuHeader {
   final int id;
   final String name;
   final List<FoodIdWithQuantity> foods;
 
-  FoodMenu({
+  FoodMenuHeader({
     required this.id,
     required this.name,
     required this.foods,
   });
 
-  FoodMenu.init() : id = 0, name = "food", foods = [];
+  FoodMenuHeader.init() : id = 0, name = "food", foods = [];
 
-  factory FoodMenu.fromJson(Map<String, dynamic> json) {
-    return FoodMenu(
+  factory FoodMenuHeader.fromJson(Map<String, dynamic> json) {
+    return FoodMenuHeader(
       id: json['id'],
       name: json['name'],
       foods: (json['foods'] as List).map((e) => FoodIdWithQuantity.fromJson(e)).toList(),
