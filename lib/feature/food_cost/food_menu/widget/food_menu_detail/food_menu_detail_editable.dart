@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routine_builder/feature/food_cost/food_menu/controller/food_menu_form_controller.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/widget/food_menu_detail/food_list_editable.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/widget/food_menu_detail/food_selector.dart';
 import 'package:routine_builder/general/model/food.dart';
@@ -11,24 +12,32 @@ class FoodMenuDetailEditable extends StatelessWidget {
   final bool isEditable;
   final double width;
   final double height;
-  // final FoodMenuFormController? formController;
+  final FoodMenuFormController? formController;
 
-  FoodMenuDetailEditable(this.foodMenu, {this.width = 250, this.height = 540, this.isEditable = false});
+  FoodMenuDetailEditable(this.foodMenu, {this.formController, this.width = 250, this.height = 540, this.isEditable = false});
 
   @override
   Widget build(BuildContext context) {
+    print(formController?.foodMenu.foods.length);
     final addButton = isEditable
-        ? AddButton()
+        ? AddButton(onTap: formController?.handleTapAddButton)
         : Container();
 
-    final dialog = false ?
+    final dialog = formController?.showFoodList ?? false ?
         Dialog(
-          child: FoodSelector([
-            Food.init(0),
-            Food.init(1),
-          ]),
+          child: FoodSelector(
+            formController?.foods ?? [],
+            onTapItem: (Food food) { //TODO: ちゃんと実装する
+              final fq = FoodWithQuantity(food: food, quantity: 1);
+              formController?.handleAddFood(fq);
+            },
+            onTapCrossButton: formController?.handleTapCrossButton,
+          ),
         )
         : Container();
+      
+      final name = formController?.map["name"] ?? foodMenu.name;
+      final foods = formController?.foodMenu.foods ?? foodMenu.foods;
     return Container(
         width: width,
         height: height,
@@ -38,7 +47,7 @@ class FoodMenuDetailEditable extends StatelessWidget {
               children: [
                 DetailItemEditable("id", foodMenu.id.toString(), keyLabel: ""),
                 Divider(),
-                DetailItemEditable("名前", foodMenu.name, keyLabel: "name", isEditable: isEditable),
+                DetailItemEditable("名前", name, keyLabel: "name", isEditable: isEditable),
                 Divider(),
                 SizedBox(height: 10),
                 Row(
@@ -47,7 +56,7 @@ class FoodMenuDetailEditable extends StatelessWidget {
                     addButton,
                   ],
                 ),
-                FoodListEditable(foodMenu.foods, isEditable: isEditable),
+                FoodListEditable(foods, isEditable: isEditable, onChangedFood: formController?.handleEditFood),
               ],
             ),
             Center(

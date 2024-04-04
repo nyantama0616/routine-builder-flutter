@@ -6,7 +6,8 @@ class Food {
 
   Food({required this.id, required this.name, this.abbName, required this.price});
 
-  Food.init(int id) : this(id: 0, name: "food", price: 0);
+  Food.init(int id) : this(id: 0, name: "", price: 0);
+  Food.initDev(int id) : this(id: id, name: "food$id", price: 100);
 
   factory Food.fromJson(Map<String, dynamic> json) {
     return Food(

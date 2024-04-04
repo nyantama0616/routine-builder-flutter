@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/enum/scenes.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/hook/use_food_menu.dart';
+import 'package:routine_builder/feature/food_cost/food_menu/widget/food_menu_edit.dart/food_menu_edit.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/widget/food_menu_detail/food_menu_detail.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/widget/foods/food_menus.dart';
 
@@ -16,7 +17,10 @@ class FoodMenuHeader extends HookWidget {
         mainScreen = FoodMenus(controller: controller.foodMenusController);
         break;
       case Scenes.foodMenuDetail:
-        mainScreen = FoodMenuDetail();
+        mainScreen = FoodMenuDetail(controller: controller.foodMenuDetailController);
+        break;
+      case Scenes.foodMenuEdit:
+        mainScreen = FoodMenuEdit(controller: controller.foodMenuEditController);
         break;
       default:
         mainScreen = FoodMenus(controller: controller.foodMenusController);

@@ -8,16 +8,17 @@ class FoodSelector extends StatelessWidget {
   final double width;
   final double height;
   final Function(Food)? onTapItem;
+  final Function()? onTapCrossButton;
 
   FoodSelector(this.foods,
-      {this.width = 250, this.height = 400, this.onTapItem});
+      {this.width = 250, this.height = 400, this.onTapItem, this.onTapCrossButton});
 
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
       Align(
         alignment: Alignment.topRight,
-        child: CrossButton(),
+        child: CrossButton(onTap: onTapCrossButton),
       ),
       Center(
           child: Container(

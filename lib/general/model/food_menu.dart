@@ -11,7 +11,12 @@ class FoodMenuHeader {
     required this.foodIds,
   });
 
-  FoodMenuHeader.init() : id = 0, name = "foodMenu", foodIds = [];
+  FoodMenuHeader.init() : id = 0, name = "", foodIds = [];
+  FoodMenuHeader.initDev(this.id) : name = "foodMenuHeader$id", foodIds = [
+    FoodIdWithQuantity.initDev(Food.initDev(0), 1),
+    FoodIdWithQuantity.initDev(Food.initDev(1), 2),
+    FoodIdWithQuantity.initDev(Food.initDev(2), 3),
+  ];
 
   factory FoodMenuHeader.fromJson(Map<String, dynamic> json) {
     return FoodMenuHeader(
@@ -33,6 +38,9 @@ class FoodIdWithQuantity {
     required this.quantity,
   });
 
+  FoodIdWithQuantity.init() : foodId = 0, quantity = 1;
+  FoodIdWithQuantity.initDev(Food food, this.quantity) : foodId = food.id;
+
   factory FoodIdWithQuantity.fromJson(Map<String, dynamic> json) {
     return FoodIdWithQuantity(
       foodId: json['foodId'],
@@ -52,11 +60,20 @@ class FoodMenu {
     required this.foods,
   });
 
-  FoodMenu.init() : id = 0, name = "foodMenu", foods = [
-    FoodWithQuantity.init(),
-    FoodWithQuantity.init(),
-    FoodWithQuantity.init(),
+  FoodMenu.init() : id = 0, name = "", foods = [];
+  FoodMenu.initDev(this.id) : name = "foodMenu$id", foods = [
+    FoodWithQuantity.initDev(Food.initDev(0)),
+    FoodWithQuantity.initDev(Food.initDev(1)),
+    FoodWithQuantity.initDev(Food.initDev(2)),
   ];
+
+  FoodMenu copyWith({String? name, List<FoodWithQuantity>? foods}) {
+    return FoodMenu(
+      id: id,
+      name: name ?? this.name,
+      foods: foods ?? List.from(this.foods), //MEMO: リストをコピーする際はこうする！
+    );
+  }
 }
 
 class FoodWithQuantity {
@@ -68,7 +85,8 @@ class FoodWithQuantity {
     required this.quantity,
   });
 
-  FoodWithQuantity.init() : food = Food.init(0), quantity = 1;
+  FoodWithQuantity.init() : food = Food.initDev(0), quantity = 1;
+  FoodWithQuantity.initDev(this.food) : quantity = 1;
 
   FoodWithQuantity copyWith({int? quantity}) {
     return FoodWithQuantity(

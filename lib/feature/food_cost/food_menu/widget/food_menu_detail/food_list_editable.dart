@@ -5,10 +5,11 @@ import 'package:routine_builder/general/model/food_menu.dart';
 class FoodListEditable extends StatelessWidget {
   final List<FoodWithQuantity> foods;
   final bool isEditable;
+  final Function(FoodWithQuantity)? onChangedFood;
   final double width;
   final double height;
 
-  FoodListEditable(this.foods, {this.width = 250, this.height = 400, this.isEditable = false});
+  FoodListEditable(this.foods, {this.width = 250, this.height = 400, this.isEditable = false, this.onChangedFood});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class FoodListEditable extends StatelessWidget {
           return FoodWithQuantityEditable(
             value: foods[index],
             isEditable: isEditable,
-            onChanged: null,
+            onChanged: onChangedFood,
           );
         },
       )
