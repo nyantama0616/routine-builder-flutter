@@ -25,7 +25,7 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
     final index = _foodMenu.value.foods
         .indexWhere((element) => element.food.id == foodId);
     _foodMenu.value.foods[index] =
-        _foodMenu.value.foods[index].copyWith(quantity: int.parse(value));
+        _foodMenu.value.foods[index].copyWith(quantity: double.parse(value));
   }
 
   void handleAddFood(FoodWithQuantity foodWithQuantity) {
@@ -39,11 +39,11 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
     print("$foodWithQuantity.id, $index");
   }
 
-  FoodMenu getFoodMenuAndValidate() {
+  FoodMenuAndValid getFoodMenuAndValidate() {
     final foodMenu = _foodMenu.value.copyWith(
       name: _map.value['name'] ?? '',
     );
-    return foodMenu;
+    return FoodMenuAndValid(foodMenu, true);
   }
 
   void init(FoodMenu foodMenu) {

@@ -12,7 +12,7 @@ class FoodMenuFormController {
   final Function(FoodWithQuantity) handleAddFood;
   final Function(FoodWithQuantity) handleEditFood;
 
-  final Function() getFoodMenuAndValidate;
+  final FoodMenuAndValid Function() getFoodMenuAndValidate;
   final Function(FoodMenu foodMenu) init;
 
   FoodMenuFormController({
@@ -28,4 +28,11 @@ class FoodMenuFormController {
     required this.getFoodMenuAndValidate,
     required this.init,
   });
+}
+
+class FoodMenuAndValid {
+  final FoodMenu foodMenu;
+  final bool isValid;
+
+  FoodMenuAndValid(this.foodMenu, this.isValid);
 }

@@ -47,7 +47,7 @@ class FoodMenuDetailEditable extends StatelessWidget {
               children: [
                 DetailItemEditable("id", foodMenu.id.toString(), keyLabel: ""),
                 Divider(),
-                DetailItemEditable("名前", name, keyLabel: "name", isEditable: isEditable),
+                DetailItemEditable("名前", name, keyLabel: "name", isEditable: isEditable, onChanged: formController?.handleChange),
                 Divider(),
                 SizedBox(height: 10),
                 Row(

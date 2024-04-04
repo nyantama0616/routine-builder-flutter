@@ -10,10 +10,10 @@ class FoodWithQuantityEditable extends StatelessWidget {
   FoodWithQuantityEditable({ required this.value, this.isEditable = false, this.onChanged});
 
   void _onChanged(String quantityStr) {
-    int quantity;
+    double quantity;
     
     try {
-      quantity = int.parse(quantityStr);
+      quantity = double.parse(quantityStr);
     } catch (e) {
       return;
     }
