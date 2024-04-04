@@ -15,7 +15,7 @@ class FoodMenuDetail extends StatelessWidget {
         height: height,
         child: ListView(
           children: [
-            FoodMenuDetailEditable(FoodMenu.init(), isEditable: true),
+            FoodMenuDetailEditable(FoodMenu.init(), isEditable: false),
             SubmitButton("編集", icon: Icons.edit, type: SubmitButtonType.edit, onPressed: () {}),
           ],
         ));
