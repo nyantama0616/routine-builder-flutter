@@ -1,5 +1,6 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/controller/food_menu_controller.dart';
+import 'package:routine_builder/feature/food_cost/food_menu/controller/food_menu_create_controller.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/controller/food_menu_detail_controller.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/controller/food_menu_edit_controller.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/controller/food_menus_controller.dart';
@@ -9,7 +10,7 @@ import 'package:routine_builder/general/model/food.dart';
 import 'package:routine_builder/general/model/food_menu.dart';
 
 FoodMenuController useFoodMenu() {
-  final _scene = useState(Scenes.foodMenuDetail);
+  final _scene = useState(Scenes.foodMenus);
   final title = _titleFromScene(_scene.value);
   final _selectedFoodMenu = useState<FoodMenu>(FoodMenu.initDev(0));
   final _formController = useFoodMenuForm(foods: [
@@ -36,7 +37,8 @@ FoodMenuController useFoodMenu() {
   }
 
   void handleTapAddFoodMenuButton() {
-    print("tapped add food menu button");
+    _formController.init(FoodMenu.init());
+    _scene.value = Scenes.foodMenuCreate;
   }
 
   final foodMenusController = FoodMenusController(
@@ -75,6 +77,17 @@ FoodMenuController useFoodMenu() {
     formController: _formController,
   );
 
+  //FoodMenuCreate
+
+  void handleTapSaveCreateButton() {
+    _scene.value = Scenes.foodMenus;
+  }
+
+  final foodMenuCreateController = FoodMenuCreateController(
+    handleTapSaveButton: handleTapSaveCreateButton,
+    formController: _formController,
+  );
+
   return useMemoized(() {
     return FoodMenuController(
       scene: _scene.value,
@@ -83,6 +96,7 @@ FoodMenuController useFoodMenu() {
       foodMenusController: foodMenusController,
       foodMenuDetailController: foodMenuDetailController,
       foodMenuEditController: foodMenuEditController,
+      foodMenuCreateController: foodMenuCreateController,
     );
   }, [_scene.value, _selectedFoodMenu.value, _formController, foodMenus.value]);
 }
