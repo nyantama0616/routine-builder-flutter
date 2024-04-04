@@ -6,6 +6,7 @@ import 'package:routine_builder/feature/food_cost/food_menu/widget/food_menu_cre
 import 'package:routine_builder/feature/food_cost/food_menu/widget/food_menu_edit.dart/food_menu_edit.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/widget/food_menu_detail/food_menu_detail.dart';
 import 'package:routine_builder/feature/food_cost/food_menu/widget/foods/food_menus.dart';
+import 'package:routine_builder/general/widget/back_button.dart' as back;
 
 class FoodMenuHeader extends HookWidget {
   @override
@@ -33,7 +34,16 @@ class FoodMenuHeader extends HookWidget {
     return Center(
         child: Column(
           children: [
-            Text(controller.title, style: TextStyle(fontSize: 30)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: back.BackButton(onPressed: controller.handleTapBackButton),
+                ),
+                Text(controller.title, style: TextStyle(fontSize: 30)), //TODO: 微妙に真ん中からズレてるから直す
+              ]
+            ),
             mainScreen,
           ],
     ));

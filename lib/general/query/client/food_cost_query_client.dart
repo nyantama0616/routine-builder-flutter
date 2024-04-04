@@ -52,7 +52,6 @@ class FoodCostQueryClient extends QueryClientBase {
     final res = await queryClient.get(requests.initFoodMenu);
 
     if (res.statusCode == 200) {
-      print(jsonDecode(res.body));
       return InitFoodMenuResponseBody.fromJson(jsonDecode(res.body));
     }
 
@@ -64,10 +63,8 @@ class FoodCostQueryClient extends QueryClientBase {
     final requestBody = CreateFoodMenuRequestBody(
             foodMenu: FoodMenuForCreate(name: name, foods: foods))
         .toJson();
-    print(requestBody);
     final res = await queryClient.post(requests.createFoodMenu,
         body: jsonEncode(requestBody));
-    print(jsonDecode(res.body));
 
     if (res.statusCode == 200) {
       return CreateFoodMenuResponseBody.fromJson(jsonDecode(res.body));

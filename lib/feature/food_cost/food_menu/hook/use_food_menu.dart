@@ -22,7 +22,7 @@ FoodMenuController useFoodMenu() {
   final client = FoodCostQueryClient();
 
   void handleTapBackButton() {
-    print("tapped back button");
+    _scene.value = _targetSceneFromScene(_scene.value);
   }
 
   void _init() {
@@ -72,8 +72,24 @@ FoodMenuController useFoodMenu() {
   //FoodMenuEdit
 
   void handleTapSaveButton() {
-    print("tapped save button");
-    _scene.value = Scenes.foodMenuDetail;
+    final foodMenuAndValid = _formController.getFoodMenuAndValidate();
+
+    if (!foodMenuAndValid.isValid) {
+      return;
+    }
+
+    final name = foodMenuAndValid.foodMenu.name;
+    final foods = foodMenuAndValid.foodMenu.foods
+        .map((e) => e.toFoodIdWithQuantity())
+        .toList();
+
+    client.updateFoodMenu(_selectedFoodMenu.value.id, name, foods).then((res) {
+      _init();
+      _selectedFoodMenu.value = res.foodMenu;
+      _scene.value = Scenes.foodMenuDetail;
+    }).catchError((error) {
+      print("$error from updateFoodMenu");
+    });
   }
 
   void handleTapDeleteButton() {
@@ -91,14 +107,15 @@ FoodMenuController useFoodMenu() {
 
   void handleTapSaveCreateButton() {
     final foodMenuAndValid = _formController.getFoodMenuAndValidate();
+    
+    if (!foodMenuAndValid.isValid) {
+      return;
+    }
+    
     final name = foodMenuAndValid.foodMenu.name;
     final foods = foodMenuAndValid.foodMenu.foods
         .map((e) => e.toFoodIdWithQuantity())
         .toList();
-
-    if (!foodMenuAndValid.isValid) {
-      return;
-    }
 
     client.createFoodMenu(name, foods).then((res) {
       _init();
@@ -145,5 +162,18 @@ String _titleFromScene(Scenes scene) {
       return "FoodMenuDetail";
     default:
       return "FoodMenus";
+  }
+}
+
+Scenes _targetSceneFromScene(Scenes scene) {
+  switch (scene) {
+    case Scenes.foodMenuDetail:
+      return Scenes.foodMenus;
+    case Scenes.foodMenuEdit:
+      return Scenes.foodMenuDetail;
+    case Scenes.foodMenuCreate:
+      return Scenes.foodMenus;
+    default:
+      return Scenes.foodMenus;
   }
 }

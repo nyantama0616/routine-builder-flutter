@@ -17,7 +17,6 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
   }
 
   void handleChange(String key, String value) {
-    print("key: $key, value: $value");
     _map.value[key] = value;
   }
 
@@ -36,7 +35,6 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
     final index = _foodMenu.value.foods.indexWhere((element) =>
         element.food.id == foodWithQuantity.food.id); //TODO: ２分法にする
     _foodMenu.value.foods[index] = foodWithQuantity;
-    print("$foodWithQuantity.id, $index");
   }
 
   FoodMenuAndValid getFoodMenuAndValidate() {

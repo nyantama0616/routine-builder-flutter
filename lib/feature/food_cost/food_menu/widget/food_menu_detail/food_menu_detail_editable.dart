@@ -18,7 +18,6 @@ class FoodMenuDetailEditable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(formController?.foodMenu.foods.length);
     final addButton = isEditable
         ? AddButton(onTap: formController?.handleTapAddButton)
         : Container();
