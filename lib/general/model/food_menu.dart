@@ -52,7 +52,11 @@ class FoodMenu {
     required this.foods,
   });
 
-  FoodMenu.init() : id = 0, name = "foodMenu", foods = [];
+  FoodMenu.init() : id = 0, name = "foodMenu", foods = [
+    FoodWithQuantity.init(),
+    FoodWithQuantity.init(),
+    FoodWithQuantity.init(),
+  ];
 }
 
 class FoodWithQuantity {
@@ -64,5 +68,12 @@ class FoodWithQuantity {
     required this.quantity,
   });
 
-  FoodWithQuantity.init() : food = Food.init(0), quantity = 0;
+  FoodWithQuantity.init() : food = Food.init(0), quantity = 1;
+
+  FoodWithQuantity copyWith({int? quantity}) {
+    return FoodWithQuantity(
+      food: food,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 }

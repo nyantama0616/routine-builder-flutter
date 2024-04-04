@@ -5,8 +5,8 @@ import 'package:routine_builder/feature/food_cost/food_menu/enum/scenes.dart';
 import 'package:routine_builder/general/model/food_menu.dart';
 
 FoodMenuController useFoodMenu() {
-  final scene = useState(Scenes.foodMenus);
-  final title = "FoodMenus";
+  final scene = useState(Scenes.foodMenuDetail);
+  final title = _titleFromScene(scene.value);
 
   void handleTapBackButton() {
     print("tapped back button");
@@ -42,4 +42,15 @@ FoodMenuController useFoodMenu() {
       handleTapBackButton: handleTapBackButton,
     );
   });
+}
+
+String _titleFromScene(Scenes scene) {
+  switch (scene) {
+    case Scenes.foodMenus:
+      return "FoodMenus";
+    case Scenes.foodMenuDetail:
+      return "FoodMenuDetail";
+    default:
+      return "FoodMenus";
+  }
 }
