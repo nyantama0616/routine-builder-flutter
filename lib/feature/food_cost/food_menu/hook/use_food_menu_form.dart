@@ -28,7 +28,9 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
   }
 
   void handleAddFood(FoodWithQuantity foodWithQuantity) {
-    _foodMenu.value.foods.add(foodWithQuantity);
+    _foodMenu.value = _foodMenu.value.copyWith(
+      foods: [..._foodMenu.value.foods, foodWithQuantity],
+    );
   }
 
   void handleEditFood(FoodWithQuantity foodWithQuantity) {
@@ -65,5 +67,10 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
       getFoodMenuAndValidate: getFoodMenuAndValidate,
       init: init,
     );
-  }, [_foodMenu.value, _showFoodList.value, _map.value, foods]);
+  }, [
+    _foodMenu.value,
+    _showFoodList.value,
+    _map.value,
+    foods,
+  ]);
 }

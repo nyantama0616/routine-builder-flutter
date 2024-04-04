@@ -23,6 +23,7 @@ class FoodListItem extends StatelessWidget {
       child: InkWell(
         onTap: _onTap,
         child: ListTile(
+          leading: Text(food.id.toString(), style: TextStyle(fontSize: 16)),
           title: Text(displayName),
           trailing: Text(price),
         ),
