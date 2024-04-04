@@ -1,14 +1,14 @@
 import 'package:routine_builder/general/model/food.dart';
 
-class CreateResponseBody {
+class CreateFoodResponseBody {
   final Food food;
 
-  CreateResponseBody({
+  CreateFoodResponseBody({
     required this.food,
   });
 
-  factory CreateResponseBody.fromJson(Map<String, dynamic> json) {
-    return CreateResponseBody(
+  factory CreateFoodResponseBody.fromJson(Map<String, dynamic> json) {
+    return CreateFoodResponseBody(
       food: Food.fromJson(json['food']),
     );
   }
