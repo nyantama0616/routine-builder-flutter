@@ -1,18 +1,20 @@
-class FoodMenu {
+import 'package:routine_builder/general/model/food.dart';
+
+class FoodMenuHeader {
   final int id;
   final String name;
   final List<FoodIdWithQuantity> foodIds;
 
-  FoodMenu({
+  FoodMenuHeader({
     required this.id,
     required this.name,
     required this.foodIds,
   });
 
-  FoodMenu.init() : id = 0, name = "food", foodIds = [];
+  FoodMenuHeader.init() : id = 0, name = "foodMenu", foodIds = [];
 
-  factory FoodMenu.fromJson(Map<String, dynamic> json) {
-    return FoodMenu(
+  factory FoodMenuHeader.fromJson(Map<String, dynamic> json) {
+    return FoodMenuHeader(
       id: json['id'],
       name: json['name'],
       foodIds: (json['foodIds'] as List)
@@ -37,4 +39,30 @@ class FoodIdWithQuantity {
       quantity: json['quantity'],
     );
   }
+}
+
+class FoodMenu {
+  final int id;
+  final String name;
+  final List<FoodWithQuantity> foods;
+
+  FoodMenu({
+    required this.id,
+    required this.name,
+    required this.foods,
+  });
+
+  FoodMenu.init() : id = 0, name = "foodMenu", foods = [];
+}
+
+class FoodWithQuantity {
+  final Food food;
+  final int quantity;
+
+  FoodWithQuantity({
+    required this.food,
+    required this.quantity,
+  });
+
+  FoodWithQuantity.init() : food = Food.init(0), quantity = 0;
 }
