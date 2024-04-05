@@ -6,10 +6,11 @@ class FoodListEditable extends StatelessWidget {
   final List<FoodWithQuantity> foods;
   final bool isEditable;
   final Function(FoodWithQuantity)? onChangedFood;
+  final Function(FoodWithQuantity)? onRemoveFood;
   final double width;
   final double height;
 
-  FoodListEditable(this.foods, {this.width = 250, this.height = 400, this.isEditable = false, this.onChangedFood});
+  FoodListEditable(this.foods, {this.width = 250, this.height = 400, this.isEditable = false, this.onChangedFood, this.onRemoveFood});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class FoodListEditable extends StatelessWidget {
             value: foods[index],
             isEditable: isEditable,
             onChanged: onChangedFood,
+            onRemove: onRemoveFood,
           );
         },
       )

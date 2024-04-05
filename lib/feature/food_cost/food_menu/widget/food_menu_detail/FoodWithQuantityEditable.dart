@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:routine_builder/general/model/food.dart';
 import 'package:routine_builder/general/model/food_menu.dart';
+import 'package:routine_builder/general/widget/icon_buttons.dart';
 
 class FoodWithQuantityEditable extends StatelessWidget {
   final FoodWithQuantity value;
   final bool isEditable;
   final Function(FoodWithQuantity)? onChanged;
+  final Function(FoodWithQuantity)? onRemove;
 
-  FoodWithQuantityEditable({ required this.value, this.isEditable = false, this.onChanged});
+  FoodWithQuantityEditable({ required this.value, this.isEditable = false, this.onChanged, this.onRemove});
 
   void _onChanged(String quantityStr) {
     double quantity;
@@ -32,6 +34,11 @@ class FoodWithQuantityEditable extends StatelessWidget {
         )
       ) : 
       Text(value.quantity.toString(), style: TextStyle(fontSize: 16));
+
+      final removeButton = isEditable ? 
+        RemoveButton(onTap: () => onRemove?.call(value)):
+        Container();
+
     return ListTile(
       title: Text(value.food.name, style: TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text("${value.food.price}円"),
@@ -45,6 +52,8 @@ class FoodWithQuantityEditable extends StatelessWidget {
           ),
           SizedBox(width: 10),
           Text("個", style: TextStyle(fontSize: 16)),
+          SizedBox(width: 10),
+          removeButton,
         ],
       ),
     );

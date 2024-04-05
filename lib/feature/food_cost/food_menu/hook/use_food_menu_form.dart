@@ -33,6 +33,14 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
     );
   }
 
+  void handleRemoveFood(FoodWithQuantity foodWithQuantity) {
+    _foodMenu.value = _foodMenu.value.copyWith(
+      foods: _foodMenu.value.foods
+          .where((element) => element.food.id != foodWithQuantity.food.id)
+          .toList(),
+    );
+  }
+
   void handleEditFood(FoodWithQuantity foodWithQuantity) {
     final index = _foodMenu.value.foods.indexWhere((element) =>
         element.food.id == foodWithQuantity.food.id); //TODO: ２分法にする
@@ -63,6 +71,7 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
       handleTapCrossButton: handleTapCrossButton,
       handleChange: handleChange,
       handleAddFood: handleAddFood,
+      handleRemoveFood: handleRemoveFood,
       handleEditFood: handleEditFood,
       getFoodMenuAndValidate: getFoodMenuAndValidate,
       init: init,

@@ -55,7 +55,7 @@ class FoodMenuDetailEditable extends StatelessWidget {
                     addButton,
                   ],
                 ),
-                FoodListEditable(foods, isEditable: isEditable, onChangedFood: formController?.handleEditFood),
+                FoodListEditable(foods, isEditable: isEditable, onChangedFood: formController?.handleEditFood, onRemoveFood: formController?.handleRemoveFood),
               ],
             ),
             Center(

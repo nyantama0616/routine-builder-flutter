@@ -5,7 +5,12 @@ final CrossButton = ({Function()? onTap}) => IconButton(
       onPressed: onTap ?? () {},
     );
 
-final AddButton = ({Function()? onTap}) => IconButton(
-      icon: Icon(Icons.add),
+final AddButton = ({Function()? onTap, Color? color = Colors.blue}) => IconButton(
+      icon: Icon(Icons.add, color: color),
+      onPressed: onTap ?? () {},
+    );
+
+final RemoveButton = ({Function()? onTap, Color? color = Colors.red}) => IconButton(
+      icon: Icon(Icons.remove_circle_outline, color: color),
       onPressed: onTap ?? () {},
     );

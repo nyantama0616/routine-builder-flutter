@@ -10,6 +10,7 @@ class FoodMenuFormController {
   final Function() handleTapCrossButton;
   final Function(String, String) handleChange;
   final Function(FoodWithQuantity) handleAddFood;
+  final Function(FoodWithQuantity) handleRemoveFood;
   final Function(FoodWithQuantity) handleEditFood;
 
   final FoodMenuAndValid Function() getFoodMenuAndValidate;
@@ -24,6 +25,7 @@ class FoodMenuFormController {
     required this.handleTapCrossButton,
     required this.handleChange,
     required this.handleAddFood,
+    required this.handleRemoveFood,
     required this.handleEditFood,
     required this.getFoodMenuAndValidate,
     required this.init,
