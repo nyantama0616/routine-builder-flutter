@@ -5,6 +5,7 @@ class FoodMenuFormController {
   final FoodMenu foodMenu;
   final Map<String, String> map;
   final List<Food> foods;
+  final List<int> disabledIds;
   final showFoodList;
   final Function() handleTapAddButton;
   final Function() handleTapCrossButton;
@@ -20,6 +21,7 @@ class FoodMenuFormController {
     required this.foodMenu,
     required this.map,
     required this.foods,
+    required this.disabledIds,
     required this.showFoodList,
     required this.handleTapAddButton,
     required this.handleTapCrossButton,

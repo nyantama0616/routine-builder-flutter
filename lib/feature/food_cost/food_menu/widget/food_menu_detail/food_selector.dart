@@ -5,13 +5,14 @@ import 'package:routine_builder/general/widget/icon_buttons.dart';
 
 class FoodSelector extends StatelessWidget {
   final List<Food> foods;
+  final List<int> disabledIds;
   final double width;
   final double height;
   final Function(Food)? onTapItem;
   final Function()? onTapCrossButton;
 
   FoodSelector(this.foods,
-      {this.width = 250, this.height = 400, this.onTapItem, this.onTapCrossButton});
+      {this.width = 250, this.height = 400, this.onTapItem, this.onTapCrossButton, this.disabledIds = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class FoodSelector extends StatelessWidget {
           foods,
           width: 220,
           onTapFoodItem: onTapItem,
+          disabledIds: disabledIds,
         ),
       ))
     ]);

@@ -31,6 +31,7 @@ class FoodMenuDetailEditable extends StatelessWidget {
               formController?.handleAddFood(fq);
             },
             onTapCrossButton: formController?.handleTapCrossButton,
+            disabledIds: formController?.disabledIds ?? [],
           ),
         )
         : Container();

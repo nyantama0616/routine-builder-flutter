@@ -7,6 +7,11 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
   final _foodMenu = useState<FoodMenu>(FoodMenu.init());
   final _showFoodList = useState<bool>(false);
   final _map = useState<Map<String, String>>({});
+  final disabledFoodIds = useMemoized(() {
+    final ids = _foodMenu.value.foods.map((e) => e.food.id).toList();
+    ids.sort();
+    return ids;
+  }, [_foodMenu.value.foods]);
 
   void handleTapAddButton() {
     _showFoodList.value = true;
@@ -66,6 +71,7 @@ FoodMenuFormController useFoodMenuForm({required List<Food> foods}) {
       foodMenu: _foodMenu.value,
       map: _map.value,
       foods: foods,
+      disabledIds: disabledFoodIds,
       showFoodList: _showFoodList.value,
       handleTapAddButton: handleTapAddButton,
       handleTapCrossButton: handleTapCrossButton,
