@@ -87,4 +87,14 @@ class FoodCostQueryClient extends QueryClientBase {
 
     handleError(res);
   }
+
+  Future<void> deleteFoodMenu(int foodMenuId) async {
+    final res = await queryClient.delete(requests.deleteFoodMenu(foodMenuId));
+
+    if (res.statusCode == 200) {
+      return;
+    }
+
+    handleError(res);
+  }
 }

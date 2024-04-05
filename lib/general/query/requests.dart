@@ -45,3 +45,4 @@ final updateFood = (int id) => "$_baseURL/foods/$id";
 final initFoodMenu = "$_baseURL/food_menus";
 final createFoodMenu = "$_baseURL/food_menus";
 final updateFoodMenu = (int id) => "$_baseURL/food_menus/$id";
+final deleteFoodMenu = (int id) => "$_baseURL/food_menus/$id";

@@ -71,6 +71,8 @@ FoodMenuController useFoodMenu() {
 
   //FoodMenuEdit
 
+  final _showDeleteDialog = useState(false);
+
   void handleTapSaveButton() {
     final foodMenuAndValid = _formController.getFoodMenuAndValidate();
 
@@ -92,14 +94,25 @@ FoodMenuController useFoodMenu() {
     });
   }
 
-  void handleTapDeleteButton() {
-    print("tapped delete button");
+  void deleteFoodMenu() {
+    client.deleteFoodMenu(_selectedFoodMenu.value.id).then((_) {
+      _init();
+      _scene.value = Scenes.foodMenus;
+    }).catchError((error) {
+      print("$error from deleteFoodMenu");
+    });
+  }
+
+  void toggleShowDeleteDialog() {
+    _showDeleteDialog.value = !_showDeleteDialog.value;
   }
 
   final foodMenuEditController = FoodMenuEditController(
     foodMenu: _selectedFoodMenu.value,
+    showDeleteDialog: _showDeleteDialog.value,
     handleTapSaveButton: handleTapSaveButton,
-    handleTapDeleteButton: handleTapDeleteButton,
+    deleteFoodMenu: deleteFoodMenu,
+    toggleShowDeleteDialog: toggleShowDeleteDialog,
     formController: _formController,
   );
 
@@ -150,7 +163,9 @@ FoodMenuController useFoodMenu() {
     _scene.value,
     _selectedFoodMenu.value,
     _formController,
-    _foodMenus.value
+    _foodMenus.value,
+    _foods.value,
+    _showDeleteDialog.value,
   ]);
 }
 

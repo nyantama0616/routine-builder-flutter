@@ -7,6 +7,8 @@ import 'package:routine_builder/general/model/food_menu.dart';
 import 'package:routine_builder/general/widget/detail_item_Editable.dart';
 import 'package:routine_builder/general/widget/icon_buttons.dart';
 
+//TODO: スクロールの挙動が少し変
+// ListViewを多用しているため
 class FoodMenuDetailEditable extends StatelessWidget {
   final FoodMenu foodMenu;
   final bool isEditable;
