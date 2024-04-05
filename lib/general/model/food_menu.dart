@@ -11,19 +11,25 @@ class FoodMenuHeader {
     required this.foodIds,
   });
 
-  FoodMenuHeader.init() : id = 0, name = "", foodIds = [];
-  FoodMenuHeader.initDev(this.id) : name = "foodMenuHeader$id", foodIds = [
-    FoodIdWithQuantity.initDev(Food.initDev(0), 1),
-    FoodIdWithQuantity.initDev(Food.initDev(1), 2),
-    FoodIdWithQuantity.initDev(Food.initDev(2), 3),
-  ];
+  FoodMenuHeader.init()
+      : id = 0,
+        name = "",
+        foodIds = [];
+  FoodMenuHeader.initDev(this.id)
+      : name = "foodMenuHeader$id",
+        foodIds = [
+          FoodIdWithQuantity.initDev(Food.initDev(0), 1),
+          FoodIdWithQuantity.initDev(Food.initDev(1), 2),
+          FoodIdWithQuantity.initDev(Food.initDev(2), 3),
+        ];
 
   factory FoodMenuHeader.fromJson(Map<String, dynamic> json) {
     return FoodMenuHeader(
       id: json['id'],
       name: json['name'],
       foodIds: (json['foodIds'] as List)
-          .map((foodIdWithQuantity) => FoodIdWithQuantity.fromJson(foodIdWithQuantity))
+          .map((foodIdWithQuantity) =>
+              FoodIdWithQuantity.fromJson(foodIdWithQuantity))
           .toList(),
     );
   }
@@ -38,7 +44,9 @@ class FoodIdWithQuantity {
     required this.quantity,
   });
 
-  FoodIdWithQuantity.init() : foodId = 0, quantity = 1;
+  FoodIdWithQuantity.init()
+      : foodId = 0,
+        quantity = 1;
   FoodIdWithQuantity.initDev(Food food, this.quantity) : foodId = food.id;
 
   factory FoodIdWithQuantity.fromJson(Map<String, dynamic> json) {
@@ -60,27 +68,40 @@ class FoodMenu {
   final int id;
   final String name;
   final List<FoodWithQuantity> foods;
+  final double price;
 
   FoodMenu({
     required this.id,
     required this.name,
     required this.foods,
+    required this.price,
   });
 
-  FoodMenu.init() : id = 0, name = "", foods = [];
-  FoodMenu.initDev(this.id) : name = "foodMenu$id", foods = [
-    FoodWithQuantity.initDev(Food.initDev(0)),
-    FoodWithQuantity.initDev(Food.initDev(1)),
-    FoodWithQuantity.initDev(Food.initDev(2)),
-  ];
+  FoodMenu.init()
+      : id = 0,
+        name = "",
+        foods = [],
+        price = 0.0
+      ;
+  FoodMenu.initDev(this.id)
+      : name = "foodMenu$id",
+        foods = [
+          FoodWithQuantity.initDev(Food.initDev(0)),
+          FoodWithQuantity.initDev(Food.initDev(1)),
+          FoodWithQuantity.initDev(Food.initDev(2)),
+        ],
+        price = 100.0
+        ;
 
   factory FoodMenu.fromJson(Map<String, dynamic> json) {
     return FoodMenu(
       id: json['id'],
       name: json['name'],
       foods: (json['foods'] as List)
-          .map((foodWithQuantity) => FoodWithQuantity.fromJson(foodWithQuantity))
+          .map(
+              (foodWithQuantity) => FoodWithQuantity.fromJson(foodWithQuantity))
           .toList(),
+      price: json['price'],
     );
   }
 
@@ -89,6 +110,7 @@ class FoodMenu {
       id: id,
       name: name ?? this.name,
       foods: foods ?? List.from(this.foods), //MEMO: リストをコピーする際はこうする！
+      price: price,
     );
   }
 }
@@ -102,7 +124,9 @@ class FoodWithQuantity {
     required this.quantity,
   });
 
-  FoodWithQuantity.init() : food = Food.initDev(0), quantity = 1;
+  FoodWithQuantity.init()
+      : food = Food.initDev(0),
+        quantity = 1;
   FoodWithQuantity.initDev(this.food) : quantity = 1;
 
   FoodWithQuantity copyWith({double? quantity}) {

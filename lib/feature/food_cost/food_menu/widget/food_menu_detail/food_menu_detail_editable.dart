@@ -16,7 +16,11 @@ class FoodMenuDetailEditable extends StatelessWidget {
   final double height;
   final FoodMenuFormController? formController;
 
-  FoodMenuDetailEditable(this.foodMenu, {this.formController, this.width = 250, this.height = 540, this.isEditable = false});
+  FoodMenuDetailEditable(this.foodMenu,
+      {this.formController,
+      this.width = 250,
+      this.height = 540,
+      this.isEditable = false});
 
   @override
   Widget build(BuildContext context) {
@@ -24,47 +28,53 @@ class FoodMenuDetailEditable extends StatelessWidget {
         ? AddButton(onTap: formController?.handleTapAddButton)
         : Container();
 
-    final dialog = formController?.showFoodList ?? false ?
-        Dialog(
-          child: FoodSelector(
-            formController?.foods ?? [],
-            onTapItem: (Food food) { //TODO: ちゃんと実装する
-              final fq = FoodWithQuantity(food: food, quantity: 1);
-              formController?.handleAddFood(fq);
-            },
-            onTapCrossButton: formController?.handleTapCrossButton,
-            disabledIds: formController?.disabledIds ?? [],
-          ),
-        )
+    final dialog = formController?.showFoodList ?? false
+        ? Dialog(
+            child: FoodSelector(
+              formController?.foods ?? [],
+              onTapItem: (Food food) {
+                //TODO: ちゃんと実装する
+                final fq = FoodWithQuantity(food: food, quantity: 1);
+                formController?.handleAddFood(fq);
+              },
+              onTapCrossButton: formController?.handleTapCrossButton,
+              disabledIds: formController?.disabledIds ?? [],
+            ),
+          )
         : Container();
-      
-      final name = formController?.map["name"] ?? foodMenu.name;
-      final foods = formController?.foodMenu.foods ?? foodMenu.foods;
+
+    final name = formController?.map["name"] ?? foodMenu.name;
+    final foods = formController?.foodMenu.foods ?? foodMenu.foods;
     return Container(
         width: width,
         height: height,
-        child: Stack(
-          children: [
-            ListView(
-              children: [
-                DetailItemEditable("id", foodMenu.id.toString(), keyLabel: ""),
-                Divider(),
-                DetailItemEditable("名前", name, keyLabel: "name", isEditable: isEditable, onChanged: formController?.handleChange),
-                Divider(),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    Text("食材一覧", style: TextStyle(fontSize: 20)),
-                    addButton,
-                  ],
-                ),
-                FoodListEditable(foods, isEditable: isEditable, onChangedFood: formController?.handleEditFood, onRemoveFood: formController?.handleRemoveFood),
-              ],
-            ),
-            Center(
-              child: dialog,
-            ),
-          ])
-        );
+        child: Stack(children: [
+          ListView(
+            children: [
+              DetailItemEditable("id", foodMenu.id.toString(), keyLabel: ""),
+              Divider(),
+              DetailItemEditable("名前", name,
+                  keyLabel: "name",
+                  isEditable: isEditable,
+                  onChanged: formController?.handleChange),
+              Divider(),
+              DetailItemEditable("コスト", "${foodMenu.price}円", keyLabel: ""),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Text("食材一覧", style: TextStyle(fontSize: 20)),
+                  addButton,
+                ],
+              ),
+              FoodListEditable(foods,
+                  isEditable: isEditable,
+                  onChangedFood: formController?.handleEditFood,
+                  onRemoveFood: formController?.handleRemoveFood),
+            ],
+          ),
+          Center(
+            child: dialog,
+          ),
+        ]));
   }
 }
