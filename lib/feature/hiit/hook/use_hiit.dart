@@ -3,10 +3,11 @@ import 'package:routine_builder/feature/hiit/controller/hiit_controller.dart';
 import 'package:routine_builder/feature/hiit/hook/use_train.dart';
 import 'package:routine_builder/general/model/hiit_setting.dart';
 import 'package:routine_builder/general/model/hiit_train_data.dart';
+import 'package:routine_builder/general/provider/app_provider.dart';
 import 'package:routine_builder/general/query/client/hiit_query_client.dart';
 import 'package:routine_builder/general/util/train_sound_player.dart';
 
-HiitController useHiit() {
+HiitController useHiit({required AppNotifier appNotifier}) {
   final _state = useState<_State>(_State(
     showSetting: false,
     saveTrainSuccess: false,
@@ -21,6 +22,7 @@ HiitController useHiit() {
     _state.value = _state.value.copyWith(isTraining: false);
     _client.finish(roundCount).then((res) {
       _state.value = _state.value.copyWith(saveTrainSuccess: true);
+      appNotifier.setTodayLife(res.todayLife);
       _tsPlayer.playSaveSuccess();
     }).catchError((e) {
       print("$e from finishTrain");
@@ -42,7 +44,7 @@ HiitController useHiit() {
     _client.start(_state.value.setting).then((res) {
       _state.value =
           _state.value.copyWith(isTraining: true, saveTrainSuccess: false);
-      print(_state.value.isTraining); 
+      appNotifier.setTodayLife(res.todayLife);
       trainController.start();
     }).catchError((e) {
       print("$e from startTrain");

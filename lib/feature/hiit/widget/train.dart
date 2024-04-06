@@ -20,7 +20,6 @@ class Train extends HookWidget {
   Widget build(BuildContext context) {
     final trainController = hiitController.trainController;
 
-    // print(trainController.status);
     final subWidget = trainController.status == TrainStatuses.notStarted ||
             trainController.status == TrainStatuses.finished
         ? StartButton(hiitController.startTrain)
