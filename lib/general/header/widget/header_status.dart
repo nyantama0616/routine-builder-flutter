@@ -43,6 +43,8 @@ IconData? iconFromStatus(Statuses status) {
       return Icons.piano;
     case Statuses.tooth:
       return Icons.local_hospital;
+    case Statuses.hiit:
+      return Icons.directions_run;
     default:
       return null;
   }

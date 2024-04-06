@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:routine_builder/feature/hiit/class/hiit_controller.dart';
+import 'package:routine_builder/feature/hiit/controller/hiit_controller.dart';
 import 'package:routine_builder/feature/hiit/enum/train_statuses.dart';
 import 'package:routine_builder/feature/hiit/hook/use_train.dart';
 import 'package:routine_builder/feature/hiit/widget/buttons.dart';
-import 'package:routine_builder/general/class/hiit_setting.dart';
-import 'package:routine_builder/general/class/hiit_train_data.dart';
+import 'package:routine_builder/general/model/hiit_setting.dart';
+import 'package:routine_builder/general/model/hiit_train_data.dart';
 
 /*
   TODO: パフォーマンスを計測する
@@ -18,21 +18,11 @@ class Train extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onFinished(int roundCount) {
-      HiitTrainData data = HiitTrainData(
-        workTime: hiitController.setting.workTime,
-        breakTime: hiitController.setting.breakTime,
-        roundCount: roundCount,
-      );
-      hiitController.saveTrainData(data);
-    }
-
-    final trainController =
-        useTrain(setting: hiitController.setting, onFinished: onFinished);
+    final trainController = hiitController.trainController;
 
     final subWidget = trainController.status == TrainStatuses.notStarted ||
             trainController.status == TrainStatuses.finished
-        ? StartButton(trainController.start)
+        ? StartButton(hiitController.startTrain)
         : _Info(
             setting: hiitController.setting,
             currentRound: trainController.currentRound);

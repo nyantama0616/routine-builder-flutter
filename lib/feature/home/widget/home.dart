@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:flutter_hooks/flutter_hooks.dart";
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import "package:routine_builder/feature/dev/ping/use_ping.dart";
+import "package:routine_builder/feature/dev/ping/hook/use_ping.dart";
 import "package:routine_builder/feature/home/widget/buttons.dart";
 import "package:routine_builder/general/enum/scenes.dart";
 import "package:routine_builder/general/provider/app_provider.dart";
@@ -60,6 +60,10 @@ class Home extends HookConsumerWidget {
       appController.setScene(Scenes.tooth);
     });
 
+    final foodCostButton = FoodCostButton(() {
+      appController.setScene(Scenes.foodCost);
+    });
+
     return Column(
       children: [
         Align(
@@ -79,7 +83,11 @@ class Home extends HookConsumerWidget {
             SizedBox(
               height: 20,
             ),
-            _ButtonsRow([hiitButton, caterpillarButton, hanonButton])
+            _ButtonsRow([hiitButton, caterpillarButton, hanonButton]),
+            SizedBox(
+              height: 20,
+            ),
+            _ButtonsRow([foodCostButton]),
           ])
         )
       ],

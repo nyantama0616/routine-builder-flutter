@@ -1,5 +1,5 @@
-import 'package:routine_builder/general/class/life.dart';
-import 'package:routine_builder/general/class/timer.dart';
+import 'package:routine_builder/general/model/life.dart';
+import 'package:routine_builder/general/model/timer.dart';
 
 class StartResponseBody {
   final Timer timer;

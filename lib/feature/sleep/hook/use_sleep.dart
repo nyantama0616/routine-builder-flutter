@@ -1,6 +1,6 @@
 import "dart:async";
 
-import "package:routine_builder/feature/sleep/class/sleep_controller.dart";
+import "package:routine_builder/feature/sleep/controller/sleep_controller.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
 import "package:routine_builder/general/provider/app_provider.dart";
 import "package:routine_builder/general/query/client/sleep_query_client.dart";

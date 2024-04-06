@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:routine_builder/feature/sleep/widget/sleep.dart';
 import 'package:mockito/mockito.dart';
-import 'package:routine_builder/feature/sleep/class/sleep_controller.dart';
+import 'package:routine_builder/feature/sleep/controller/sleep_controller.dart';
 import 'package:routine_builder/general/enum/statuses.dart';
 import 'package:routine_builder/general/provider/user_provider.dart';
 import '../../../general/query/client/sleep_query_client_test.mocks.dart';
 import "package:routine_builder/feature/sleep/hook/use_sleep.dart";
 import 'package:flutter_hooks_test/flutter_hooks_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:routine_builder/general/class/user.dart';
+import 'package:routine_builder/general/model/user.dart';
 
 final sleepQueryClient = MockSleepQueryClient();
 

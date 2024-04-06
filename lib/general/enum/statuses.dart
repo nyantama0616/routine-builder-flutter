@@ -5,6 +5,7 @@ enum Statuses {
   caterpillar("caterpillar"),
   hanon("hanon"),
   tooth("tooth"),
+  hiit("hiit")
   ;
 
   final String rawValue;
@@ -26,6 +27,8 @@ Statuses statusFromRawValue(String rawValue) {
       return Statuses.hanon;
     case "tooth":
       return Statuses.tooth;
+    case "hiit":
+      return Statuses.hiit;
     default:
       throw Exception("Unknown raw value: $rawValue");
   }

@@ -29,7 +29,8 @@ final drinkWater = "$_baseURL/waters/drink";
 
 //hiit
 final initHiit = "$_baseURL/hiits";
-final createHiit = "$_baseURL/hiits";
+final startHiit = "$_baseURL/hiits/start";
+final finishHiit = "$_baseURL/hiits/finish";
 final updateHiitSetting = "$_baseURL/hiits/setting";
 
 //tooth
@@ -37,3 +38,12 @@ final initTooth = "$_baseURL/tooths";
 final startTooth = "$_baseURL/tooths/start";
 final stopTooth = "$_baseURL/tooths/stop";
 final finishTooth = "$_baseURL/tooths/finish";
+
+//foodCost
+final initFood = "$_baseURL/foods";
+final createFood = "$_baseURL/foods";
+final updateFood = (int id) => "$_baseURL/foods/$id";
+final initFoodMenu = "$_baseURL/food_menus";
+final createFoodMenu = "$_baseURL/food_menus";
+final updateFoodMenu = (int id) => "$_baseURL/food_menus/$id";
+final deleteFoodMenu = (int id) => "$_baseURL/food_menus/$id";

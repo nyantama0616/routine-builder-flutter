@@ -23,6 +23,12 @@ class QueryClient {
     return http.patch(Uri.parse(path), body: body, headers: headers);
   }
 
+  Future<http.Response> delete(String path, {Map<String, String>? headers}) {
+    headers ??= {};
+    _setDefaultValuesToHeaders(headers);
+    return http.delete(Uri.parse(path), headers: headers);
+  }
+
   void _setDefaultValuesToHeaders(Map<String, String> headers) {
     headers["Content-Type"] ??= "application/json";
     headers["data-access-key"] ??= dotenv.env["ACCESS_KEY"]!;

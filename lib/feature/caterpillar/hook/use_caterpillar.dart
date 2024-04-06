@@ -1,10 +1,10 @@
-import 'package:routine_builder/feature/caterpillar/class/caterpillar_controller.dart';
+import 'package:routine_builder/feature/caterpillar/controller/caterpillar_controller.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/general/hook/use_counter.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import 'package:routine_builder/general/provider/app_provider.dart';
 import "package:routine_builder/general/query/client/caterpillar_query_client.dart";
-import 'package:routine_builder/general/class/caterpillar.dart';
+import 'package:routine_builder/general/model/caterpillar.dart';
 import 'package:routine_builder/feature/caterpillar/settings.dart';
 import 'package:routine_builder/general/util/train_sound_player.dart';
 

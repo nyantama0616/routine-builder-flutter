@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:routine_builder/general/class/life.dart';
+import 'package:routine_builder/general/model/life.dart';
 import "package:routine_builder/general/enum/scenes.dart";
 import 'package:routine_builder/general/query/client/home_query_client.dart';
 
@@ -14,7 +14,7 @@ class AppNotifier extends StateNotifier<AppState> {
     client.init().then((res) {
       setTodayLife(res.todayLife);
     }).catchError((e) {
-      print(e);
+      print("$e from AppNotifier.init");
     });
   }
 

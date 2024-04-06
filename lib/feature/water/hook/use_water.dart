@@ -1,5 +1,5 @@
-import "package:routine_builder/feature/water/class/WaterController.dart";
-import "package:routine_builder/general/class/water_amount.dart";
+import "package:routine_builder/feature/water/controller/WaterController.dart";
+import "package:routine_builder/general/model/water_amount.dart";
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'dart:async';
 import 'package:routine_builder/general/query/client/water_query_client.dart';

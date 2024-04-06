@@ -1,5 +1,5 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:routine_builder/feature/tooth/class/tooth_controller.dart';
+import 'package:routine_builder/feature/tooth/controller/tooth_controller.dart';
 import 'package:routine_builder/feature/tooth/settings.dart';
 import 'package:routine_builder/general/enum/basic_statuses.dart';
 import 'package:routine_builder/general/hook/use_counter.dart';

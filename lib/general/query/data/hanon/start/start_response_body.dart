@@ -1,6 +1,6 @@
-import 'package:routine_builder/general/class/hanon.dart';
-import 'package:routine_builder/general/class/life.dart';
-import 'package:routine_builder/general/class/timer.dart';
+import 'package:routine_builder/general/model/hanon.dart';
+import 'package:routine_builder/general/model/life.dart';
+import 'package:routine_builder/general/model/timer.dart';
 
 class StartResponseBody {
   final Hanon hanon;

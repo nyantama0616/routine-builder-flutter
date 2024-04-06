@@ -1,4 +1,4 @@
-import 'package:routine_builder/general/class/hiit_setting.dart';
+import 'package:routine_builder/general/model/hiit_setting.dart';
 
 class UpdateSettingRequestBody {
   final HiitSetting hiitSetting;

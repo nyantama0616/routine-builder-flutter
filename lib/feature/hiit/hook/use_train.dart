@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:routine_builder/feature/hiit/class/train_controller.dart';
+import 'package:routine_builder/feature/hiit/controller/train_controller.dart';
 import 'package:routine_builder/feature/hiit/enum/train_statuses.dart';
-import 'package:routine_builder/general/class/hiit_setting.dart';
+import 'package:routine_builder/general/model/hiit_setting.dart';
 import 'package:routine_builder/general/sound/sound_player.dart';
 import 'package:routine_builder/general/sound/sounds.dart' as sounds;
 import "package:routine_builder/general/extention/list.dart";
