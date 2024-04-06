@@ -18,21 +18,12 @@ class Train extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onFinished(int roundCount) {
-      HiitTrainData data = HiitTrainData(
-        workTime: hiitController.setting.workTime,
-        breakTime: hiitController.setting.breakTime,
-        roundCount: roundCount,
-      );
-      hiitController.saveTrainData(data);
-    }
+    final trainController = hiitController.trainController;
 
-    final trainController =
-        useTrain(setting: hiitController.setting, onFinished: onFinished);
-
+    // print(trainController.status);
     final subWidget = trainController.status == TrainStatuses.notStarted ||
             trainController.status == TrainStatuses.finished
-        ? StartButton(trainController.start)
+        ? StartButton(hiitController.startTrain)
         : _Info(
             setting: hiitController.setting,
             currentRound: trainController.currentRound);

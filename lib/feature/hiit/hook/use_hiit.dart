@@ -1,5 +1,6 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/hiit/controller/hiit_controller.dart';
+import 'package:routine_builder/feature/hiit/hook/use_train.dart';
 import 'package:routine_builder/general/model/hiit_setting.dart';
 import 'package:routine_builder/general/model/hiit_train_data.dart';
 import 'package:routine_builder/general/query/client/hiit_query_client.dart';
@@ -16,33 +17,43 @@ HiitController useHiit() {
   final _client = HiitQueryClient();
   final _tsPlayer = TrainSoundPlayer();
 
+  void finishTrain(int roundCount) {
+    _state.value = _state.value.copyWith(isTraining: false);
+    _client.finish(roundCount).then((res) {
+      _state.value = _state.value.copyWith(saveTrainSuccess: true);
+      _tsPlayer.playSaveSuccess();
+    }).catchError((e) {
+      print("$e from finishTrain");
+      _state.value = _state.value.copyWith(saveTrainSuccess: false);
+      _tsPlayer.playSaveFailed();
+    });
+  }
+
+  final trainController =
+      useTrain(setting: _state.value.setting, onFinished: finishTrain);
+
   void toggleShowSetting() {
     if (_state.value.isTraining) return; //TODO: UI側で非表示にするべき
     _state.value =
         _state.value.copyWith(showSetting: !_state.value.showSetting);
   }
 
-  void start() {
-    _state.value =
-        _state.value.copyWith(isTraining: true, saveTrainSuccess: false);
+  void startTrain() {
+    _client.start(_state.value.setting).then((res) {
+      _state.value =
+          _state.value.copyWith(isTraining: true, saveTrainSuccess: false);
+      print(_state.value.isTraining); 
+      trainController.start();
+    }).catchError((e) {
+      print("$e from startTrain");
+    });
   }
 
   void saveSetting(HiitSetting setting) {
     _client.updateSetting(setting).then((res) {
       _state.value = _state.value.copyWith(setting: res.hiitSetting);
     }).catchError((e) {
-      print(e);
-    });
-  }
-
-  void saveTrainData(HiitTrainData setting) {
-    _client.create(setting).then((res) {
-      _state.value = _state.value.copyWith(saveTrainSuccess: true);
-      _tsPlayer.playSaveSuccess();
-    }).catchError((e) {
-      print(e);
-      _state.value = _state.value.copyWith(saveTrainSuccess: false);
-      _tsPlayer.playSaveFailed();
+      print("$e from saveSetting");
     });
   }
 
@@ -50,7 +61,7 @@ HiitController useHiit() {
     _client.init().then((res) {
       _state.value = _state.value.copyWith(setting: res.hiitSetting);
     }).catchError((e) {
-      print(e);
+      print("$e from init");
     });
   }
 
@@ -66,11 +77,12 @@ HiitController useHiit() {
             showSetting: _state.value.showSetting,
             saveTrainSuccess: _state.value.saveTrainSuccess,
             setting: _state.value.setting,
+            trainController: trainController,
             toggleShowSetting: toggleShowSetting,
             saveSetting: saveSetting,
-            saveTrainData: saveTrainData,
+            startTrain: startTrain,
           ),
-      [_state.value]);
+      [_state.value, trainController]);
 }
 
 class _State {

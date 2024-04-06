@@ -9,12 +9,12 @@ final appProvider = StateNotifierProvider<AppNotifier, AppState>((ref) {
 
 class AppNotifier extends StateNotifier<AppState> {
   
-  AppNotifier.init() : super(AppState(scene: Scenes.home, todayLife: Life.init())) {
+  AppNotifier.init() : super(AppState(scene: Scenes.hiit, todayLife: Life.init())) {
     final client = HomeQueryClient(); //TODO: ここでhomeQueryClient使うのはおかしいけどね。
     client.init().then((res) {
       setTodayLife(res.todayLife);
     }).catchError((e) {
-      print(e);
+      print("$e from AppNotifier.init");
     });
   }
 

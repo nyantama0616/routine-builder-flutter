@@ -29,7 +29,8 @@ final drinkWater = "$_baseURL/waters/drink";
 
 //hiit
 final initHiit = "$_baseURL/hiits";
-final createHiit = "$_baseURL/hiits";
+final startHiit = "$_baseURL/hiits/start";
+final finishHiit = "$_baseURL/hiits/finish";
 final updateHiitSetting = "$_baseURL/hiits/setting";
 
 //tooth
