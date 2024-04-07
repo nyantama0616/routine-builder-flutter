@@ -26,7 +26,7 @@ CaterpillarController useCaterpillar(
     client.finish().then((res) {
       status.value = BasicStatuses.success;
       selectMode(res.caterpillar);
-      appNotifier.setTodayLife(res.todayLife);
+      appNotifier.setStatus(res.status);
       tsPlayer.playSaveSuccess(); //保存成功を音声で教える
     }).catchError((e) {
       status.value = BasicStatuses.failed;
@@ -72,7 +72,7 @@ CaterpillarController useCaterpillar(
         counter.start(res.timer.startedAt, res.timer.passedSecondsWhenStopped);
         status.value = BasicStatuses.doing;
         selectMode(res.caterpillar);
-        appNotifier.setTodayLife(res.todayLife);
+        appNotifier.setStatus(res.status);
       }).catchError((e) {
         print(e);
         return;
@@ -86,7 +86,7 @@ CaterpillarController useCaterpillar(
       counter.stop(res.timer.passedSecondsWhenStopped);
       status.value = BasicStatuses.none;
       selectMode(res.caterpillar);
-      appNotifier.setTodayLife(res.todayLife);
+      appNotifier.setStatus(res.status);
     } catch (e) {
       print(e);
       return;

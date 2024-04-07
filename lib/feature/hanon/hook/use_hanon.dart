@@ -30,7 +30,7 @@ HanonController useHanon({required AppNotifier appNotifier}) {
       _status.value = BasicStatuses.success;
       selectHanonNum(res.hanon.num);
       selectHanon(res.hanon);
-      appNotifier.setTodayLife(res.todayLife);
+      appNotifier.setStatus(res.status);
       tsPlayer.playSaveSuccess();
     }).catchError((e) {
       _status.value = BasicStatuses.failed;
@@ -56,7 +56,7 @@ HanonController useHanon({required AppNotifier appNotifier}) {
         selectHanon(res.hanon);
         counter.reset();
         counter.start(res.timer.startedAt, res.timer.passedSecondsWhenStopped);
-        appNotifier.setTodayLife(res.todayLife);
+        appNotifier.setStatus(res.status);
       }).catchError((e) {
         print("$e from start");
         return;
@@ -70,7 +70,7 @@ HanonController useHanon({required AppNotifier appNotifier}) {
       selectHanonNum(res.hanon.num);
       selectHanon(res.hanon);
       counter.stop(res.timer.passedSecondsWhenStopped);
-      appNotifier.setTodayLife(res.todayLife);
+      appNotifier.setStatus(res.status);
     }).catchError((e) {
       print("$e from stop");
       return;

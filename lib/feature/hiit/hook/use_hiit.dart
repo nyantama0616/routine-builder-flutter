@@ -22,7 +22,7 @@ HiitController useHiit({required AppNotifier appNotifier}) {
     _state.value = _state.value.copyWith(isTraining: false);
     _client.finish(roundCount).then((res) {
       _state.value = _state.value.copyWith(saveTrainSuccess: true);
-      appNotifier.setTodayLife(res.todayLife);
+      appNotifier.setStatus(res.status);
       _tsPlayer.playSaveSuccess();
     }).catchError((e) {
       print("$e from finishTrain");
@@ -44,7 +44,7 @@ HiitController useHiit({required AppNotifier appNotifier}) {
     _client.start(_state.value.setting).then((res) {
       _state.value =
           _state.value.copyWith(isTraining: true, saveTrainSuccess: false);
-      appNotifier.setTodayLife(res.todayLife);
+      appNotifier.setStatus(res.status);
       trainController.start();
     }).catchError((e) {
       print("$e from startTrain");
