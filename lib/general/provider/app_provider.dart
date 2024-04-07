@@ -10,7 +10,7 @@ final appProvider = StateNotifierProvider<AppNotifier, AppState>((ref) {
 
 class AppNotifier extends StateNotifier<AppState> {
   
-  AppNotifier.init() : super(AppState(scene: Scenes.home, status: Statuses.none)) {
+  AppNotifier.init() : super(AppState(scene: Scenes.life, status: Statuses.none)) {
     final client = HomeQueryClient(); //TODO: ここでhomeQueryClient使うのはおかしいけどね。
     client.init().then((res) {
       setStatus(res.status);

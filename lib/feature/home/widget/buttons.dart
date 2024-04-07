@@ -9,6 +9,7 @@ final PingButton = (Function()? onPressed) => HomeButtonBase("Ping", onPressed: 
 final HanonButton = (Function()? onPressed) => HomeButtonBase("Hanon", onPressed: onPressed, icon: Icons.piano);
 final ToothButton = (Function()? onPressed) => HomeButtonBase("歯", onPressed: onPressed, icon: Icons.local_hospital);
 final FoodCostButton = (Function()? onPressed) => HomeButtonBase("食費", onPressed: onPressed, icon: Icons.restaurant);
+final LifeButton = (Function()? onPressed) => HomeButtonBase("生活", onPressed: onPressed, icon: Icons.home);
 
 class HomeButtonBase extends StatelessWidget {
   final String text;
