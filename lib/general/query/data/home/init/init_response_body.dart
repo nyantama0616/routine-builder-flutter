@@ -1,13 +1,14 @@
+import 'package:routine_builder/general/enum/statuses.dart';
 import 'package:routine_builder/general/model/life.dart';
 
 class InitResponseBody {
-  final Life todayLife;
+  final Statuses status;
 
-  InitResponseBody({required this.todayLife});
+  InitResponseBody({required this.status});
 
   factory InitResponseBody.fromJson(Map<String, dynamic> json) {
     return InitResponseBody(
-      todayLife: Life.fromJson(json['todayLife']),
+      status: statusFromRawValue(json['status']),
     );
   }
 }

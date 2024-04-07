@@ -8,7 +8,7 @@ class HeaderStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final status = ref.watch(appProvider).todayLife.status;
+    final status = ref.watch(appProvider).status;
     final icon = iconFromStatus(status);
     final text = status == Statuses.none ? "" : status.rawValue;
 

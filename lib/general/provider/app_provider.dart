@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routine_builder/general/enum/statuses.dart';
 import 'package:routine_builder/general/model/life.dart';
 import "package:routine_builder/general/enum/scenes.dart";
 import 'package:routine_builder/general/query/client/home_query_client.dart';
@@ -9,10 +10,10 @@ final appProvider = StateNotifierProvider<AppNotifier, AppState>((ref) {
 
 class AppNotifier extends StateNotifier<AppState> {
   
-  AppNotifier.init() : super(AppState(scene: Scenes.home, todayLife: Life.init())) {
+  AppNotifier.init() : super(AppState(scene: Scenes.home, status: Statuses.none)) {
     final client = HomeQueryClient(); //TODO: ここでhomeQueryClient使うのはおかしいけどね。
     client.init().then((res) {
-      setTodayLife(res.todayLife);
+      setStatus(res.status);
     }).catchError((e) {
       print("$e from AppNotifier.init");
     });
@@ -22,27 +23,27 @@ class AppNotifier extends StateNotifier<AppState> {
     state = state.copyWith(scene: newScene);
   }
 
-  void setTodayLife(Life todayLife) {
-    state = state.copyWith(todayLife: todayLife);
+  void setStatus(Statuses status) {
+    state = state.copyWith(status: status);
   }
 }
 
 class AppState {
   final Scenes scene;
-  final Life todayLife;
+  final Statuses status;
 
   AppState({
     required this.scene,
-    required this.todayLife,
+    this.status = Statuses.none,
   });
 
   AppState copyWith({
     Scenes? scene,
-    Life? todayLife,
+    Statuses? status,
   }) {
     return AppState(
       scene: scene ?? this.scene,
-      todayLife: todayLife ?? this.todayLife,
+      status: status ?? this.status,
     );
   }
 }

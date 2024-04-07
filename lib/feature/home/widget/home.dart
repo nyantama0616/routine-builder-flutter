@@ -64,11 +64,24 @@ class Home extends HookConsumerWidget {
       appController.setScene(Scenes.foodCost);
     });
 
+    final lifeButton = LifeButton(() {
+      appController.setScene(Scenes.life);
+    });
+
     return Column(
       children: [
         Align(
           alignment: Alignment.topRight,
-          child: pingButton,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              lifeButton,
+              SizedBox(
+                width: 20,
+              ),
+              pingButton,
+            ],
+          ),
         ),
         Center(
           child: Column(

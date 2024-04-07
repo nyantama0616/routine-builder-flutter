@@ -20,7 +20,7 @@ SleepController useSleep(AppNotifier notifier,
     if (!_callable.value) return;
 
     client.startSleep(isNap: isNap).then((res) {
-      notifier.setTodayLife(res.todayLife);
+      notifier.setStatus(res.status);
       soundPlayer.playOneShot(sounds.sleepGoToBedSound);
       
       /* 3秒間は連続で呼べないようにする
@@ -52,7 +52,7 @@ SleepController useSleep(AppNotifier notifier,
     if (!_callable.value) return;
     
     client.finishSleep().then((res) {
-      notifier.setTodayLife(res.todayLife);
+      notifier.setStatus(res.status);
       soundPlayer.playOneShot(sounds.sleepWakeUpSounds.pick());
       soundPlayer.playOneShot(sounds.sleepWakeUpVoices.pick(), delay: 1500);
 
