@@ -1,3 +1,6 @@
+import 'package:routine_builder/general/util/time.dart';
+import 'package:timezone/timezone.dart' as tz;
+
 class Life {
   final DateTime wakedUpAt;
   final DateTime? wentToBedAt;
@@ -13,6 +16,13 @@ class Life {
     required this.trainSeconds,
   });
 
+  Life.init() : 
+    wakedUpAt = DateTime.now(),
+    wentToBedAt = null,
+    sleepSeconds = 0,
+    water = 0,
+    trainSeconds = _TrainSeconds(hiit: 0, hanon: 0, caterpillar: 0);
+
   Life.initDev() : 
     wakedUpAt = DateTime.now(),
     wentToBedAt = DateTime.now().add(Duration(hours: 8)),
@@ -21,9 +31,11 @@ class Life {
     trainSeconds = _TrainSeconds(hiit: 0, hanon: 0, caterpillar: 0);
 
   factory Life.fromJson(Map<String, dynamic> json) {
+    final wakedUpAt = convertFromUTCToJST(DateTime.parse(json["wakedUpAt"]));
+    final wentToBedAt = json["wentToBedAt"] == null ? null : convertFromUTCToJST(DateTime.parse(json["wentToBedAt"]));
     return Life(
-      wakedUpAt: DateTime.parse(json["wakedUpAt"]),
-      wentToBedAt: DateTime.parse(json["wentToBedAt"]),
+      wakedUpAt: wakedUpAt,
+      wentToBedAt: wentToBedAt,
       sleepSeconds: json["sleepSeconds"],
       water: json["water"],
       trainSeconds: _TrainSeconds.fromJson(json["trainSeconds"]),
