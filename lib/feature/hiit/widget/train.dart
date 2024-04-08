@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:routine_builder/feature/hiit/controller/hiit_controller.dart';
 import 'package:routine_builder/feature/hiit/enum/train_statuses.dart';
-import 'package:routine_builder/feature/hiit/hook/use_train.dart';
 import 'package:routine_builder/feature/hiit/widget/buttons.dart';
 import 'package:routine_builder/general/model/hiit_setting.dart';
 import 'package:routine_builder/general/model/hiit_train_data.dart';
+import 'package:routine_builder/general/widget/gage.dart';
 
 /*
   TODO: パフォーマンスを計測する
@@ -51,7 +51,7 @@ class Train extends HookWidget {
             ),
             saveTrainSuccess: hiitController.saveTrainSuccess,
           )
-        : _Gage(gageProgress, color: gageColor);
+        : Gage(gageProgress, color: gageColor);
 
     return Column(
       children: [
@@ -61,40 +61,6 @@ class Train extends HookWidget {
         ),
         subWidget,
       ],
-    );
-  }
-}
-
-class _Gage extends StatelessWidget {
-  final double progress;
-  final Color color;
-
-  _Gage(this.progress, {required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        children: [
-          Container(
-            width: 200,
-            height: 300,
-            color: Colors.grey,
-          ),
-          Container(
-            width: 200,
-            height: 300,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: 200,
-                height: 300 * progress,
-                color: color,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
