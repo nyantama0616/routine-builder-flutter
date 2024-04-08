@@ -9,6 +9,7 @@ enum Scenes {
   tooth("tooth"),
   foodCost("foodCost"),
   life("life"),
+  walk("walk"),
   ;
 
   final String rawValue;

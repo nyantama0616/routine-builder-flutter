@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routine_builder/feature/life/life.dart';
+import 'package:routine_builder/feature/walk/widget/walk.dart';
 import 'package:routine_builder/general/provider/app_provider.dart';
 import 'package:routine_builder/feature/dev/ping/widget/ping.dart';
 import 'package:routine_builder/feature/home/widget/home.dart';
@@ -52,6 +53,9 @@ class App extends HookConsumerWidget {
         break;
       case Scenes.life:
         mainScreen = Life();
+        break;
+      case Scenes.walk:
+        mainScreen = Walk();
         break;
       default:
         mainScreen = Home();
