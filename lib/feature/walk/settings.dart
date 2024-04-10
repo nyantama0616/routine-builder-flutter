@@ -1,2 +1,2 @@
-const walk_seconds = 3;
-const run_seconds = 3;
+const walk_seconds = 5;
+const run_seconds = 5;
