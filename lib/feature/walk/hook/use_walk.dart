@@ -10,6 +10,7 @@ import 'package:routine_builder/general/util/train_sound_player.dart';
 WalkController useWalk() {
   final _status = useState<BasicStatuses>(BasicStatuses.none);
   final _scene = useState<Scenes>(Scenes.home);
+  final _to = useState<Places>(Places.home);
   final workController = useWork();
   final _tsPlayer = TrainSoundPlayer();
   final _client = WalkQueryClient();
@@ -19,8 +20,9 @@ WalkController useWalk() {
     _tsPlayer.playCountDownToStart(() {
       _client.start(from: from, to: to).then((res) {
         _scene.value = Scenes.work;
-        workController.start();
         _status.value = BasicStatuses.doing;
+        _to.value = to;
+        workController.start();
       }).catchError((e) {
         print("$e from _goTo");
       });
@@ -51,6 +53,7 @@ WalkController useWalk() {
     return WalkController(
       status: _status.value,
       scene: _scene.value,
+      to: _to.value,
       goToSchool: goToSchool,
       goHome: goHome,
       finish: finish,

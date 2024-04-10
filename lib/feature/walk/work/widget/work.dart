@@ -14,13 +14,14 @@ class Work extends HookWidget {
   @override
 
   Widget build(BuildContext context) {
-    final helper = WorkHelper(workController: walkController.workController);
+    final helper = WorkHelper(walkController: walkController);
 
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("目的地: 学校", style: TextStyle(fontSize: 20)),
+          helper.destinationMessage,
+          helper.saveResultMessage,
           SizedBox(height: 30),
           Gage(helper.gageProgress, color: helper.gageColor),
           SizedBox(height: 30),
