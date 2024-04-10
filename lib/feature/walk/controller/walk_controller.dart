@@ -10,6 +10,8 @@ class WalkController {
 
   final Function() goToSchool;
   final Function() goHome;
+  final Function() stop;
+  final Function() restart;
   final Function() finish;
   
   final WorkController workController;
@@ -20,6 +22,8 @@ class WalkController {
     required this.to,
     required this.goToSchool,
     required this.goHome,
+    required this.stop,
+    required this.restart,
     required this.finish,
     required this.workController,
   });

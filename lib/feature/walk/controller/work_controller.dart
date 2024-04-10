@@ -5,6 +5,7 @@ class WorkController {
   final int walkMilliSec;
   final int runMilliSec;
   final Function() start;
+  final Function() stop;
   final Function() finish;
 
   WorkController({
@@ -12,6 +13,7 @@ class WorkController {
     required this.walkMilliSec,
     required this.runMilliSec,
     required this.start,
+    required this.stop,
     required this.finish,
   });
 }

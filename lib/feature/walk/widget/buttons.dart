@@ -4,6 +4,7 @@ final SchoolButton = (Function()? onTap) => _ButtonBase("学校へ", onTap: onTa
 final HomeButton = (Function()? onTap) => _ButtonBase("帰宅", onTap: onTap, color: Colors.orange!);
 final ArrivalButton = (Function()? onTap) => _ButtonBase('到着', onTap: onTap, color: Colors.green);
 final StopButton = (Function()? onTap) => _ButtonBase('停止', onTap: onTap, color: Colors.red);
+final RestartButton = (Function()? onTap) => _ButtonBase('再開', onTap: onTap, color: Colors.blue);
 
 class _ButtonBase extends StatelessWidget {
   final String text;

@@ -37,6 +37,24 @@ WalkController useWalk() {
     _goTo(Places.home);
   }
 
+  void stop() {
+    workController.stop();
+    _client.stop().then((res) {
+      _status.value = BasicStatuses.paused;
+    }).catchError((e) {
+      print("$e from stop");
+    });
+  }
+
+  void restart() {
+    _client.restart().then((res) {
+      workController.start();
+      _status.value = BasicStatuses.doing;
+    }).catchError((e) {
+      print("$e from restart");
+    });
+  }
+
   void finish() {
     workController.finish();
     _client.finish().then((res) {
@@ -56,6 +74,8 @@ WalkController useWalk() {
       to: _to.value,
       goToSchool: goToSchool,
       goHome: goHome,
+      stop: stop,
+      restart: restart,
       finish: finish,
       workController: workController,
     );

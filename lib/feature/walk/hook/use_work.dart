@@ -55,6 +55,11 @@ WorkController useWork() {
     _soundPlayer.playOneShot(sounds.walkStartVoices.pick(), delay: 1000);
   }
 
+  void stop() {
+    _status.value = WorkStatuses.notStarted;
+    _timer?.cancel(); //多分いらない
+  }
+
   void finish() {
     _status.value = WorkStatuses.finished;
   }
@@ -83,6 +88,7 @@ WorkController useWork() {
       walkMilliSec: _walkMilliSec.value,
       runMilliSec: _runMilliSec.value,
       start: start,
+      stop: stop,
       finish: finish,
     );
   }, [_status.value, _walkMilliSec.value, _runMilliSec.value]);
