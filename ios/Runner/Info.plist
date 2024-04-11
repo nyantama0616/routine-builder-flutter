@@ -45,5 +45,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>このアプリは位置情報を使用して、あなたの現在地を取得します。</string>
+
+	<!-- 以下のエントリは、アプリがバックグラウンドでも位置情報を使用する場合に追加します -->
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>このアプリは位置情報を使用して、あなたの現在地を取得します。</string>
 </dict>
 </plist>

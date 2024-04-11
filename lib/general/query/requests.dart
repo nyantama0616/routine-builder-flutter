@@ -50,3 +50,8 @@ final deleteFoodMenu = (int id) => "$_baseURL/food_menus/$id";
 
 //life
 final todayLife = "$_baseURL/lifes/today";
+
+//walk
+final startWalk = "$_baseURL/walks/start";
+final stopWalk = "$_baseURL/walks/stop";
+final finishWalk = "$_baseURL/walks/finish";
