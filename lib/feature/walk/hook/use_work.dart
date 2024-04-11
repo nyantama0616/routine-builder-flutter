@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:routine_builder/feature/walk/manager/gps_manager.dart';
 import 'package:routine_builder/feature/walk/controller/work_controller.dart';
 import 'package:routine_builder/feature/walk/enum/work_statuses.dart';
 import 'package:routine_builder/feature/walk/settings.dart' as settings;
@@ -27,7 +28,8 @@ WorkController useWork() {
         _status.value = WorkStatuses.running;
         return;
       }
-      if (_walkMilliSec.value >= settings.walk_seconds * 1000 - 3000 && !_playedSwitchSound.value) {
+      if (_walkMilliSec.value >= settings.walk_seconds * 1000 - 3000 &&
+          !_playedSwitchSound.value) {
         _soundPlayer.playOneShot(sounds.walkToRunning);
         _playedSwitchSound.value = true;
       }
@@ -43,7 +45,8 @@ WorkController useWork() {
         _status.value = WorkStatuses.walking;
         return;
       }
-      if (_runMilliSec.value >= settings.run_seconds * 1000 - 3000 && !_playedSwitchSound.value) {
+      if (_runMilliSec.value >= settings.run_seconds * 1000 - 3000 &&
+          !_playedSwitchSound.value) {
         _soundPlayer.playOneShot(sounds.walkToWalking);
         _playedSwitchSound.value = true;
       }
