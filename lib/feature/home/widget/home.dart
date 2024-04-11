@@ -68,6 +68,10 @@ class Home extends HookConsumerWidget {
       appController.setScene(Scenes.life);
     });
 
+    final walkButton = WalkButton(() {
+      appController.setScene(Scenes.walk);
+    });
+
     return Column(
       children: [
         Align(
@@ -100,7 +104,7 @@ class Home extends HookConsumerWidget {
             SizedBox(
               height: 20,
             ),
-            _ButtonsRow([foodCostButton]),
+            _ButtonsRow([foodCostButton, walkButton]),
           ])
         )
       ],
