@@ -1,16 +1,3 @@
-# routine_builder
+習慣化アプリを作ってみました
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+詳しくは[こちら](https://github.com/nyantama0616/routine-builder-flutter/blob/master/docs/%E7%BF%92%E6%85%A3%E5%8C%96%E3%82%A2%E3%83%97%E3%83%AA%E7%B4%B9%E4%BB%8B.pdf)をご覧ください。
